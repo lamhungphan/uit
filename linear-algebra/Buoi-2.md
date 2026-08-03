@@ -1,4 +1,4 @@
-# Buổi 2 – Đại số tuyến tính – Bổ sung so với giáo trình chương 2
+# Buổi 2 – Đại số tuyến tính
 
 ## 1. Các cột bán chuẩn (semi‑standard columns)
 
