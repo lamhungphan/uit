@@ -15,6 +15,17 @@
 - Thời điểm t = 39: P4 hoàn thành. P3 (đến t = 16) chạy từ 39 đến 49 (39 + 10).
 
 ## b. Trình tự thực thi của các tiến trình
+Sơ đồ Gantt:
+
+```
+Time  0    5    10   15   20   25   30   35   40   45  
+P2   |██████                                           | 0 - 6
+P1   |      █████████                                  | 6 - 15
+P5   |               ████                              | 15 - 19
+P4   |                   ████████████████████          | 19 - 39
+P3   |                                       ██████████| 39 - 49
+```
+
 - P2 (0 – 6)
 - P1 (6 – 15)
 - P5 (15 – 19)
@@ -48,7 +59,7 @@ Công thức: WT = TAT - Burst Time
 - P5: 13 - 4 = 9
 - Avg WT = (2 + 0 + 23 + 12 + 9) / 5 = 9.2
 
-# 4.2 - SJF
+# 4.2.1 - SJF
 - P1: Arrival Time = 6, Burst Time = 4
 - P2: Arrival Time = 7, Burst Time = 17
 - P3: Arrival Time = 0, Burst Time = 14
@@ -65,6 +76,17 @@ Công thức: WT = TAT - Burst Time
 - Thời điểm t = 36: P5 hoàn thành. P2 chạy từ 36 đến 53 (36 + 17).
 
 ## b. Trình tự thực thi của các tiến trình
+Sơ đồ Gantt:
+
+```
+Time  0    5    10   15   20   25   30   35   40   45   50 
+P3   |██████████████                                       | 0 - 14
+P1   |              ████                                   | 14 - 18
+P4   |                  █████████                          | 18 - 27
+P5   |                           █████████                 | 27 - 36
+P2   |                                    █████████████████| 36 - 53
+```
+
 - P3 (0 – 14)
 - P1 (14 – 18)
 - P4 (18 – 27)
@@ -98,7 +120,76 @@ Công thức: WT = TAT - Burst Time
 - P5: 21 - 9 = 12
 - Avg WT = (8 + 29 + 0 + 14 + 12) / 5 = 12.6
 
-# 4.3.1 - Priority Scheduling (Preemptive)
+# 4.2.2 - SRTF
+- P1: Arrival Time = 6, Burst Time = 4
+- P2: Arrival Time = 7, Burst Time = 17
+- P3: Arrival Time = 0, Burst Time = 14
+- P4: Arrival Time = 4, Burst Time = 9
+- P5: Arrival Time = 15, Burst Time = 9
+
+**Định thời dùng giải thuật SJF trưng dụng (SRTF - Shortest Remaining Time First)**
+
+## a. Quá trình điều phối
+- Thời điểm t = 0: Chỉ có P3 đến (Arrival = 0). P3 chạy từ 0 đến 4.
+- Thời điểm t = 4: P4 đến (Burst = 9). P4 có thời gian còn lại (9) nhỏ hơn P3 (10), trưng dụng CPU. P3 bị ngắt (còn lại 10). P4 chạy từ 4 đến 6 (còn lại 7).
+- Thời điểm t = 6: P1 đến (Burst = 4). P1 có thời gian còn lại (4) nhỏ hơn P4 (7), trưng dụng CPU. P4 bị ngắt (còn lại 7). P1 chạy từ 6 đến 10, hoàn thành.
+- Thời điểm t = 7: P2 đến (Burst = 17). P1 còn lại 3, vẫn nhỏ nhất nên P1 tiếp tục chạy, P2 vào hàng chờ.
+- Thời điểm t = 10: P1 hoàn thành. Hàng chờ gồm P4 (còn 7), P3 (còn 10), P2 (còn 17). P4 có thời gian còn lại nhỏ nhất, chạy từ 10 đến 17, hoàn thành.
+- Thời điểm t = 15: P5 đến (Burst = 9). P4 còn lại 2, vẫn nhỏ nhất nên P4 tiếp tục chạy.
+- Thời điểm t = 17: P4 hoàn thành. Hàng chờ gồm P5 (còn 9), P3 (còn 10), P2 (còn 17). P5 có thời gian còn lại nhỏ nhất, chạy từ 17 đến 26, hoàn thành.
+- Thời điểm t = 26: P5 hoàn thành. Hàng chờ gồm P3 (còn 10), P2 (còn 17). P3 chạy từ 26 đến 36, hoàn thành.
+- Thời điểm t = 36: P3 hoàn thành. P2 chạy từ 36 đến 53, hoàn thành.
+
+## b. Trình tự thực thi của các tiến trình
+Sơ đồ Gantt:
+
+```
+Time  0    5    10   15   20   25   30   35   40   45   50 
+P3   |████                                                 | 0 - 4
+P4   |    ██                                               | 4 - 6
+P1   |      ████                                           | 6 - 10
+P4   |          ███████                                    | 10 - 17
+P5   |                 █████████                           | 17 - 26
+P3   |                          ██████████                 | 26 - 36
+P2   |                                    █████████████████| 36 - 53
+```
+
+- P3 (0 – 4)
+- P4 (4 – 6)
+- P1 (6 – 10)
+- P4 (10 – 17)
+- P5 (17 – 26)
+- P3 (26 – 36)
+- P2 (36 – 53)
+
+## c. Thời gian đáp ứng (Response Time)
+Công thức: RT = Thời điểm nhận CPU lần đầu - Thời điểm đến
+- P1: 6 - 6 = 0
+- P2: 36 - 7 = 29
+- P3: 0 - 0 = 0
+- P4: 4 - 4 = 0
+- P5: 17 - 15 = 2
+- Avg RT = (0 + 29 + 0 + 0 + 2) / 5 = 6.2
+
+## d. Thời gian hoàn thành (Turnaround Time)
+Công thức: TAT = Thời điểm hoàn thành - Thời điểm đến
+- P1: 10 - 6 = 4
+- P2: 53 - 7 = 46
+- P3: 36 - 0 = 36
+- P4: 17 - 4 = 13
+- P5: 26 - 15 = 11
+- Avg TAT = (4 + 46 + 36 + 13 + 11) / 5 = 22
+
+## e. Thời gian chờ (Waiting Time)
+Công thức: WT = TAT - Burst Time
+- P1: 4 - 4 = 0
+- P2: 46 - 17 = 29
+- P3: 36 - 14 = 22
+- P4: 13 - 9 = 4
+- P5: 11 - 9 = 2
+- Avg WT = (0 + 29 + 22 + 4 + 2) / 5 = 11.4
+
+# 4.3.1 - Priority Scheduling (Non-preemptive)
 - P1: Arrival Time = 6, Burst Time = 4, Priority = 1
 - P2: Arrival Time = 7, Burst Time = 17, Priority = 2
 - P3: Arrival Time = 0, Burst Time = 14, Priority = 4
@@ -115,6 +206,17 @@ Công thức: WT = TAT - Burst Time
 - Thời điểm t = 44: P4 hoàn thành. P5 chạy từ 44 đến 53 (44 + 9).
 
 ## b. Trình tự thực thi của các tiến trình
+Sơ đồ Gantt:
+
+```
+Time  0    5    10   15   20   25   30   35   40   45   50 
+P3   |██████████████                                       | 0 - 14
+P1   |              ████                                   | 14 - 18
+P2   |                  █████████████████                  | 18 - 35
+P4   |                                   █████████         | 35 - 44
+P5   |                                            █████████| 44 - 53
+```
+
 - P3 (0 – 14)
 - P1 (14 – 18)
 - P2 (18 – 35)
@@ -148,7 +250,7 @@ Công thức: WT = TAT - Burst Time
 - P5: 38 - 9 = 29
 - Avg WT = (8 + 11 + 0 + 31 + 29) / 5 = 15.8
 
-# 4.3.2 - Priority Scheduling (Non-preemptive)
+# 4.3.2 - Priority Scheduling (Preemptive)
 - P1: Arrival Time = 6, Burst Time = 4, Priority = 1
 - P2: Arrival Time = 7, Burst Time = 17, Priority = 2
 - P3: Arrival Time = 0, Burst Time = 14, Priority = 4
@@ -169,6 +271,19 @@ Công thức: WT = TAT - Burst Time
 - Thời điểm t = 44: P3 hoàn thành. P5 thực thi đến khi hoàn thành lúc t = 53.
 
 ## b. Trình tự thực thi của các tiến trình
+Sơ đồ Gantt:
+
+```
+Time  0    5    10   15   20   25   30   35   40   45   50 
+P3   |████                                                 | 0 - 4
+P4   |    ██                                               | 4 - 6
+P1   |      ████                                           | 6 - 10
+P2   |          █████████████████                          | 10 - 27
+P4   |                           ███████                   | 27 - 34
+P3   |                                  ██████████         | 34 - 44
+P5   |                                            █████████| 44 - 53
+```
+
 - P3 (0 – 4)
 - P4 (4 – 6)
 - P1 (6 – 10)
@@ -204,7 +319,7 @@ Công thức: WT = TAT - Burst Time
 - P5: 38 - 9 = 29
 - Avg WT = (0 + 3 + 30 + 21 + 29) / 5 = 16.6
 
-# 4.4
+# 4.4 - Round Robin
 - P1: Arrival Time = 6, Burst Time = 4
 - P2: Arrival Time = 7, Burst Time = 17
 - P3: Arrival Time = 0, Burst Time = 14
@@ -227,6 +342,23 @@ Công thức: WT = TAT - Burst Time
 - Thời điểm t = 46: P2 chạy nốt 7 đơn vị (46 → 53), hoàn thành.
 
 ## b. Trình tự thực thi của các tiến trình
+Sơ đồ Gantt:
+
+```
+Time  0    5    10   15   20   25   30   35   40   45   50 
+P3   |█████                                                | 0 - 5
+P4   |     █████                                           | 5 - 10
+P3   |          █████                                      | 10 - 15
+P1   |               ████                                  | 15 - 19
+P2   |                   █████                             | 19 - 24
+P4   |                        ████                         | 24 - 28
+P5   |                            █████                    | 28 - 33
+P3   |                                 ████                | 33 - 37
+P2   |                                     █████           | 37 - 42
+P5   |                                          ████       | 42 - 46
+P2   |                                              ███████| 46 - 53
+```
+
 - P3 (0 – 5)
 - P4 (5 – 10)
 - P3 (10 – 15)
