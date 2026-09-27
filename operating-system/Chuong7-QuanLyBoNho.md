@@ -69,6 +69,8 @@
 - p: m-n bits, d: n bits
 - Nếu không gian ảo = 2^m, page size = 2^n → bảng trang có 2^(m-n) mục
 
+--- 
+
 ### Cài đặt bảng trang
 - **PTBR** (Page-Table Base Register): trỏ đến bảng trang
 - **PTLR** (Page-Table Length Register): kích thước bảng trang
