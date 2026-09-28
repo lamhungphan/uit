@@ -46,13 +46,12 @@
 
 #### **Câu 3: A**
 * **Lý do:**
-  * Kích thước khung trang: $1	ext{ KB} = 1024	ext{ bytes}$.
+  * Kích thước khung trang: $1\text{ KB} = 1024\text{ bytes}$.
   * Địa chỉ vật lý $PA = 4567$.
-  * Số hiệu khung trang (Frame number) $= \lfloor 4567 / 1024 
-floor = 4$.
+  * Số hiệu khung trang (Frame number) $= \lfloor 4567 / 1024 \rfloor = 4$.
   * Độ lệch (Offset) $= 4567 \pmod{1024} = 467$.
   * Tra bảng trang: Khung trang $4$ ứng với trang luận lý $3$.
-  * Địa chỉ luận lý $LA = (3 	imes 1024) + 467 = 3072 + 467 = \mathbf{3543}$.
+  * Địa chỉ luận lý $LA = (3 \times 1024) + 467 = 3072 + 467 = \mathbf{3543}$.
 
 #### **Câu 4: B**
 * **Lý do:** Critical Section (miền găng) là đoạn mã (code segment) trong chương trình có thực hiện truy cập hoặc thao tác trên tài nguyên/dữ liệu dùng chung.
@@ -78,8 +77,8 @@ floor = 4$.
 #### **Câu 10: A**
 * **Lý do:**
   * Số trang $= 124 \le 2^7 \implies$ Cần **7 bit** để định danh số hiệu trang.
-  * Kích thước trang $= 2	ext{ MB} = 2^{21}	ext{ bytes} \implies$ Cần **21 bit** biểu diễn offset.
-  * Tổng số bit luận lý $= 7 + 21 = \mathbf{28	ext{ bit}}$.
+  * Kích thước trang $= 2\text{ MB} = 2^{21}\text{ bytes} \implies$ Cần **21 bit** biểu diễn offset.
+  * Tổng số bit luận lý $= 7 + 21 = \mathbf{28\text{ bit}}$.
 
 #### **Câu 11: B**
 * **Lý do:** Xử lý lỗi trang yêu cầu thao tác I/O đọc đĩa (tốn nhiều thời gian), do đó HĐH sẽ đưa tiến trình vào trạng thái **Waiting** (Chờ).
@@ -89,11 +88,11 @@ floor = 4$.
 
 #### **Câu 13: B**
 * **Lý do:**
-  * Thời gian truy xuất TLB: $25	ext{ ns}$.
-  * Thời gian truy xuất RAM: $300	ext{ ns}$.
-  * Hit ratio: $lpha = 0.85$.
-  * $EAT = lpha 	imes (t_{TLB} + t_{RAM}) + (1 - lpha) 	imes (t_{TLB} + 2 	imes t_{RAM})$
-  * $EAT = 0.85 	imes (25 + 300) + 0.15 	imes (25 + 300 + 300) = 276.25 + 93.75 = \mathbf{370	ext{ ns}}$.
+  * Thời gian truy xuất TLB: $25\text{ ns}$.
+  * Thời gian truy xuất RAM: $300\text{ ns}$.
+  * Hit ratio: $\alpha = 0.85$.
+  * $EAT = \alpha \times (t_{TLB} + t_{RAM}) + (1 - \alpha) \times (t_{TLB} + 2 \times t_{RAM})$
+  * $EAT = 0.85 \times (25 + 300) + 0.15 \times (25 + 300 + 300) = 276.25 + 93.75 = \mathbf{370\text{ ns}}$.
 
 #### **Câu 14: B**
 * **Lý do:** Để giải quyết busy waiting (chờ bận), HĐH cung cấp hai thao tác nguyên tử là `block()` (đưa tiến trình vào hàng đợi chờ) và `wakeup()` (đưa tiến trình trở lại Ready).
@@ -111,7 +110,7 @@ floor = 4$.
 * **Lý do:** Giá trị semaphore $S < 0$ có độ lớn $|S|$ đúng bằng **số lượng tiến trình đang bị chặn** (blocked) và nằm trong hàng đợi chờ của semaphore đó. Vì $S = -4 \implies$ có 4 tiến trình đang bị chặn.
 
 #### **Câu 19: A**
-* **Lý do:** Thứ tự xử lý chuẩn: Trình biên dịch (**Compiler**) tạo mã máy $	o$ Trình liên kết (**Linker**) kết nối thư viện/file object $	o$ Trình nạp (**Loader**) nạp chương trình vào RAM để chạy.
+* **Lý do:** Thứ tự xử lý chuẩn: Trình biên dịch (**Compiler**) tạo mã máy $\rightarrow$ Trình liên kết (**Linker**) kết nối thư viện/file object $\rightarrow$ Trình nạp (**Loader**) nạp chương trình vào RAM để chạy.
 
 #### **Câu 20: A**
 * **Lý do:** Để ép $S_1$ chạy trước $S_2$:
@@ -126,18 +125,18 @@ floor = 4$.
 #### **Câu 21: Thuật toán thay thế trang LRU (4 Khung trang)**
 * **Chuỗi truy xuất:** `2, 1, 2, 5, 6, 4, 0, 1, 4, 7, 1, 3, 6, 7, 1, 3, 5, 0`
 * **Diễn biến nạp trang:**
-  1. `2` $	o$ [2] *(Lỗi 1)*
-  2. `1` $	o$ [2, 1] *(Lỗi 2)*
-  3. `2` $	o$ [2, 1] *(Hit)*
-  4. `5` $	o$ [2, 1, 5] *(Lỗi 3)*
-  5. `6` $	o$ [2, 1, 5, 6] *(Lỗi 4)*
-  6. `4` $	o$ Thay `2` $\implies$ [4, 1, 5, 6] *(Lỗi 5)*
-  7. `0` $	o$ Thay `1` $\implies$ [4, 0, 5, 6] *(Lỗi 6)*
-  8. `1` $	o$ Thay `5` $\implies$ [4, 0, 1, 6] *(Lỗi 7)*
-  9. `4` $	o$ [4, 0, 1, 6] *(Hit)*
-  10. `7` $	o$ Thay `6` $\implies$ [4, 0, 1, 7] *(Lỗi 8)*
-  11. `1` $	o$ [4, 0, 1, 7] *(Hit)*
-  12. `3` $	o$ Thay `0` $\implies$ [4, 3, 1, 7] *(Lỗi 9 - lần đầu xuất hiện 3)*
+  1. `2` $\rightarrow$ [2] *(Lỗi 1)*
+  2. `1` $\rightarrow$ [2, 1] *(Lỗi 2)*
+  3. `2` $\rightarrow$ [2, 1] *(Hit)*
+  4. `5` $\rightarrow$ [2, 1, 5] *(Lỗi 3)*
+  5. `6` $\rightarrow$ [2, 1, 5, 6] *(Lỗi 4)*
+  6. `4` $\rightarrow$ Thay `2` $\implies$ [4, 1, 5, 6] *(Lỗi 5)*
+  7. `0` $\rightarrow$ Thay `1` $\implies$ [4, 0, 5, 6] *(Lỗi 6)*
+  8. `1` $\rightarrow$ Thay `5` $\implies$ [4, 0, 1, 6] *(Lỗi 7)*
+  9. `4` $\rightarrow$ [4, 0, 1, 6] *(Hit)*
+  10. `7` $\rightarrow$ Thay `6` $\implies$ [4, 0, 1, 7] *(Lỗi 8)*
+  11. `1` $\rightarrow$ [4, 0, 1, 7] *(Hit)*
+  12. `3` $\rightarrow$ Thay `0` $\implies$ [4, 3, 1, 7] *(Lỗi 9 - lần đầu xuất hiện 3)*
 
 * **Kết quả:**
   * **(a):** Trước khi nạp trang `3` ở bước 12, đã có **8 lỗi trang** phát sinh.
@@ -146,23 +145,24 @@ floor = 4$.
 ---
 
 #### **Câu 22: Đồng bộ tiến trình P1 và P2**
-* **Yêu cầu:** Tính $y = x / 2$ thì $x$ phải có giá trị trước ($x = 10 	imes 2 = 20$). Do đó $P_2$ phải gán $x$ xong mới cho phép $P_1$ tính $y$.
+* **Yêu cầu:** Tính $y = x / 2$ thì $x$ phải có giá trị trước ($x = 10 \times 2 = 20$). Do đó $P_2$ phải gán $x$ xong mới cho phép $P_1$ tính $y$.
 * **Cấu trúc đoạn mã:**
-  ```c
-  semaphore S = 0; // Khởi tạo semaphore bằng 0
 
-  P1 {
-      wait(S);     // (a) Chờ P2 tính xong x
-      y = x / 2;
-      BLANK        // (c) Không cần làm gì thêm
-  }
+```c
+semaphore S = 0; // Khởi tạo semaphore bằng 0
 
-  P2 {
-      BLANK        // (b) Không cần làm gì trước
-      x = 10 * 2;
-      signal(S);   // (d) Báo hiệu cho P1 biết x đã sẵn sàng
-  }
-  ```
+P1 {
+    wait(S);     // (a) Chờ P2 tính xong x
+    y = x / 2;
+    BLANK        // (c) Không cần làm gì thêm
+}
+
+P2 {
+    BLANK        // (b) Không cần làm gì trước
+    x = 10 * 2;
+    signal(S);   // (d) Báo hiệu cho P1 biết x đã sẵn sàng
+}
+```
 
 ---
 
@@ -176,10 +176,10 @@ floor = 4$.
   * Vùng 6: 280 KB (Trống)
 
 * **Trả lời:**
-  * **a. Next-Fit cho $P = 240	ext{ KB}$:**
-    * Duyệt tiếp từ vị trí PC (Vùng 4): Vùng 5 (190 KB < 240 KB $	o$ Bỏ qua) $	o$ Vùng 6 (280 KB $\ge 240	ext{ KB} \implies$ Đủ điều kiện).
+  * **a. Next-Fit cho $P = 240\text{ KB}$:**
+    * Duyệt tiếp từ vị trí PC (Vùng 4): Vùng 5 (190 KB < 240 KB $\rightarrow$ Bỏ qua) $\rightarrow$ Vùng 6 (280 KB $\ge 240\text{ KB} \implies$ Đủ điều kiện).
     * **Đáp án:** **Vùng 6**
-  * **b. Worst-Fit cho $Q = 120	ext{ KB}$:**
+  * **b. Worst-Fit cho $Q = 120\text{ KB}$:**
     * Tìm phân vùng trống có kích thước LỚN NHẤT trong toàn bộ bộ nhớ.
     * Danh sách vùng trống: Vùng 1 (340 KB), Vùng 3 (250 KB), Vùng 5 (190 KB), Vùng 6 (280 KB).
     * Vùng trống lớn nhất là Vùng 1 (340 KB).

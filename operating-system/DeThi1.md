@@ -41,18 +41,12 @@ Tại thời điểm tiến trình truy xuất trang nhớ số `7` lần đầu
 - **Trạng thái frame:** Tiến trình có 4 frame trống.
 
 **✏️ Lời giải chi tiết:**
-1. Truy xuất `4` $
-ightarrow$ Nạp 4 (Frames: [4])
-2. Truy xuất `2` $
-ightarrow$ Nạp 2 (Frames: [4, 2])
-3. Truy xuất `4` $
-ightarrow$ Đã có 4 (Frames: [4, 2])
-4. Truy xuất `4` $
-ightarrow$ Đã có 4 (Frames: [4, 2])
-5. Truy xuất `5` $
-ightarrow$ Nạp 5 (Frames: [4, 2, 5])
-6. Truy xuất `7` $
-ightarrow$ Nạp 7 (Frames: [4, 2, 5, 7])
+1. Truy xuất `4` $\rightarrow$ Nạp 4 (Frames: [4])
+2. Truy xuất `2` $\rightarrow$ Nạp 2 (Frames: [4, 2])
+3. Truy xuất `4` $\rightarrow$ Đã có 4 (Frames: [4, 2])
+4. Truy xuất `4` $\rightarrow$ Đã có 4 (Frames: [4, 2])
+5. Truy xuất `5` $\rightarrow$ Nạp 5 (Frames: [4, 2, 5])
+6. Truy xuất `7` $\rightarrow$ Nạp 7 (Frames: [4, 2, 5, 7])
 
 Tại thời điểm nạp trang `7` lần đầu tiên, bộ nhớ vật lý lúc đó đang chứa [4, 2, 5] (mới dùng 3 frame), nên trang `7` được nạp vào frame trống thứ 4 mà **chưa phải thay thế trang nào**.
 
@@ -75,29 +69,19 @@ Tại thời điểm nạp trang `7` lần đầu tiên, bộ nhớ vật lý l�
 Chuỗi truy xuất: `4, 2, 4, 4, 5, 7, 3, 1, 4, 2, 1, 7, 5, 6...`
 Số frame = 4.
 
-- `4`: PF (1) $
-ightarrow$ [4]
-- `2`: PF (2) $
-ightarrow$ [4, 2]
+- `4`: PF (1) $\rightarrow$ [4]
+- `2`: PF (2) $\rightarrow$ [4, 2]
 - `4`: hit
 - `4`: hit
-- `5`: PF (3) $
-ightarrow$ [4, 2, 5]
-- `7`: PF (4) $
-ightarrow$ [4, 2, 5, 7] (Bộ nhớ đầy)
-- `3`: PF (5) $
-ightarrow$ Nhìn về tương lai: `1, 4, 2, 1, 7, 5, 6...`. Trong [4, 2, 5, 7], trang `5` xuất hiện trễ nhất/không dùng sớm. Do đó thay `5` bằng `3` $
-ightarrow$ [4, 2, 3, 7]
-- `1`: PF (6) $
-ightarrow$ Nhìn về tương lai từ 1: `4, 2, 1, 7, 5, 6...`. Trong [4, 2, 3, 7], trang `3` không còn dùng lại nữa! Thay `3` bằng `1` $
-ightarrow$ [4, 2, 1, 7]
+- `5`: PF (3) $\rightarrow$ [4, 2, 5]
+- `7`: PF (4) $\rightarrow$ [4, 2, 5, 7] (Bộ nhớ đầy)
+- `3`: PF (5) $\rightarrow$ Nhìn về tương lai: `1, 4, 2, 1, 7, 5, 6...`. Trong [4, 2, 5, 7], trang `5` xuất hiện trễ nhất/không dùng sớm. Do đó thay `5` bằng `3` $\rightarrow$ [4, 2, 3, 7]
+- `1`: PF (6) $\rightarrow$ Nhìn về tương lai từ 1: `4, 2, 1, 7, 5, 6...`. Trong [4, 2, 3, 7], trang `3` không còn dùng lại nữa! Thay `3` bằng `1` $\rightarrow$ [4, 2, 1, 7]
 - `4`: hit
 - `2`: hit
 - `1`: hit
 - `7`: hit
-- `5`: PF (7) $
-ightarrow$ Nhìn tương lai từ 5: `6, 5, 2, 4, 3, 5, 1`. Trong [4, 2, 1, 7], trang `7` không còn dùng lại nữa! Thay `7` bằng `5` $
-ightarrow$ [4, 2, 1, 5]
+- `5`: PF (7) $\rightarrow$ Nhìn tương lai từ 5: `6, 5, 2, 4, 3, 5, 1`. Trong [4, 2, 1, 7], trang `7` không còn dùng lại nữa! Thay `7` bằng `5` $\rightarrow$ [4, 2, 1, 5]
 - `6`: Thời điểm dừng tính!
 
 Tổng số lỗi trang trước khi nạp 6 là **7**.
@@ -119,68 +103,26 @@ Tổng số lỗi trang trước khi nạp 6 là **7**.
 **✏️ Lời giải chi tiết:**
 Chuỗi: `4 2 4 4 5 7 3 1 4 2 1 7 5 6 5 2 4 3 5 1` (20 lần truy xuất, 4 frame)
 
-1. `4`: PF (1) $
-ightarrow$ [4]
-2. `2`: PF (2) $
-ightarrow$ [4, 2]
-3. `4`: Hit $
-ightarrow$ [2, 4]
-4. `4`: Hit $
-ightarrow$ [2, 4]
-5. `5`: PF (3) $
-ightarrow$ [2, 4, 5]
-6. `7`: PF (4) $
-ightarrow$ [2, 4, 5, 7]
-7. `3`: PF (5) $
-ightarrow$ Lâu nhất là 2 $
-ightarrow$ Thay 2 $
-ightarrow$ [4, 5, 7, 3]
-8. `1`: PF (6) $
-ightarrow$ Lâu nhất là 4 $
-ightarrow$ Thay 4 $
-ightarrow$ [5, 7, 3, 1]
-9. `4`: PF (7) $
-ightarrow$ Lâu nhất là 5 $
-ightarrow$ Thay 5 $
-ightarrow$ [7, 3, 1, 4]
-10. `2`: PF (8) $
-ightarrow$ Lâu nhất là 7 $
-ightarrow$ Thay 7 $
-ightarrow$ [3, 1, 4, 2]
-11. `1`: Hit $
-ightarrow$ [3, 4, 2, 1]
-12. `7`: PF (9) $
-ightarrow$ Lâu nhất là 3 $
-ightarrow$ Thay 3 $
-ightarrow$ [4, 2, 1, 7]
-13. `5`: PF (10) $
-ightarrow$ Lâu nhất là 4 $
-ightarrow$ Thay 4 $
-ightarrow$ [2, 1, 7, 5]
-14. `6`: PF (11) $
-ightarrow$ Lâu nhất là 2 $
-ightarrow$ Thay 2 $
-ightarrow$ [1, 7, 5, 6]
-15. `5`: Hit $
-ightarrow$ [1, 7, 6, 5]
-16. `2`: PF (12) $
-ightarrow$ Lâu nhất là 1 $
-ightarrow$ Thay 1 $
-ightarrow$ [7, 6, 5, 2]
-17. `4`: PF (13) $
-ightarrow$ Lâu nhất là 7 $
-ightarrow$ Thay 7 $
-ightarrow$ [6, 5, 2, 4]
-18. `3`: PF (14) $
-ightarrow$ Lâu nhất là 6 $
-ightarrow$ Thay 6 $
-ightarrow$ [5, 2, 4, 3]
-19. `5`: Hit $
-ightarrow$ [2, 4, 3, 5]
-20. `1`: PF (15) $
-ightarrow$ Lâu nhất là 2 $
-ightarrow$ Thay 2 $
-ightarrow$ [4, 3, 5, 1]
+1. `4`: PF (1) $\rightarrow$ [4]
+2. `2`: PF (2) $\rightarrow$ [4, 2]
+3. `4`: Hit $\rightarrow$ [2, 4]
+4. `4`: Hit $\rightarrow$ [2, 4]
+5. `5`: PF (3) $\rightarrow$ [2, 4, 5]
+6. `7`: PF (4) $\rightarrow$ [2, 4, 5, 7]
+7. `3`: PF (5) $\rightarrow$ Lâu nhất là 2 $\rightarrow$ Thay 2 $\rightarrow$ [4, 5, 7, 3]
+8. `1`: PF (6) $\rightarrow$ Lâu nhất là 4 $\rightarrow$ Thay 4 $\rightarrow$ [5, 7, 3, 1]
+9. `4`: PF (7) $\rightarrow$ Lâu nhất là 5 $\rightarrow$ Thay 5 $\rightarrow$ [7, 3, 1, 4]
+10. `2`: PF (8) $\rightarrow$ Lâu nhất là 7 $\rightarrow$ Thay 7 $\rightarrow$ [3, 1, 4, 2]
+11. `1`: Hit $\rightarrow$ [3, 4, 2, 1]
+12. `7`: PF (9) $\rightarrow$ Lâu nhất là 3 $\rightarrow$ Thay 3 $\rightarrow$ [4, 2, 1, 7]
+13. `5`: PF (10) $\rightarrow$ Lâu nhất là 4 $\rightarrow$ Thay 4 $\rightarrow$ [2, 1, 7, 5]
+14. `6`: PF (11) $\rightarrow$ Lâu nhất là 2 $\rightarrow$ Thay 2 $\rightarrow$ [1, 7, 5, 6]
+15. `5`: Hit $\rightarrow$ [1, 7, 6, 5]
+16. `2`: PF (12) $\rightarrow$ Lâu nhất là 1 $\rightarrow$ Thay 1 $\rightarrow$ [7, 6, 5, 2]
+17. `4`: PF (13) $\rightarrow$ Lâu nhất là 7 $\rightarrow$ Thay 7 $\rightarrow$ [6, 5, 2, 4]
+18. `3`: PF (14) $\rightarrow$ Lâu nhất là 6 $\rightarrow$ Thay 6 $\rightarrow$ [5, 2, 4, 3]
+19. `5`: Hit $\rightarrow$ [2, 4, 3, 5]
+20. `1`: PF (15) $\rightarrow$ Lâu nhất là 2 $\rightarrow$ Thay 2 $\rightarrow$ [4, 3, 5, 1]
 
 Tổng cộng có **15** lỗi trang.
 
@@ -196,12 +138,12 @@ Tổng cộng có **15** lỗi trang.
 - **D.** $2^{18}$
 
 **💡 Kiến thức cần biết:**
-- **Số mục trong bảng trang (Number of entries)** = $rac{	ext{Kích thước bảng trang}}{	ext{Kích thước 1 mục (entry size)}}$.
-- Quy đổi đơn vị: $1 	ext{ KB} = 2^{10} 	ext{ bytes}$, $512 	ext{ KB} = 512 	imes 2^{10} 	ext{ bytes} = 2^9 	imes 2^{10} = 2^{19} 	ext{ bytes}$.
-- $4 	ext{ bytes} = 2^2 	ext{ bytes}$.
+- **Số mục trong bảng trang (Number of entries)** = $\frac{\text{Kích thước bảng trang}}{\text{Kích thước 1 mục (entry size)}}$.
+- Quy đổi đơn vị: $1 \text{ KB} = 2^{10} \text{ bytes}$, $512 \text{ KB} = 512 \times 2^{10} \text{ bytes} = 2^9 \times 2^{10} = 2^{19} \text{ bytes}$.
+- $4 \text{ bytes} = 2^2 \text{ bytes}$.
 
 **✏️ Lời giải chi tiết:**
-$$	ext{Số mục} = rac{512 	ext{ KB}}{4 	ext{ bytes}} = rac{2^{19}}{2^2} = 2^{17} 	ext{ mục}$$
+$$\text{Số mục} = \frac{512 \text{ KB}}{4 \text{ bytes}} = \frac{2^{19}}{2^2} = 2^{17} \text{ mục}$$
 
 👉 **Đáp án đúng: C. $2^{17}$**
 
@@ -243,7 +185,7 @@ $$	ext{Số mục} = rac{512 	ext{ KB}}{4 	ext{ bytes}} = rac{2^{19}}{2^2} = 2
 ---
 
 ### 🔹 CÂU 7
-**Đề bài:** Xét một hệ thống sử dụng kỹ thuật phân trang với bảng trang được lưu trong bộ nhớ chính. Thời gian tìm kiếm trong TLB là $\epsilon = 25	ext{ns}$, thời gian một chu kỳ truy xuất bộ nhớ ($m$) là $200	ext{ns}$, và thời gian truy xuất bộ nhớ hiệu dụng ($	ext{EAT}$) là $250	ext{ns}$. Hỏi tỉ lệ tìm thấy trang nhớ trong TLB ($lpha$) là bao nhiêu?
+**Đề bài:** Xét một hệ thống sử dụng kỹ thuật phân trang với bảng trang được lưu trong bộ nhớ chính. Thời gian tìm kiếm trong TLB là $\epsilon = 25\text{ns}$, thời gian một chu kỳ truy xuất bộ nhớ ($m$) là $200\text{ns}$, và thời gian truy xuất bộ nhớ hiệu dụng ($\text{EAT}$) là $250\text{ns}$. Hỏi tỉ lệ tìm thấy trang nhớ trong TLB ($\alpha$) là bao nhiêu?
 - **A.** 90.7%
 - **B.** 85.7%
 - **C.** 87.5%
@@ -251,15 +193,15 @@ $$	ext{Số mục} = rac{512 	ext{ KB}}{4 	ext{ bytes}} = rac{2^{19}}{2^2} = 2
 
 **💡 Kiến thức cần biết:**
 - **Công thức EAT với TLB:**
-  $$	ext{EAT} = lpha 	imes (\epsilon + m) + (1 - lpha) 	imes (\epsilon + 2m)$$
-  *(Giải thích: Khi TLB Hit ($lpha$), tốn 1 lần tra TLB + 1 lần truy xuất bộ nhớ. Khi TLB Miss ($1-lpha$), tốn 1 lần tra TLB + 1 lần tra Bảng trang trong bộ nhớ + 1 lần truy xuất dữ liệu thật).*
+  $$\text{EAT} = \alpha \times (\epsilon + m) + (1 - \alpha) \times (\epsilon + 2m)$$
+  *(Giải thích: Khi TLB Hit ($\alpha$), tốn 1 lần tra TLB + 1 lần truy xuất bộ nhớ. Khi TLB Miss ($1-\alpha$), tốn 1 lần tra TLB + 1 lần tra Bảng trang trong bộ nhớ + 1 lần truy xuất dữ liệu thật).*
 
 **✏️ Lời giải chi tiết:**
-- $\epsilon = 25$, $m = 200$, $	ext{EAT} = 250$.
+- $\epsilon = 25$, $m = 200$, $\text{EAT} = 250$.
 - Thay vào công thức:
-  $$250 = lpha 	imes (25 + 200) + (1 - lpha) 	imes (25 + 400)$$
-  $$250 = 225lpha + 425(1 - lpha)$$
-  $$250 = 425 - 200lpha \implies 200lpha = 175 \implies lpha = rac{175}{200} = 0.875 = 87.5\%$$
+  $$250 = \alpha \times (25 + 200) + (1 - \alpha) \times (25 + 400)$$
+  $$250 = 225\alpha + 425(1 - \alpha)$$
+  $$250 = 425 - 200\alpha \implies 200\alpha = 175 \implies \alpha = \frac{175}{200} = 0.875 = 87.5\%$$
 
 👉 **Đáp án đúng: C. 87.5%**
 
@@ -273,8 +215,7 @@ $$	ext{Số mục} = rac{512 	ext{ KB}}{4 	ext{ bytes}} = rac{2^{19}}{2^2} = 2
 - **D.** FIFO
 
 **💡 Kiến thức cần biết:**
-- **LRU (Least Recently Used)** cần lưu vết thời gian truy xuất gần nhất của từng trang (sử dụng Counter/Clock hoặc Stack phần cứng) $
-ightarrow$ **Cần hỗ trợ phần cứng**.
+- **LRU (Least Recently Used)** cần lưu vết thời gian truy xuất gần nhất của từng trang (sử dụng Counter/Clock hoặc Stack phần cứng) $\rightarrow$ **Cần hỗ trợ phần cứng**.
 - OPT là giải thuật lý thuyết (không thực hiện được trong thực tế).
 - FIFO chỉ cần hàng đợi phần mềm (Queue).
 
@@ -294,12 +235,9 @@ Hỏi vấn đề gì có thể xảy ra khi P1 và P2 thực thi đồng thời
 
 **💡 Kiến thức cần biết:**
 - Nếu P1 thực thi `wait(S)` thành công (giữ S), đúng lúc đó context switch sang P2 thực thi `wait(Q)` thành công (giữ Q).
-- Tiếp theo, P1 gọi `wait(Q)` $
-ightarrow$ bị chặn vì P2 đang giữ Q.
-- P2 gọi `wait(S)` $
-ightarrow$ bị chặn vì P1 đang giữ S.
-- Cả 2 tiến trình chờ lẫn nhau vô thời hạn $
-ightarrow$ **Deadlock** (Tắc nghẽn).
+- Tiếp theo, P1 gọi `wait(Q)` $\rightarrow$ bị chặn vì P2 đang giữ Q.
+- P2 gọi `wait(S)` $\rightarrow$ bị chặn vì P1 đang giữ S.
+- Cả 2 tiến trình chờ lẫn nhau vô thời hạn $\rightarrow$ **Deadlock** (Tắc nghẽn).
 
 👉 **Đáp án đúng: D. P1 và P2 có thể bị deadlock**
 
@@ -328,29 +266,16 @@ ightarrow$ **Deadlock** (Tắc nghẽn).
 
 **💡 Kiến thức cần biết:**
 - Quy tắc kiểm tra Deadlock trên Đồ thị cấp phát tài nguyên (RAG):
-  1. Nếu đồ thị **không có chu trình (cycle)** $
-ightarrow$ **Không Deadlock**.
+  1. Nếu đồ thị **không có chu trình (cycle)** $\rightarrow$ **Không Deadlock**.
   2. Nếu đồ thị **có chu trình**:
-     - Nếu mỗi loại tài nguyên chỉ có **1 thực thể (1 chấm)** $
-ightarrow$ **Chắc chắn Deadlock**.
-     - Nếu tài nguyên có **nhiều thực thể (nhiều chấm)** $
-ightarrow$ Có thể có Deadlock hoặc không (cần kiểm tra xem có tiến trình nào ngoài chu trình có thể giải phóng tài nguyên để phá vỡ chu trình không).
+     - Nếu mỗi loại tài nguyên chỉ có **1 thực thể (1 chấm)** $\rightarrow$ **Chắc chắn Deadlock**.
+     - Nếu tài nguyên có **nhiều thực thể (nhiều chấm)** $\rightarrow$ Có thể có Deadlock hoặc không (cần kiểm tra xem có tiến trình nào ngoài chu trình có thể giải phóng tài nguyên để phá vỡ chu trình không).
 
 **✏️ Lời giải chi tiết:**
-- **(a):** Không có chu trình $
-ightarrow$ No deadlock.
-- **(b):** Có chu trình $T_1 
-ightarrow R_3 
-ightarrow T_2 
-ightarrow R_3 / R_1 
-ightarrow T_1$, tất cả tài nguyên $R_1, R_2, R_3$ đều chỉ có 1 thực thể (1 dot) $
-ightarrow$ **Deadlock**.
-- **(c):** $R_1, R_2$ có 2 thực thể. $T_3$ giữ $R_2$ nhưng không chờ ai cả $
-ightarrow T_3$ chạy xong trả $R_2 
-ightarrow$ giải phóng chu trình $
-ightarrow$ No deadlock.
-- **(d):** Các tiến trình trong chu trình đều giữ tất cả các thực thể của $R_1$ và $R_2$, không có tiến trình độc lập nào chạy xong để trả tài nguyên $
-ightarrow$ **Deadlock**.
+- **(a):** Không có chu trình $\rightarrow$ No deadlock.
+- **(b):** Có chu trình $T_1 \rightarrow R_3 \rightarrow T_2 \rightarrow R_3 / R_1 \rightarrow T_1$, tất cả tài nguyên $R_1, R_2, R_3$ đều chỉ có 1 thực thể (1 dot) $\rightarrow$ **Deadlock**.
+- **(c):** $R_1, R_2$ có 2 thực thể. $T_3$ giữ $R_2$ nhưng không chờ ai cả $\rightarrow T_3$ chạy xong trả $R_2 \rightarrow$ giải phóng chu trình $\rightarrow$ No deadlock.
+- **(d):** Các tiến trình trong chu trình đều giữ tất cả các thực thể của $R_1$ và $R_2$, không có tiến trình độc lập nào chạy xong để trả tài nguyên $\rightarrow$ **Deadlock**.
 
 👉 **Đáp án đúng: D. Đồ thị (b), (d)**
 
@@ -391,16 +316,14 @@ Lựa chọn nào sau đây **KHÔNG PHẢI** là chuỗi an toàn (Safe Sequenc
   - $Need(P_3) = (1,4,2,4) - (1,3,1,2) = (0, 1, 1, 2)$
   - $Need(P_4) = (3,6,6,5) - (1,4,3,2) = (2, 2, 3, 3)$
 - Điều kiện để tiến trình $P_i$ thực thi: $Need(P_i) \le Available$.
-- Khi $P_i$ hoàn thành: $Available_{mới} = Available_{cũ} + Allocation(P_i)$.
+- Khi $P_i$ hoàn thành: $Available_{\text{mới}} = Available_{\text{cũ}} + Allocation(P_i)$.
 
 **✏️ Lời giải chi tiết:**
 - **Thử câu B:** `<P1, ...>`
   - Ban đầu $Available = (3, 3, 2, 1)$.
   - So sánh với $Need(P_1) = (2, 1, 3, 1)$:
-    - $Need_C(P_1) = 3 > Available_C = 2$ $
-ightarrow$ **Không đủ C cho $P_1$ ngay từ đầu!**
-  - Do đó $P_1$ không thể chạy đầu tiên $
-ightarrow$ **Chuỗi B không hợp lệ.**
+    - $Need_C(P_1) = 3 > Available_C = 2 \rightarrow$ **Không đủ C cho $P_1$ ngay từ đầu!**
+  - Do đó $P_1$ không thể chạy đầu tiên $\rightarrow$ **Chuỗi B không hợp lệ.**
 
 👉 **Đáp án đúng: B. `<P1, P3, P0, P4, P2>`**
 
@@ -415,36 +338,25 @@ ightarrow$ **Chuỗi B không hợp lệ.**
 
 **💡 Kiến thức cần biết:**
 Thuật toán Yêu cầu Tài nguyên (Resource-Request Algorithm):
-1. $Request_i \le Need_i$ (nếu sai $
-ightarrow$ Báo lỗi vượt quá nhu cầu đã khai báo).
-2. $Request_i \le Available$ (nếu sai $
-ightarrow P_i$ phải chờ vì hệ thống không đủ tài nguyên rảnh).
+1. $Request_i \le Need_i$ (nếu sai $\rightarrow$ Báo lỗi vượt quá nhu cầu đã khai báo).
+2. $Request_i \le Available$ (nếu sai $\rightarrow P_i$ phải chờ vì hệ thống không đủ tài nguyên rảnh).
 3. Thử cấp phát giả định và kiểm tra trạng thái an toàn (Banker).
 
 **✏️ Lời giải chi tiết:**
 $Available = (3, 3, 2, 1)$.
-- **Xét C ($P_0$ req `<3,0,1,0>`):** $Need(P_0) = (2,2,1,1)$. $Request_A = 3 > Need_A = 2 
-ightarrow$ Vi phạm Bước 1.
+- **Xét C ($P_0$ req `<3,0,1,0>`):** $Need(P_0) = (2,2,1,1)$. $Request_A = 3 > Need_A = 2 \rightarrow$ Vi phạm Bước 1.
 - **Xét B ($P_2$ req `<0,0,1,1>`):** $Need(P_2) = (0,2,1,3)$. $Request_D = 1 \le Need_D = 3$. $Request \le Available (3,3,2,1)$.
   - Giả định cấp cho $P_2$:
-    - $Available_{mới} = (3,3,2,1) - (0,0,1,1) = (3,3,1,0)$.
-    - $Allocation(P_2)_{mới} = (2,1,1,4)$. $Need(P_2)_{mới} = (0,2,0,2)$.
+    - $Available_{\text{mới}} = (3,3,2,1) - (0,0,1,1) = (3,3,1,0)$.
+    - $Allocation(P_2)_{\text{mới}} = (2,1,1,4)$. $Need(P_2)_{\text{mới}} = (0,2,0,2)$.
   - Thử tìm chuỗi an toàn mới với $Available = (3,3,1,0)$:
-    - $P_3$ có $Need = (0,1,1,2)$. $Need_D = 2 > Available_D = 0 
-ightarrow P_3$ không chạy được.
-    - $P_0$ có $Need = (2,2,1,1)$. $Need_D = 1 > Available_D = 0 
-ightarrow P_0$ không chạy được.
-    - $P_1$ có $Need_D = 1 > 0 
-ightarrow$ Không chạy được.
-    - $P_2$ có $Need_D = 2 > 0 
-ightarrow$ Không chạy được.
-    - $P_4$ có $Need_D = 3 > 0 
-ightarrow$ Không chạy được.
-    $
-ightarrow$ Mọi tiến trình đều bị tắc nghẽn ở tài nguyên $D$ ($Available_D = 0$)! Trạng thái KHÔNG an toàn $
-ightarrow$ Từ chối.
-- **Xét D ($P_3$ req `<1,0,0,1>`):** $Need(P_3) = (0,1,1,2)$. $Request_A = 1 > Need_A = 0 
-ightarrow$ Vi phạm Bước 1.
+    - $P_3$ có $Need = (0,1,1,2)$. $Need_D = 2 > Available_D = 0 \rightarrow P_3$ không chạy được.
+    - $P_0$ có $Need = (2,2,1,1)$. $Need_D = 1 > Available_D = 0 \rightarrow P_0$ không chạy được.
+    - $P_1$ có $Need_D = 1 > 0 \rightarrow$ Không chạy được.
+    - $P_2$ có $Need_D = 2 > 0 \rightarrow$ Không chạy được.
+    - $P_4$ có $Need_D = 3 > 0 \rightarrow$ Không chạy được.
+    $\rightarrow$ Mọi tiến trình đều bị tắc nghẽn ở tài nguyên $D$ ($Available_D = 0$)! Trạng thái KHÔNG an toàn $\rightarrow$ Từ chối.
+- **Xét D ($P_3$ req `<1,0,0,1>`):** $Need(P_3) = (0,1,1,2)$. $Request_A = 1 > Need_A = 0 \rightarrow$ Vi phạm Bước 1.
 
 Do đó, **không yêu cầu nào có thể được đáp ứng**.
 
@@ -518,8 +430,7 @@ Do đó, **không yêu cầu nào có thể được đáp ứng**.
 - **D.** Giữ và chờ tài nguyên (Hold and Wait)
 
 **💡 Kiến thức cần biết:**
-- Đánh số thứ tự các tài nguyên $F(R)$ và bắt buộc yêu cầu tài nguyên theo thứ tự tăng dần sẽ triệt tiêu khả năng tạo thành vòng khép kín $
-ightarrow$ Triệt tiêu **Circular Wait (Chu trình đợi)**.
+- Đánh số thứ tự các tài nguyên $F(R)$ và bắt buộc yêu cầu tài nguyên theo thứ tự tăng dần sẽ triệt tiêu khả năng tạo thành vòng khép kín $\rightarrow$ Triệt tiêu **Circular Wait (Chu trình đợi)**.
 
 👉 **Đáp án đúng: A. Chu trình đợi**
 
@@ -561,19 +472,19 @@ ightarrow$ Triệt tiêu **Circular Wait (Chu trình đợi)**.
 ---
 
 ### 🔹 CÂU 22
-**Đề bài:** Một hệ thống phân trang sử dụng TLB với xác suất tìm thấy trang trong TLB là $lpha = 0.92$. Thời gian tìm kiếm trong TLB là $\epsilon = 20	ext{ns}$, và thời gian truy xuất bộ nhớ hiệu quả ($	ext{EAT}$) là $210	ext{ns}$. Hãy tính thời gian một thao tác truy xuất bộ nhớ ($m$) khi không dùng TLB?
+**Đề bài:** Một hệ thống phân trang sử dụng TLB với xác suất tìm thấy trang trong TLB là $\alpha = 0.92$. Thời gian tìm kiếm trong TLB là $\epsilon = 20\text{ns}$, và thời gian truy xuất bộ nhớ hiệu quả ($\text{EAT}$) là $210\text{ns}$. Hãy tính thời gian một thao tác truy xuất bộ nhớ ($m$) khi không dùng TLB?
 - **A.** 351.85ns
 - **B.** 182.42ns
 - **C.** 175.93ns
 - **D.** 204.84ns
 
 **💡 Kiến thức cần biết:**
-$$	ext{EAT} = lpha(\epsilon + m) + (1-lpha)(\epsilon + 2m)$$
+$$\text{EAT} = \alpha(\epsilon + m) + (1-\alpha)(\epsilon + 2m)$$
 
 **✏️ Lời giải chi tiết:**
 $$210 = 0.92(20 + m) + 0.08(20 + 2m)$$
 $$210 = 18.4 + 0.92m + 1.6 + 0.16m$$
-$$210 = 20 + 1.08m \implies 1.08m = 190 \implies m = rac{190}{1.08} pprox 175.9259 	ext{ ns}$$
+$$210 = 20 + 1.08m \implies 1.08m = 190 \implies m = \frac{190}{1.08} \approx 175.9259 \text{ ns}$$
 
 👉 **Đáp án đúng: C. 175.93ns**
 
@@ -601,18 +512,16 @@ $$210 = 20 + 1.08m \implies 1.08m = 190 \implies m = rac{190}{1.08} pprox 175.
 - **D.** 9723
 
 **💡 Kiến thức cần biết:**
-1. **Số trang (Page Number - p):** $p = \lfloor 	ext{Địa chỉ logic} / 	ext{Kích thước trang} 
-floor$
-2. **Độ lệch (Offset - d):** $d = 	ext{Địa chỉ logic} \pmod{	ext{Kích thước trang}}$
-3. **Địa chỉ vật lý (Physical Address):** $	ext{Frame number} 	imes 	ext{Kích thước trang} + d$
+1. **Số trang (Page Number - p):** $p = \lfloor \text{Địa chỉ logic} / \text{Kích thước trang} \rfloor$
+2. **Độ lệch (Offset - d):** $d = \text{Địa chỉ logic} \pmod{\text{Kích thước trang}}$
+3. **Địa chỉ vật lý (Physical Address):** $\text{Frame number} \times \text{Kích thước trang} + d$
 
 **✏️ Lời giải chi tiết:**
 - Địa chỉ logic $= 2555$, Kích thước trang $= 1024$.
-- $p = \lfloor 2555 / 1024 
-floor = 2$ (Trang số 2).
-- $d = 2555 \pmod{1024} = 2555 - 2 	imes 1024 = 507$.
+- $p = \lfloor 2555 / 1024 \rfloor = 2$ (Trang số 2).
+- $d = 2555 \pmod{1024} = 2555 - 2 \times 1024 = 507$.
 - Tra bảng trang: Trang 2 được nạp vào **Frame 9**.
-- Địa chỉ vật lý $= 9 	imes 1024 + 507 = 9216 + 507 = 9723$.
+- Địa chỉ vật lý $= 9 \times 1024 + 507 = 9216 + 507 = 9723$.
 
 👉 **Đáp án đúng: D. 9723**
 
@@ -626,8 +535,7 @@ floor = 2$ (Trang số 2).
 - **D.** Tiến trình bị đói (Starvation)
 
 **💡 Kiến thức cần biết:**
-- **Race Condition (Tình trạng tranh đua):** Xảy ra khi nhiều tiến trình cùng truy cập và chỉnh sửa dữ liệu dùng chung đồng thời, kết quả cuối cùng phụ thuộc vào thứ tự thực thi $
-ightarrow$ Gây ra **dữ liệu sai lệch / không nhất quán**.
+- **Race Condition (Tình trạng tranh đua):** Xảy ra khi nhiều tiến trình cùng truy cập và chỉnh sửa dữ liệu dùng chung đồng thời, kết quả cuối cùng phụ thuộc vào thứ tự thực thi $\rightarrow$ Gây ra **dữ liệu sai lệch / không nhất quán**.
 
 👉 **Đáp án đúng: B. Dữ liệu không nhất quán**
 
@@ -715,21 +623,20 @@ Biết `Products` và `Sells` ban đầu là $100$ và $20$. Nếu dùng Semapho
 **Đề bài:** Khi sử dụng mutex để đồng bộ tiến trình, nếu tiến trình thực hiện thao tác `acquire()` mutex trong tình trạng mutex đã khóa thì tiến trình sẽ chuyển sang trạng thái ______
 
 **💡 Lời giải & Kiến thức:**
-- Khi mutex đang bị khóa bởi tiến trình khác, tiến trình gọi `acquire()` sẽ không thể lấy khóa và bị hệ điều hành đưa vào danh sách chờ $
-ightarrow$ Trạng thái **Waiting** (hoặc **Blocked**).
+- Khi mutex đang bị khóa bởi tiến trình khác, tiến trình gọi `acquire()` sẽ không thể lấy khóa và bị hệ điều hành đưa vào danh sách chờ $\rightarrow$ Trạng thái **Waiting** (hoặc **Blocked**).
 
 👉 **Đáp án điền:** **`Waiting`** *(hoặc `Blocked` / `chờ`)*
 
 ---
 
 ### 🔹 CÂU 32
-**Đề bài:** Bộ vi xử lý MIPS R2000 có không gian địa chỉ ảo 32 bit với kích thước trang là 4096 bytes ($4	ext{KB}$). Như vậy, bảng trang của hệ thống này sẽ có tổng cộng ______ mục.
+**Đề bài:** Bộ vi xử lý MIPS R2000 có không gian địa chỉ ảo 32 bit với kích thước trang là 4096 bytes ($4\text{KB}$). Như vậy, bảng trang của hệ thống này sẽ có tổng cộng ______ mục.
 
 **💡 Lời giải & Kiến thức:**
-- Không gian địa chỉ $32 	ext{ bit} \implies 2^{32} 	ext{ bytes}$.
-- Kích thước trang $= 4096 	ext{ bytes} = 2^{12} 	ext{ bytes}$.
+- Không gian địa chỉ $32 \text{ bit} \implies 2^{32} \text{ bytes}$.
+- Kích thước trang $= 4096 \text{ bytes} = 2^{12} \text{ bytes}$.
 - Số trang (số mục trong bảng trang):
-  $$	ext{Số mục} = rac{2^{32}}{2^{12}} = 2^{20} = 1,048,576 	ext{ mục}$$
+  $$\text{Số mục} = \frac{2^{32}}{2^{12}} = 2^{20} = 1,048,576 \text{ mục}$$
 
 👉 **Đáp án điền:** **`1048576`** *(hoặc `2^20`)*
 
@@ -741,8 +648,8 @@ ightarrow$ Trạng thái **Waiting** (hoặc **Blocked**).
    - Lập bảng từng bước cho FIFO, LRU, OPT.
    - Nhớ kỹ định nghĩa Belady Anomaly (xảy ra ở FIFO, không xảy ra ở LRU/OPT vì chúng thuộc lớp Stack Algorithms).
 2. **Tính toán Địa chỉ & TLB:**
-   - Thuộc lòng: $p = 	ext{address} // 	ext{pagesize}$, $d = 	ext{address} \% 	ext{pagesize}$.
-   - Thuộc công thức EAT: $	ext{EAT} = lpha(\epsilon + m) + (1-lpha)(\epsilon + 2m)$.
+   - Thuộc lòng: $p = \lfloor \text{address} / \text{pagesize} \rfloor$, $d = \text{address} \pmod{\text{pagesize}}$.
+   - Thuộc công thức EAT: $\text{EAT} = \alpha(\epsilon + m) + (1-\alpha)(\epsilon + 2m)$.
 3. **Đồng bộ Tiến trình & Semaphore:**
    - Phân biệt Semaphore đếm (Counting Semaphore) vs Mutex (Binary).
    - Nắm quy tắc khởi tạo Semaphore để ép thứ tự thực thi: Muốn $B$ chạy sau $A$, khởi tạo `synch = 0`, $A$ gọi `signal`, $B$ gọi `wait`.
