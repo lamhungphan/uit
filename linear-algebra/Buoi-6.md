@@ -167,20 +167,6 @@ A_S = [ .. ]
 
 ---
 
-### Bài tập: Tìm cơ sở và số chiều cho W
-
-a) `S = {α₁=(1; 3; 2), α₂=(0; 1; −4), α₃=(−2; 3; 1)}` ⊂ ℝ³, `W = ⟨S⟩`
-
-b) `S = {α₁=(1; 0; −1; 2), α₂=(2; 0; 3; −1), α₃=(−1; 2; 0; 2)}` ⊂ ℝ⁴, `W = ⟨S⟩`
-
-c) `S = {α₁=(−1; 3; −2; 4), α₂=(0; 0; 1; 1), α₃=(1; 0; 1; 0), α₄=(2; 3; 1; 4)}` ⊂ ℝ⁴, `W = ⟨S⟩`
-
-d) `S = {α₁=(−1; 1; 0; −1; 1), α₂=(1; 0; 0; 2; 1), α₃=(−2; 1; 3; 0; 1)}` ⊂ ℝ⁵, `W = ⟨S⟩`
-
-e) `S = {α₁=(−2; 3; 0; 0; 1), α₂=(−1; 1; 1; 0; 0), α₃=(2; −1; 4; 1; 0), α₄=(−2; 1; 3; 0; 1)}` ⊂ ℝ⁵, `W = ⟨S⟩`
-
----
-
 ### TÌM HỆ SINH, CƠ SỞ VÀ SỐ CHIỀU CHO KHÔNG GIAN PHỤ THUỘC THAM SỐ
 
 **Ví dụ mẫu:** Trên V = ℝ⁴, cho:
@@ -217,19 +203,6 @@ Lập ma trận `A_S` từ S (mỗi dòng một véc tơ), bán chuẩn hóa c�
 
 ---
 
-### Bài tập tương tự (tìm hệ sinh, cơ sở, số chiều cho không gian phụ thuộc tham số):
-
-a) `W = { (c; 2a; 4b; 2c−3a) | a, b, c ∈ ℝ }` ⊂ ℝ⁴
-
-b) `W = { (d+3a; 2c; 3b−2c; d−a; a+b) | a, b, c, d ∈ ℝ }` ⊂ ℝ⁵
-
-c) `W = { (a−2b; 3c; 4d−e; 2a−e; 3b; a+b+c+d−e) | a, b, c, d, e ∈ ℝ }` ⊂ ℝ⁶
-
-d) `W = { (c; 2a; 4b; 2c−3a; b) | a, b, c ∈ ℝ }` ⊂ ℝ⁵
-
-e) `W = { (c; 2a; 4b; 2c−3d; c; d) | a, b, c, d ∈ ℝ }` ⊂ ℝ⁶
-
----
 
 ### TÌM HỆ SINH, CƠ SỞ VÀ SỐ CHIỀU CHO KHÔNG GIAN NGHIỆM CỦA HỆ THUẦN NHẤT AX = O
 
@@ -270,41 +243,6 @@ W = { (2a−2b−c; 3a−b; a; b; c) | a, b, c ∈ ℝ }
 - S = {α₁, α₂, α₃} là hệ sinh của W.
 - Lập ma trận từ S, bán chuẩn hóa → H có 3 dòng khác 0 → `r(A_S) = 3` → **S là cơ sở của W**, `dim W = 3`.
 - Cơ sở khác từ H: `γ₁ = (1; 1; 1; 0; 0), γ₂ = (0; −2; 0; 1; 1), γ₃ = (0; 0; −4; 1; 1)`, `dim W = 3`.
-
----
-
-### Bài tập tương tự (cho các hệ thuần nhất AX = O, tìm hệ sinh, cơ sở, số chiều cho W):
-
-a) V = ℝ⁴:
-```
-x₁ − 2x₂ + 2x₃ = 0
-x₁ + 2x₃ + 4x₄ = 0
-```
-
-b) V = ℝ⁴:
-```
-x₁ + 2x₂ + 4x₄ = 0
-−x₂ + x₃ + x₄ = 0
-```
-
-c) V = ℝ⁵:
-```
-x₁ − x₂ + 5x₃ = 0
-−x₁ + x₂ + x₃ + x₄ + 5x₅ = 0
-```
-
-d) V = ℝ⁵:
-```
-−x₁ + 3x₂ + 4x₃ + x₄ + x₅ = 0
-3x₁ + 4x₂ + x₃ + 2x₄ + x₅ = 0
-```
-
-e) V = ℝ⁵:
-```
-x₁ + 2x₂ + 5x₃ + x₄ + 3x₅ = 0
-4x₁ + x₂ + x₃ + 2x₄ + 5x₅ = 0
-x₁ + 2x₃ + 5x₄ = 0
-```
 
 ---
 
