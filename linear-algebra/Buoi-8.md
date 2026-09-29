@@ -97,14 +97,6 @@ Chọn α₁ = (1; 0), α₂ = (0; 1), β = (1; 1), c₁ = c₂ = 1:
 → **Vi phạm iii/** → **Không phải tích vô hướng**.
 ```
 
-### Bài tập tương tự (5 bài): Kiểm tra các ánh xạ trên ℝ², ℝ³
-
-a/ ℝ²: ⟨(x₁;x₂), (y₁;y₂)⟩ = x₁y₁ + 5x₂y₂
-b/ ℝ²: ⟨(x₁;x₂), (y₁;y₂)⟩ = x₁y₁ + 6x₁y₂ + 9x₂y₁ + 2x₂y₂
-c/ ℝ³: ⟨(x₁;x₂;x₃), (y₁;y₂;y₃)⟩ = x₁y₁ + x₂y₂ + x₃y₃ + x₁y₂ + 2x₂y₁ + 3x₂y₂ + x₃y₁ + x₁y₃ + 2x₂y₃
-d/ ℝ³: ⟨...⟩ = x₁y₁ + x₂y₂ + x₃y₃ + 6x₁y₂ + 5x₂y₁ + 2x₃y₂ + 8x₂y₃
-e/ ℝ³: ⟨...⟩ = x₁y₁ + x₂y₂ + x₃y₃ + 4x₁y₂ + 2x₂y₁ + 3x₃y₂ + 7x₂y₃
-
 ### Tích vô hướng tiêu chuẩn (Standard Inner Product)
 Trên ℝⁿ luôn có tích vô hướng tiêu chuẩn:
 ```
@@ -178,15 +170,6 @@ Cho S = {α₁, α₂, α₃}. Áp dụng Gram-Schmidt:
 ```
 Sau đó chuẩn hóa: γᵢ = βᵢ/‖βᵢ‖.
 
-### Bài tập tương tự (4 bài trực chuẩn hóa trên ℝ³):
-
-1. S = {(2; 3; 6), (−3; 6; −2), (6; −2; 3)}
-2. S = {(1; −2; 2), (−2; 2; −1), (2; 1; −2)}
-3. S = {(8; 1; −4), (1; 0; −2), (−2; 8; −2)}
-4. Trên ℝ³ với tích vô hướng cho trước (không phải tiêu chuẩn), S = {(1; 0; 1), (−4; 0; 2), (−3; 1; 3)}
-
----
-
 ### 5. Tọa độ theo cơ sở trực chuẩn
 
 Cho không gian Euclide V = (ℝⁿ, ⟨·, ·⟩) có cơ sở trực chuẩn:
@@ -251,8 +234,6 @@ Cho A = [[...]]. Các bước:
     - β₂ = v₂ − ⟨v₂, γ₂⟩γ₂ → chuẩn hóa → γ₃.
 - P = [γ₁ γ₂ γ₃] là ma trận trực giao (P⁻¹ = Pᵀ).
 - D = PᵀAP = diag(0, 3, 3).
-
-### Bài tập tương tự: Chéo hóa trực giao các ma trận vuông thực.
 
 ---
 
