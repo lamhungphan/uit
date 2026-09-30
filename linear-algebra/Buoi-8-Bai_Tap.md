@@ -41,16 +41,25 @@ Vì $\langle \alpha \vert{} \beta \rangle \neq \langle \beta \vert{} \alpha \ran
 ---
 
 ### **Bài 1c**
-* **Đề bài:** $V = \mathbb{R}^3$, $\langle \alpha \vert{} \beta \rangle = \langle \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \Big\vert{} \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix} \rangle = x_1 y_1 + 2x_1 y_2 + 3x_3 y_3 + 2x_2 y_1 + 12x_3 y_2$
+* **Đề bài:** $V = \mathbb{R}^3$, $\langle \alpha \vert{} \beta \rangle = \langle \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \Big\vert{} \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix} \rangle = x_1 y_1 + 2x_1 y_2 + 3x_3 y_3 + 2x_2 y_1 + 12x_2 y_2$
 * **Lời giải:**
 
-Ta chọn hai véc-tơ $\alpha = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}, \beta = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}$.
-* $\langle \alpha \vert{} \beta \rangle = \langle \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \Big\vert{} \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} \rangle = 0\cdot 0 + 2(0)(1) + 3(1)(0) + 2(0)(0) + 12(1)(1) = 12$
-* $\langle \beta \vert{} \alpha \rangle = \langle \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} \Big\vert{} \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \rangle = 0\cdot 0 + 2(0)(0) + 3(0)(1) + 2(1)(0) + 12(0)(0) = 0$
+Ta chứng minh $\langle \alpha \vert{} \beta \rangle$ là một tích vô hướng trên $\mathbb{R}^3$ bằng cách kiểm tra 3 tính chất:
 
-Vì $\langle \alpha \vert{} \beta \rangle \neq \langle \beta \vert{} \alpha \rangle$ ($12 \neq 0$) nên tính chất đối xứng bị vi phạm.
+**i/** Với mọi $\alpha = \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \in \mathbb{R}^3$:
+$$\langle \alpha \vert{} \alpha \rangle = x_1^2 + 2x_1 x_2 + 2x_2 x_1 + 12x_2^2 + 3x_3^2 = (x_1 + 2x_2)^2 + 8x_2^2 + 3x_3^2$$
+Vì $(x_1 + 2x_2)^2 \ge 0$, $8x_2^2 \ge 0$, $3x_3^2 \ge 0$ nên $\langle \alpha \vert{} \alpha \rangle \ge 0, \forall \alpha \in \mathbb{R}^3$.  
+Mặt khác: $\langle \alpha \vert{} \alpha \rangle = 0 \Leftrightarrow (x_1 + 2x_2)^2 + 8x_2^2 + 3x_3^2 = 0 \Leftrightarrow x_2 = 0,\ x_3 = 0,\ x_1 + 2x_2 = 0 \Leftrightarrow x_1 = x_2 = x_3 = 0 \Leftrightarrow \alpha = 0$.
 
-**Kết luận:** $\langle \alpha \vert{} \beta \rangle$ **không phải là tích vô hướng** trên $\mathbb{R}^3$.
+**ii/** Với mọi $\alpha = \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix}, \beta = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix} \in \mathbb{R}^3$:
+$$\langle \alpha \vert{} \beta \rangle = x_1 y_1 + 2x_1 y_2 + 2x_2 y_1 + 12x_2 y_2 + 3x_3 y_3$$
+$$\langle \beta \vert{} \alpha \rangle = y_1 x_1 + 2y_1 x_2 + 2y_2 x_1 + 12y_2 x_2 + 3y_3 x_3 = \langle \alpha \vert{} \beta \rangle$$
+
+**iii/** Với mọi $c \in \mathbb{R}, \alpha_1 = \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix}, \alpha_2 = \begin{pmatrix} z_1 \\ z_2 \\ z_3 \end{pmatrix}, \beta = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix} \in \mathbb{R}^3$:
+$$c\alpha_1 + \alpha_2 = \begin{pmatrix} cx_1 + z_1 \\ cx_2 + z_2 \\ cx_3 + z_3 \end{pmatrix}$$
+$$\begin{aligned} \langle c\alpha_1 + \alpha_2 \vert{} \beta \rangle &= (cx_1 + z_1)y_1 + 2(cx_1 + z_1)y_2 + 3(cx_3 + z_3)y_3 + 2(cx_2 + z_2)y_1 + 12(cx_2 + z_2)y_2 \\ &= c(x_1 y_1 + 2x_1 y_2 + 2x_2 y_1 + 12x_2 y_2 + 3x_3 y_3) + (z_1 y_1 + 2z_1 y_2 + 2z_2 y_1 + 12z_2 y_2 + 3z_3 y_3) \\ &= c\langle \alpha_1 \vert{} \beta \rangle + \langle \alpha_2 \vert{} \beta \rangle \end{aligned}$$
+
+**Kết luận:** $\langle \alpha \vert{} \beta \rangle$ **là một tích vô hướng** trên $\mathbb{R}^3$.
 
 ---
 
@@ -68,23 +77,18 @@ Do $\langle \alpha \vert{} \alpha \rangle < 0$ nên tính chất i/ bị vi ph�
 ---
 
 ### **Bài 1e**
-* **Đề bài:** $V = \mathbb{R}^3$, $\langle \alpha \vert{} \beta \rangle = \langle \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \Big\vert{} \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix} \rangle = 4x_1 y_1 - 2x_2 y_3 + 3x_3 y_2 - 7x_1 x_3$
+* **Đề bài:** $V = \mathbb{R}^3$, $\langle \alpha \vert{} \beta \rangle = \langle \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \Big\vert{} \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix} \rangle = 4x_1 y_1 - 2x_2 y_3 + 3x_3 y_2 - 7x_1 y_3$
 * **Lời giải:**
 
-Chọn $\alpha = \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, \beta = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}$.
-* $\langle \alpha \vert{} \beta \rangle = \langle \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix} \Big\vert{} \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \rangle = 4(1)(0) - 2(0)(1) + 3(0)(0) - 7(1)(0) = 0$
-* $\langle \beta \vert{} \alpha \rangle = \langle \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \Big\vert{} \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix} \rangle = 4(0)(1) - 2(0)(0) + 3(1)(0) - 7(0)(1) = 0$
+Ta chứng tỏ $\langle \alpha \vert{} \beta \rangle$ **không phải** là tích vô hướng bằng cách chỉ ra tính chất đối xứng (ii/) bị vi phạm.
 
-Thử cặp véc-tơ khác: chọn $\alpha = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \beta = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}$.
-* $\langle \alpha \vert{} \beta \rangle = \langle \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} \Big\vert{} \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \rangle = 4(0)(0) - 2(1)(1) + 3(0)(0) - 7(0)(0) = -2$
+Chọn $\alpha = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \beta = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}$.
+* $\langle \alpha \vert{} \beta \rangle = \langle \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} \Big\vert{} \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \rangle = 4(0)(0) - 2(1)(1) + 3(0)(0) - 7(0)(1) = -2$
 * $\langle \beta \vert{} \alpha \rangle = \langle \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \Big\vert{} \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} \rangle = 4(0)(0) - 2(0)(0) + 3(1)(1) - 7(0)(0) = 3$
 
 Vì $\langle \alpha \vert{} \beta \rangle \neq \langle \beta \vert{} \alpha \rangle$ ($-2 \neq 3$) nên tính chất đối xứng bị vi phạm.
 
 **Kết luận:** $\langle \alpha \vert{} \beta \rangle$ **không phải là tích vô hướng** trên $\mathbb{R}^3$.
-
----
-
 ## BÀI TẬP 2: ĐỘ DÀI VÉC-TƠ VÀ KHOẢNG CÁCH GIỮA HAI VÉC-TƠ
 
 ### **Ví dụ 2**
@@ -112,8 +116,6 @@ Vì $\langle \alpha \vert{} \beta \rangle \neq \langle \beta \vert{} \alpha \ran
 ---
 
 ## BÀI TẬP 3: TRỰC CHUẨN HÓA BẰNG PHƯƠNG PHÁP GRAM-SCHMIDT
-
----
 
 ### **Bài tập tương tự 1**
 * **Đề bài:** Trên $Eu = (\mathbb{R}^3, \langle , \rangle)$ với tích vô hướng tiêu chuẩn, cho tập hợp $S = \{u_1 = (2, 3, 6); u_2 = (5, -3, 8); u_3 = (8, 5, 3)\}$. Hãy trực chuẩn hóa $S$.
@@ -207,9 +209,7 @@ Tập trực giao: $S' = \{v_1 = (1, 0, 1), v_2 = (-4, 0, 2), v_3 = (0, -1, 0)\}
     $$q_2 = \left(\frac{1}{\sqrt{5}}, 0, \frac{2}{\sqrt{5}}\right)$$
     $$q_3 = \left(-\frac{2}{9\sqrt{5}}, \frac{20}{9\sqrt{5}}, \frac{1}{9\sqrt{5}}\right)$$
 
----
-
-## BÀI TẬP 4: CHÉO HÓA TRỰC GIAO MA TRẬN VUÔNG
+## BÀI TẬP 6: CHÉO HÓA TRỰC GIAO MA TRẬN VUÔNG (phần thêm)
 
 ### **Bài tập tương tự**
 * **Đề bài:** Chéo hóa trực giao ma trận vuông thực $A = \begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 1 \end{pmatrix}$
