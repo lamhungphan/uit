@@ -81,10 +81,12 @@ Pi:
 - `acquire()`: yêu cầu khóa (nếu không được → busy waiting → **spinlock**)
 - `release()`: mở khóa
 - `acquire()` và `release()` phải là thao tác đơn nguyên
+- Không cần hệ điều hành hỗ trợ
 
 ### 6.2. Mutex locks không busy waiting
 - Dùng `block()`: tạm dừng tiến trình (đưa vào hàng đợi ngủ)
 - Dùng `wakeup()`: đánh thức tiến trình (đưa vào ready queue)
+- Cần hệ điều hành hỗ trợ 2 API trên
 
 ### 6.3. Cách sử dụng
 ```c
