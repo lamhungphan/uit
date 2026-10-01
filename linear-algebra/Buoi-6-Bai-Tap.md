@@ -1,4 +1,10 @@
-# 1. Tìm cơ sở và số chiều cho W (Cho truước hệ sinh S)
+# BÀI TẬP BUỔI 6 – ĐẠI SỐ TUYẾN TÍNH
+
+> Luyện tập: tìm cơ sở, số chiều, không gian con và các dạng bài tập liên quan đến Chương 3.
+
+---
+
+## 1. Tìm cơ sở và số chiều cho $W$ (cho trước hệ sinh $S$)
 
 ## a) $V = \mathbb{R}^3$, tập hợp $S = \{a_1 = (1; -3; 2), a_2 = (0; 1; -4), a_3 = (-2; 3; 1)\}$ và $W = \langle S \rangle$
 
@@ -216,7 +222,7 @@ Số chiều: $\dim_{\mathbb{R}} W = 4$
 # 3. Cho các hệ thuần nhất AX = O, tìm hệ sinh, cơ sở, số chiều cho W
 > Dạng bài: Không gian nghiệm của hệ phương trình tuyến tính thuần nhất $AX = O$
 
-## a) $$V = \mathbb{R}^4, W = \left\{ X = (x_1; x_2; x_3; x_4) \in \mathbb{R}^4 \;\middle\vert{}\; \begin{cases} 2x_2 - x_1 + x_3 = 0 \\ x_1 - 3x_2 + 2x_4 = 0 \\ 2x_1 - 3x_2 - x_4 = 0 \end{cases} \right\}$$
+## a) $V = \mathbb{R}^4, W = \left\{ X = (x_1; x_2; x_3; x_4) \in \mathbb{R}^4 \;\middle\vert{}\; \begin{cases} 2x_2 - x_1 + x_3 = 0 \\ x_1 - 3x_2 + 2x_4 = 0 \\ 2x_1 - 3x_2 - x_4 = 0 \end{cases} \right\}$
 
 Sắp xếp lại hệ phương trình theo thứ tự ẩn $(x_1, x_2, x_3, x_4)$:
 
@@ -250,7 +256,7 @@ $$X = (9a;\; 5a;\; -a;\; 3a) = a(9;\; 5;\; -1;\; 3)$$
 * **Cơ sở của $W$**: $S = \{(9;\; 5;\; -1;\; 3)\}$
 * **Số chiều**: $\dim_{\mathbb{R}} W = 1$
 
-## b) $$V = \mathbb{R}^4, W = \left\{ X = (x_1; x_2; x_3; x_4) \in \mathbb{R}^4 \;\middle\vert{}\; \begin{cases} 4x_1 + 2x_2 + x_3 = 0 \\ x_1 + 2x_2 + 4x_4 = 0 \\ 2x_1 - x_2 + x_3 + x_4 = 0 \end{cases} \right\}$$
+## b) $V = \mathbb{R}^4, W = \left\{ X = (x_1; x_2; x_3; x_4) \in \mathbb{R}^4 \;\middle\vert{}\; \begin{cases} 4x_1 + 2x_2 + x_3 = 0 \\ x_1 + 2x_2 + 4x_4 = 0 \\ 2x_1 - x_2 + x_3 + x_4 = 0 \end{cases} \right\}$
 
 Ma trận hệ số $A$:
 
@@ -274,7 +280,7 @@ $$X = (14a; -9a; -38a; a) = a(14; -9; -38; 1)$$
 Đặt $\alpha_1 = (14; -9; -38; 1) \neq \mathbf{0} \Rightarrow S = \{\alpha_1\}$ là cơ sở của $W$.
 Số chiều: $\dim_{\mathbb{R}} W = 1$
 
-## c) $$V = \mathbb{R}^5, W = \left\{ X = (x_1; x_2; x_3; x_4; x_5) \in \mathbb{R}^5 \;\middle\vert{}\; \begin{cases} 5x_1 - x_2 + 2x_3 + 3x_4 = 0 \\ x_1 - x_2 + 5x_3 = 0 \\ 4x_1 - 2x_2 + 2x_3 + x_4 + 5x_5 = 0 \\ 3x_1 - x_2 + 2x_3 - x_4 + 2x_5 = 0 \end{cases} \right\}$$
+## c) $V = \mathbb{R}^5, W = \left\{ X = (x_1; x_2; x_3; x_4; x_5) \in \mathbb{R}^5 \;\middle\vert{}\; \begin{cases} 5x_1 - x_2 + 2x_3 + 3x_4 = 0 \\ x_1 - x_2 + 5x_3 = 0 \\ 4x_1 - 2x_2 + 2x_3 + x_4 + 5x_5 = 0 \\ 3x_1 - x_2 + 2x_3 - x_4 + 2x_5 = 0 \end{cases} \right\}$
 
 Ma trận hệ số $A$:
 
@@ -298,7 +304,7 @@ Chọn $a = 31 \Rightarrow X = (9; 124; 23; 11; 31)$.
 Cơ sở của $W$: $S = \{(9; 124; 23; 11; 31)\}$
 Số chiều: $\dim_{\mathbb{R}} W = 1$
 
-## d) $$V = \mathbb{R}^5, W = \left\{ X = (x_1; x_2; x_3; x_4; x_5) \in \mathbb{R}^5 \;\middle\vert{}\; \begin{cases} 3x_3 - 4x_4 + x_1 + 2x_2 = 0 \\ 5x_5 - x_1 + 2x_2 + 3x_4 = 0 \\ x_1 - x_2 + 2x_5 = 0 \end{cases} \right\}$$
+## d) $V = \mathbb{R}^5, W = \left\{ X = (x_1; x_2; x_3; x_4; x_5) \in \mathbb{R}^5 \;\middle\vert{}\; \begin{cases} 3x_3 - 4x_4 + x_1 + 2x_2 = 0 \\ 5x_5 - x_1 + 2x_2 + 3x_4 = 0 \\ x_1 - x_2 + 2x_5 = 0 \end{cases} \right\}$
 
 Sắp xếp lại hệ theo thứ tự $(x_1, x_2, x_3, x_4, x_5)$:
 
@@ -328,7 +334,7 @@ $$= a\left(-3; -3; \frac{13}{3}; 1; 0\right) + b\left(-9; -7; \frac{23}{3}; 0; 1
 Cơ sở của $W$: $S = \{(-9; -9; 13; 3; 0), (-27; -21; 23; 0; 3)\}$
 Số chiều: $\dim_{\mathbb{R}} W = 2$
 
-## e) $$V = \mathbb{R}^5, W = \left\{ X = (x_1; x_2; x_3; x_4; x_5) \in \mathbb{R}^5 \;\middle\vert{}\; \begin{cases} 2x_2 - 5x_5 + x_1 - 3x_3 = 0 \\ 5x_5 + 4x_4 - x_1 + 3x_3 = 0 \\ x_1 - x_2 + 2x_5 - 4x_3 = 0 \\ 3x_1 - 2x_2 + 6x_5 - 6x_4 = 0 \end{cases} \right\}$$
+## e) $V = \mathbb{R}^5, W = \left\{ X = (x_1; x_2; x_3; x_4; x_5) \in \mathbb{R}^5 \;\middle\vert{}\; \begin{cases} 2x_2 - 5x_5 + x_1 - 3x_3 = 0 \\ 5x_5 + 4x_4 - x_1 + 3x_3 = 0 \\ x_1 - x_2 + 2x_5 - 4x_3 = 0 \\ 3x_1 - 2x_2 + 6x_5 - 6x_4 = 0 \end{cases} \right\}$
 
 Sắp xếp lại hệ theo thứ tự $(x_1, x_2, x_3, x_4, x_5)$:
 

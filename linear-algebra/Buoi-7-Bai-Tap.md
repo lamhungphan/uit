@@ -1,4 +1,10 @@
-# 1. MA TRẬN CHUYỂN CƠ SỞ VÀ ĐỔI TỌA ĐỘ
+# BÀI TẬP BUỔI 7 – ĐẠI SỐ TUYẾN TÍNH
+
+> Chương 3: ma trận chuyển cơ sở và đổi tọa độ.
+
+---
+
+## 1. Ma trận chuyển cơ sở và đổi tọa độ
 
 ## Bài 3.28. Trong $U = \mathbb{R}^3$, cho $T_{a \to b} = \begin{pmatrix} 1 & 2 & -4 \\ 2 & 5 & 3 \\ 3 & 2 & 1 \end{pmatrix}$ và $[x]_a = \begin{pmatrix} 1 \\ 4 \\ -2 \end{pmatrix}$. Tìm $[x]_b$.
 

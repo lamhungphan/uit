@@ -1,4 +1,10 @@
-## BÀI TẬP 1: KIỂM TRA ÁNH XẠ CÓ PHẢI LÀ TÍCH VÔ HƯỚNG HAY KHÔNG
+# BÀI TẬP BUỔI 8 – ĐẠI SỐ TUYẾN TÍNH
+
+> Chương 5: không gian Euclide, tích vô hướng và trực chuẩn hóa.
+
+---
+
+## 1. Kiểm tra ánh xạ có phải là tích vô hướng hay không
 
 Kiểm tra xem ánh xạ $\varphi(\alpha, \beta) = \langle \alpha \vert{} \beta \rangle$ có phải là một tích vô hướng trên không gian $V$ hay không? Vì sao?
 

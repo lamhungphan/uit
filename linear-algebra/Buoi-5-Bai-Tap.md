@@ -1,9 +1,10 @@
-# BÀI TẬP ĐẠI SỐ TUYẾN TÍNH - BUỔI 05
-**(Không gian véc tơ, Không gian con, Tổ hợp tuyến tính & ĐLTT/PTTT)**
+# BÀI TẬP BUỔI 5 – ĐẠI SỐ TUYẾN TÍNH
+
+> Chương 3: Không gian véc tơ, không gian con, tổ hợp tuyến tính và ĐLTT/PTTT.
 
 ---
 
-## PHẦN 1: TÍNH PHÉP TOÁN VÉC TƠ TRÊN $\mathbb{R}^6$
+## 1. Tính phép toán véc tơ trên $\mathbb{R}^6$
 
 ### Bài tập ví dụ trang 2
 > Cho $\alpha = (-2; 3; 5; -8; -4; 9)$ và $\beta = (7; -1; 2; 4; -6; 3)$ trên $\mathbb{R}^6$.  
