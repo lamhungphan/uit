@@ -32,9 +32,60 @@
 >   - Nhập giá trị cơ số 10 (DEC) $\to$ ấn `=` $\to$ ấn nút **`BIN`** (thường ở phím `log` hoặc `x²` tùy dòng máy) để đổi sang nhị phân.
 >   - Đơn vị tính cơ bản trong máy tính: $1 \text{ KB} = 1024 \text{ Bytes} = 2^{10} \text{ Bytes}$.
 
-# Tính thời gian truy xuất bộ nhớ hiệu dụng (EAT)
-## 1.
+# Bài tập buổi 7
+## Câu 1.
+
+Xét một không gian địa chỉ có 12 trang, mỗi trang có kích thước 2K, ánh xạ vào bộ nhớ vật lý có 32 khung trang.
+
+- **a.** Địa chỉ logic gồm bao nhiêu bit?
+- **b.** Địa chỉ vật lý gồm bao nhiêu bit?
+
+**Dữ kiện:**
+- Số trang trong không gian địa chỉ: $12$ trang
+- Kích thước mỗi trang: $2\text{K} = 2048 \text{ byte} = 2^{11} \text{ byte}$
+
+### a. Địa chỉ logic
+
+- Số hiệu trang (page number): $p = \lceil \log_2 12 \rceil = 4 \text{ bit}$
+- Độ dời trong trang (offset): $d = \log_2 2048 = 11 \text{ bit}$
+
+$$\text{Địa chỉ logic} = p + d = 4 + 11 = 15 \text{ bit}$$
+
+### b. Địa chỉ vật lý
+
+- Số hiệu khung trang (frame number): $f = \log_2 32 = 5 \text{ bit}$
+- Độ dời trong khung trang (offset): $d = 11 \text{ bit}$
+
+$$\text{Địa chỉ vật lý} = f + d = 5 + 11 = 16 \text{ bit}$$
+
+## Câu 2.
+> Tính thời gian truy xuất bộ nhớ hiệu dụng (EAT)
 Xét một hệ thống sử dụng kỹ thuật phân trang, với bảng trang được lưu trữ trong bộ nhớ chính. Thời gian cho một lần truy xuất bộ nhớ bình thường là $250\text{ ns}$. Nếu sử dụng TLBs với hit-ratio (tỷ lệ tìm thấy) là $85\%$, thời gian để tìm trong TLBs xem như bằng $0$, thì thời gian truy xuất bộ nhớ trong hệ thống là khoảng bao nhiêu?
+
+#### Bảng Đối Chiếu Thuật Ngữ & Khái Niệm
+
+| Thuật ngữ (English) | Ký hiệu | Khái niệm / Ý nghĩa |
+| :--- | :---: | :--- |
+| **Associative Lookup** | $e$ ($\epsilon$) | Thời gian tìm kiếm/tra cứu địa chỉ trong bộ nhớ liên kết TLB. |
+| **Memory Access** | $x$ | Thời gian truy xuất vào bộ nhớ chính (RAM). |
+| **Hit Ratio** | $\alpha$ (alpha) | Tỷ lệ tìm thấy địa chỉ trong TLB (tỷ lệ trúng TLB). |
+| **Miss Ratio** | $1 - \alpha$ | Tỷ lệ không tìm thấy địa chỉ trong TLB (tỷ lệ trượt TLB). |
+| **Effective Access Time** | $\text{EAT}$ | Thời gian truy xuất bộ nhớ trung bình thực tế tính đến cả trường hợp Hit và Miss TLB. |
+
+#### Công Thức Tính EAT
+
+$$\text{EAT} = (e + x)\alpha + (e + 2x)(1 - \alpha)$$ 
+
+$$\text{EAT} = (2 - \alpha)x + e$$
+
+1. **Trường hợp Hit TLB (xác suất $\alpha$):**
+   * Cần thời gian tra cứu TLB ($e$) + thời gian truy xuất bộ nhớ chính ($x$).
+   * Thời gian = $e + x$.
+
+2. **Trường hợp Miss TLB (xác suất $1 - \alpha$):**
+   * Cần thời gian tra cứu TLB ($e$) + thời gian đọc bảng trang trong bộ nhớ chính ($x$) + thời gian đọc dữ liệu thực tế trong bộ nhớ chính ($x$).
+   * Thời gian = $e + 2x$.
+--- 
 
 * **TLB hit ($85\%$):** 
   * Chỉ cần $1$ lần truy xuất bộ nhớ chính (để lấy dữ liệu).
@@ -46,7 +97,30 @@ Xét một hệ thống sử dụng kỹ thuật phân trang, với bảng trang
 
 $$\text{EAT} = 0.85 \times 250 + 0.15 \times 500 = 212.5 + 75 = 287.5\text{ ns} $$
 
---- 
+## Câu 3.
+
+Cho bảng trang như hình dưới:
+
+| Page | Frame |
+| :---: | :---: |
+| 0 | 6 |
+| 1 | 4 |
+| 2 | 5 |
+| 3 | 7 |
+| 4 | 1 |
+| 5 | 9 |
+
+**a.** Địa chỉ vật lý $6568$ sẽ được chuyển thành địa chỉ ảo bao nhiêu? Biết rằng kích thước mỗi frame là $1\text{KB}$ ($1024\text{ bytes}$).
+
+- Xác định số khung trang: $6568 \div 1024 = 6$ → Khung $6$ ⇒ Trang $0$
+- Độ dời (offset): $6568 \bmod 1024 = 424$
+- Địa chỉ ảo $= 0 \times 1024 + 424 = 424$
+
+**b.** Địa chỉ ảo $3254$ sẽ được chuyển thành địa chỉ vật lý bao nhiêu? Biết rằng kích thước mỗi frame là $2\text{KB}$ ($2048\text{ bytes}$).
+
+- Xác định số trang: $3254 \div 2048 = 1$ → Trang $1$ ⇒ Khung $4$
+- Độ dời (offset): $3254 \bmod 2048 = 1206$
+- Địa chỉ vật lý $= 4 \times 2048 + 1206 = 9398$
 
 # Tiểu kết
 
