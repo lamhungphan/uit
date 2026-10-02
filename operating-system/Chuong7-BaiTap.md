@@ -62,22 +62,6 @@ $$\text{Địa chỉ vật lý} = f + d = 5 + 11 = 16 \text{ bit}$$
 > Tính thời gian truy xuất bộ nhớ hiệu dụng (EAT)
 Xét một hệ thống sử dụng kỹ thuật phân trang, với bảng trang được lưu trữ trong bộ nhớ chính. Thời gian cho một lần truy xuất bộ nhớ bình thường là $250\text{ ns}$. Nếu sử dụng TLBs với hit-ratio (tỷ lệ tìm thấy) là $85\%$, thời gian để tìm trong TLBs xem như bằng $0$, thì thời gian truy xuất bộ nhớ trong hệ thống là khoảng bao nhiêu?
 
-#### Bảng Đối Chiếu Thuật Ngữ & Khái Niệm
-
-| Thuật ngữ (English) | Ký hiệu | Khái niệm / Ý nghĩa |
-| :--- | :---: | :--- |
-| **Associative Lookup** | $e$ ($\epsilon$) | Thời gian tìm kiếm/tra cứu địa chỉ trong bộ nhớ liên kết TLB. |
-| **Memory Access** | $x$ | Thời gian truy xuất vào bộ nhớ chính (RAM). |
-| **Hit Ratio** | $\alpha$ (alpha) | Tỷ lệ tìm thấy địa chỉ trong TLB (tỷ lệ trúng TLB). |
-| **Miss Ratio** | $1 - \alpha$ | Tỷ lệ không tìm thấy địa chỉ trong TLB (tỷ lệ trượt TLB). |
-| **Effective Access Time** | $\text{EAT}$ | Thời gian truy xuất bộ nhớ trung bình thực tế tính đến cả trường hợp Hit và Miss TLB. |
-
-#### Công Thức Tính EAT
-
-$$\text{EAT} = (e + x)\alpha + (e + 2x)(1 - \alpha)$$ 
-
-$$\text{EAT} = (2 - \alpha)x + e$$
-
 1. **Trường hợp Hit TLB (xác suất $\alpha$):**
    * Cần thời gian tra cứu TLB ($e$) + thời gian truy xuất bộ nhớ chính ($x$).
    * Thời gian = $e + x$.
@@ -96,6 +80,17 @@ $$\text{EAT} = (2 - \alpha)x + e$$
   * $\text{Thời gian} = 250\text{ ns} + 250\text{ ns} = 500\text{ ns}$
 
 $$\text{EAT} = 0.85 \times 250 + 0.15 \times 500 = 212.5 + 75 = 287.5\text{ ns} $$
+
+hoặc
+
+Với $e = 0$, $x = 250\text{ ns}$ và $\alpha = 0.85$, áp dụng công thức:
+
+$$\begin{aligned}
+\mathrm{EAT} &= (e + x)\alpha + (e + 2x)(1 - \alpha) \\
+&= (0 + 250)(0.85) + (0 + 2 \times 250)(1 - 0.85) \\
+&= 212.5 + 75 \\
+&= 287.5\text{ ns}
+\end{aligned}$$
 
 ## Câu 3.
 
@@ -120,7 +115,7 @@ Cho bảng trang như hình dưới:
 
 - Xác định số trang: $3254 \div 2048 = 1$ → Trang $1$ ⇒ Khung $4$
 - Độ dời (offset): $3254 \bmod 2048 = 1206$
-- Địa chỉ vật lý $= 4 \times 2048 + 1206 = 9398$
+- Địa chỉ vật lý $= (4 \times 2048) + 1206 = 9398$
 
 # Tiểu kết
 
@@ -131,17 +126,47 @@ Cho bảng trang như hình dưới:
 
 ## Câu 2. Xét một không gian địa chỉ luận lý cần 20 bit để biểu diễn địa chỉ. Biết rằng 12 trang trong không gian này được ánh xạ vào bộ nhớ vật lý có 36 khung trang. Vậy ta cần bao nhiêu bit để biểu diễn một địa chỉ vật lý?
 - Số trang trong không gian địa chỉ luận lý = 12 trang.
-  - Để định danh $12$ trang, ta dùng $p = \lceil \log_2(12) \rceil = 4$ bit dành cho số trang (page number).
+  - Để định danh $12$ trang, ta dùng $p = \lceil \log_2(12) \rceil = \lceil 3.585 \rceil = 4$ bit dành cho số trang (page number) (vì $2^3 = 8 < 12 \le 16 = 2^4$)
 
 - Tổng độ dài địa chỉ luận lý = $20$ bit. 
   - Kích thước độ lệch (offset/page offset) $d = 20 - 4 = 16$ bit.
   - Do đó, kích thước một trang/khung trang là $2^{16}$ bytes.
 
 - Bộ nhớ vật lý có $36$ khung trang (frame).   
-  - Số bit cần để biểu diễn số khung trang (frame number $f$) là $f_{bits} = \lceil \log_2(36) \rceil = 6$ bit (vì $2^5 = 32 < 36 \le 64 = 2^6$).
+  - Số bit cần để biểu diễn số khung trang (frame number $f$) là $f_{bits} = \lceil \log_2(36) \rceil = \lceil 5.17 \rceil = 6$ bit (vì $2^5 = 32 < 36 \le 64 = 2^6$).
 
-- Kích thước địa chỉ vật lý = (Số bit biểu diễn khung trang) + (Kích thước offset $d$)
-  - Địa chỉ vật lý $= 6 + 16 = 22$ bit
+- Gọi $N_{PA}$ là số bit của địa chỉ vật lý. Khi đó:
+  - $N_{PA} = f_{\text{bits}} + d = 6 + 16 = 22\text{ bit}$
+
+```
+================================================================================
+ĐỊA CHỈ LUẬN LÝ (LOGICAL ADDRESS) - Tổng: 20 bits
+================================================================================
+
+  +-------------------------------+-----------------------------------+
+  |  Số trang - Page Number (p)   |   Độ lệch trang - Offset (d)      |
+  +-------------------------------+-----------------------------------+
+  |            4 bits             |              16 bits              |
+  +-------------------------------+-----------------------------------+
+               |                                    |
+               | (12 trang <= 2^4 = 16)             | (Giữ nguyên sang
+               v                                    |  địa chỉ vật lý)
+    [Bảng trang / Page Table]                       |
+               |                                    |
+               v                                    v
+================================================================================
+ĐỊA CHỈ VẬT LÝ (PHYSICAL ADDRESS) - Tổng: 22 bits
+================================================================================
+
+  +-------------------------------+-----------------------------------+
+  |  Số khung - Frame Number (f)  |   Độ lệch trang - Offset (d)      |
+  +-------------------------------+-----------------------------------+
+  |            6 bits             |              16 bits              |
+  +-------------------------------+-----------------------------------+
+               ^
+               |
+     (36 khung <= 2^6 = 64)
+```
 
 ## Câu 3. Trong kỹ thuật phân trang, mục đích của việc thiết lập bảng trang là gì?
 - a. **Chuyển địa chỉ luận lý thành địa chỉ vật lý** Bảng trang (page table) chứa thông tin ánh xạ từ số trang (page number) của địa chỉ luận lý sang số khung trang (frame number) của địa chỉ vật lý.
@@ -260,15 +285,15 @@ Page 4 $\rightarrow$ Frame 9
 
 Page 5 $\rightarrow$ Frame 3
 
-Kích thước mỗi frame (Frame Size) $= 1\text{ Kbytes} = 1024\text{ bytes}$. Tìm địa chỉ luận lý có ánh xạ tương ứng với địa chỉ vật lý 
+Kích thước mỗi frame (Frame Size) $= 1\text{ Kbytes} = 1024\text{ bytes}$. Tìm địa chỉ luận lý tương ứng với địa chỉ vật lý $2099$.
 
-- Xác định số trang Số khung trang (Frame Number - $f$) và và Độ lệch (Offset - $d$):
-  - Số Số khung trang $f = \lfloor \frac{2099}{1024} \rfloor = 2$
+- Xác định số khung trang (Frame Number - $f$) và độ lệch (Offset - $d$):
+  - Số khung trang $f = \lfloor \frac{2099}{1024} \rfloor = 2$
   - Độ lệch $d = 2099 \pmod{1024} = 2099 - (2 \times 1024) = 2099 - 2048 = 51$
  
 - Tra bảng trang
   - Khung trang $f = 2$ ánh xạ ngược lại tương ứng với trang Page $p = 3$ .
 
-- Tính địa chỉ vật lý (Physical Address)
+- Tính địa chỉ luận lý (Logical Address)
   - $\text{Địa chỉ luận lý} = (p \times \text{Page Size}) + d$
   - $\text{Địa chỉ luận lý} = (3 \times 1024) + 51 = 3072 + 51 = 3123$
