@@ -126,3 +126,190 @@ Note: Số chính phương là số có căn bậc hai là một số nguyên.
 | 0 | 1 | 0 | 1 | 1 | 0 |
 | 1 | 0 | 0 | 1 | 0 | 0 |
 | 1 | 1 | 1 | 1 | 1 | 1 |
+
+## 4. Mệnh đề phức hợp và tương đương logic
+
+### 4.1. Khái niệm mệnh đề phức hợp
+
+Mệnh đề phức hợp là mệnh đề được xây dựng từ các mệnh đề đơn giản bằng cách nối chúng với các phép toán logic như: phủ định, hội, tuyển, kéo theo, tương đương.
+
+Ví dụ:
+
+$$
+(3 + 5 = 8) \Rightarrow (8 - 5 = 3)
+$$
+
+là một mệnh đề phức hợp.
+
+### 4.2. Hằng đúng và hằng sai
+
+- Một mệnh đề phức hợp luôn có giá trị đúng được gọi là **hằng đúng**.
+- Một mệnh đề phức hợp luôn có giá trị sai được gọi là **hằng sai**.
+
+### 4.3. Tương đương logic và hệ quả logic
+
+- Hai mệnh đề $E$ và $F$ gọi là tương đương logic nếu chúng có cùng giá trị chân lý (chân trị).
+- Mệnh đề $F$ gọi là hệ quả logic của mệnh đề $E$ nếu $E \Rightarrow F$ là hằng đúng.
+
+### 4.4. Xây dựng bảng chân trị
+
+Để xác định một mệnh đề phức hợp là hằng đúng hay không, ta lập bảng chân trị theo tất cả các khả năng của các biến mệnh đề.
+
+#### Ví dụ 1: $X = (P \land Q) \Rightarrow (P \lor Q)$
+
+Số lượng biến: $2^2 = 4$ dòng
+
+| $P$ | $Q$ | $P \land Q$ | $P \lor Q$ | $X$ |
+| --- | --- | --- | --- | --- |
+| 0 | 0 | 0 | 0 | 1 |
+| 0 | 1 | 0 | 1 | 1 |
+| 1 | 0 | 0 | 1 | 1 |
+| 1 | 1 | 1 | 1 | 1 |
+
+Kết luận: $X$ là một hằng đúng.
+
+#### Ví dụ 2: $(P \land Q) \leftrightarrow r$
+
+Số lượng biến: $2^3 = 8$ dòng
+
+| $P$ | $Q$ | $r$ | $P \land Q$ | $(P \land Q) \leftrightarrow r$ |
+| --- | --- | --- | --- | --- |
+| 0 | 0 | 0 | 0 | 1 |
+| 0 | 0 | 1 | 0 | 0 |
+| 0 | 1 | 0 | 0 | 1 |
+| 0 | 1 | 1 | 0 | 0 |
+| 1 | 0 | 0 | 0 | 1 |
+| 1 | 0 | 1 | 0 | 0 |
+| 1 | 1 | 0 | 1 | 0 |
+| 1 | 1 | 1 | 1 | 1 |
+
+Kết luận: Đây không phải là hằng đúng.
+
+---
+
+## 5. Độ ưu tiên của các phép toán mệnh đề
+
+Thứ tự ưu tiên của các phép toán logic là:
+
+1. Các phép toán trong ngoặc
+2. Phép phủ định
+3. Phép hội ($\land$)
+4. Phép tuyển ($\lor$)
+5. Phép kéo theo ($\Rightarrow$) và tương đương ($\Leftrightarrow$)
+
+Ví dụ:
+
+$$
+\neg (3 + 5 = 8) \Rightarrow (6 : 2 = 3) \land (15 : 3 = 4)
+$$
+
+Ta tính như sau:
+
+- $\neg(1) \Rightarrow (1) \land (0)$
+- $0 \Rightarrow (1 \land 0)$
+- $0 \Rightarrow 0$
+- $1$
+
+Vậy mệnh đề này là đúng.
+
+---
+
+## 6. Các quy luật logic
+
+Với $P$, $Q$, $R$ là các mệnh đề bất kỳ, ta có các quy luật sau:
+
+### 6.1. Luật phủ định của phủ định
+
+$$
+\overline{\overline{P}} = P
+$$
+
+### 6.2. Các luật De Morgan
+
+$$
+\overline{P \land Q} = \overline{P} \lor \overline{Q}
+$$
+
+$$
+\overline{P \lor Q} = \overline{P} \land \overline{Q}
+$$
+
+### 6.3. Luật giao hoán
+
+$$
+P \land Q = Q \land P
+$$
+
+$$
+P \lor Q = Q \lor P
+$$
+
+### 6.4. Luật kết hợp
+
+$$
+P \land (Q \land R) = (P \land Q) \land R
+$$
+
+$$
+P \lor (Q \lor R) = (P \lor Q) \lor R
+$$
+
+### 6.5. Luật phân phối
+
+$$
+P \land (Q \lor R) = (P \land Q) \lor (P \land R)
+$$
+
+$$
+P \lor (Q \land R) = (P \lor Q) \land (P \lor R)
+$$
+
+### 6.6. Luật lũy đẳng
+
+$$
+P \land P = P
+$$
+
+$$
+P \lor P = P
+$$
+
+### 6.7. Luật về phần tử bù
+
+$$
+P \land \overline{P} = 0
+$$
+
+$$
+P \lor \overline{P} = 1
+$$
+
+### 6.8. Luật thống trị
+
+$$
+P \land 0 = 0
+$$
+
+$$
+P \lor 1 = 1
+$$
+
+### 6.9. Luật hấp thụ
+
+$$
+P \land (P \lor Q) = P
+$$
+
+$$
+P \lor (P \land Q) = P
+$$
+
+### 6.10. Luật chứng minh phản chứng
+
+$$
+(P \implies Q) \equiv (\overline{Q} \implies \overline{P})
+$$
+
+$$
+\overline{P \implies Q} \equiv P \land \overline{Q}
+$$
