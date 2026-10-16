@@ -1,4 +1,4 @@
-# Mệnh đề
+## Mệnh đề
 
 Một mệnh đề là một khẳng định có giá trị chân lý xác định, chỉ có thể là đúng hoặc sai, không thể vừa đúng vừa sai.
 
@@ -228,9 +228,7 @@ $$
 
 $$
 \overline{P \land Q} = \overline{P} \lor \overline{Q}
-$$
-
-$$
+\mathbin ;
 \overline{P \lor Q} = \overline{P} \land \overline{Q}
 $$
 
@@ -238,9 +236,7 @@ $$
 
 $$
 P \land Q = Q \land P
-$$
-
-$$
+\mathbin ;
 P \lor Q = Q \lor P
 $$
 
@@ -248,10 +244,6 @@ $$
 
 $$
 P \land (Q \land R) = (P \land Q) \land R
-$$
-
-$$
-P \lor (Q \lor R) = (P \lor Q) \lor R
 $$
 
 ### 6.5. Luật phân phối
@@ -268,9 +260,7 @@ $$
 
 $$
 P \land P = P
-$$
-
-$$
+\mathbin ;
 P \lor P = P
 $$
 
@@ -278,9 +268,7 @@ $$
 
 $$
 P \land \overline{P} = 0
-$$
-
-$$
+\mathbin ;
 P \lor \overline{P} = 1
 $$
 
@@ -288,9 +276,7 @@ $$
 
 $$
 P \land 0 = 0
-$$
-
-$$
+\mathbin ;
 P \lor 1 = 1
 $$
 
@@ -298,18 +284,310 @@ $$
 
 $$
 P \land (P \lor Q) = P
-$$
-
-$$
+\mathbin ;
 P \lor (P \land Q) = P
 $$
 
-### 6.10. Luật chứng minh phản chứng
+### 6.10. Luật chứng minh phản chứng thứ nhất
 
 $$
 (P \implies Q) \equiv (\overline{Q} \implies \overline{P})
 $$
 
+### 6.11. Luật chứng minh phản chứng thứ hai
+
 $$
 \overline{P \implies Q} \equiv P \land \overline{Q}
 $$
+
+## 7. Vị từ và lượng từ
+
+### 7.1. Hàm mệnh đề
+
+Hàm mệnh đề là một khẳng định $P(x, y, \dots)$ có chứa một hay nhiều biến thuộc các tập hợp $A, B, \dots$, sao cho:
+
+- Bản thân $P(x, y, \dots)$ chưa phải là mệnh đề.
+- Khi thay các biến $x, y, \dots$ bằng các giá trị cụ thể, ta thu được một mệnh đề.
+
+Nói cách khác, bản thân hàm mệnh đề chưa phải là mệnh đề; sau khi thay biến bằng giá trị cụ thể, ta thu được một mệnh đề.
+
+**Ví dụ 1:** “$x$ là số nguyên tố”, với $x \in \mathbb{N}$:
+
+- $x = 2$: mệnh đề đúng, giá trị $1$.
+- $x = 3$: mệnh đề đúng, giá trị $1$.
+- $x = 4$: mệnh đề sai, giá trị $0$.
+
+**Ví dụ 2:** “$x + y = 3$”, với $x, y \in \mathbb{N}$:
+
+- $x = 5,\ y = 2$: mệnh đề sai, giá trị $0$.
+- $x = 0,\ y = 4$: mệnh đề sai, giá trị $0$.
+- $x = 1,\ y = 2$: mệnh đề đúng, giá trị $1$.
+
+### 7.2. Vị từ và lượng từ
+
+- $\forall$ là ký hiệu **với mọi** (Universal Quantifier, chữ A viết ngược từ chữ *All*).
+- $\exists$ là ký hiệu **tồn tại** (Existential Quantifier, chữ E viết ngược từ chữ *Exist*).
+- Hai ký hiệu trên được gọi là các **lượng từ**.
+- **Vị từ** là một hàm mệnh đề có chứa các lượng từ.
+
+**Ví dụ:**
+
+1. $\forall x \in \mathbb{Z},\ 2x$ là số lẻ. Giá trị chân lý là $0$, vì $2x$ luôn là số chẵn với mọi số nguyên $x$.
+2. $\exists n \in \mathbb{Z},\ 0 \cdot n + 1 = 0$. Giá trị chân lý là $0$, vì $1 = 0$ không thể đúng với bất kỳ $n$ nào.
+3. $\exists x \in \mathbb{N},\ \forall y \in \mathbb{N},\ x \cdot y = 0$. Giá trị chân lý là $1$, vì chọn $x = 0$ thì $0 \cdot y = 0$ luôn đúng với mọi $y$.
+
+### 7.3. Phủ định của vị từ
+
+Khi lấy phủ định của một mệnh đề chứa lượng từ, ta áp dụng quy tắc đổi lượng từ và phủ định vị từ bên trong:
+
+- $\forall$ chuyển thành $\exists$.
+- $\exists$ chuyển thành $\forall$.
+- $P(x)$ chuyển thành $\neg P(x)$.
+- $\neg P(x)$ chuyển thành $P(x)$.
+
+**Ví dụ 1:**
+
+Phủ định của mệnh đề
+
+$$
+\exists x,\ \forall y \in \mathbb{Z},\ x + y < 5
+$$
+
+là
+
+$$
+\forall x,\ \exists y \in \mathbb{Z},\ x + y \ge 5.
+$$
+
+**Ví dụ 2:**
+
+Cho mệnh đề
+
+$$
+\forall x,\ \exists y \in \mathbb{N},\ x \% y = 0.
+$$
+
+Phủ định của mệnh đề trên là
+
+$$
+\exists x,\ \forall y \in \mathbb{N},\ x \% y \ne 0.
+$$
+
+## 8. Suy luận và quy tắc suy diễn
+
+### 8.1. Khái niệm suy luận
+
+Suy luận là quá trình rút ra mệnh đề mới từ một hoặc nhiều mệnh đề đã có. Mệnh đề đã có được gọi là **giả thiết** hoặc **tiền đề**, còn mệnh đề mới được gọi là **kết luận**.
+
+Trong chứng minh toán học, ta có các khẳng định $P_1, P_2, P_3, \dots, P_n$ và sử dụng các quy tắc suy diễn để rút ra kết luận $Q$:
+
+$$
+(P_1 \land P_2 \land \dots \land P_n) \Rightarrow Q
+$$
+
+Trong đó:
+
+- $P_1, P_2, \dots, P_n$ là các tiền đề (hay giả thiết).
+- $\therefore$ là ký hiệu “do đó” hoặc “vì vậy” (Therefore).
+- $Q$ là kết luận rút ra từ các tiền đề $P_1, P_2, \dots, P_n$.
+
+Sơ đồ biểu diễn:
+
+$$
+\begin{array}{c}
+P_1 \\
+P_2 \\
+\vdots \\
+P_n \\
+\hline
+\therefore Q
+\end{array}
+$$
+
+Mô hình trên đại diện cho dạng lập luận (Argument form) trong logic học.
+
+### 8.2. Phương pháp khẳng định (quy tắc Modus Ponens)
+
+Quy tắc này được thể hiện bởi hằng đúng:
+
+$$
+[(P \Rightarrow Q) \land P] \Rightarrow Q
+$$
+
+Dưới dạng sơ đồ:
+
+$$
+\begin{array}{c}
+P \Rightarrow Q \\
+P \\
+\hline
+\therefore Q
+\end{array}
+$$
+
+- Tiền đề 1: Nếu $P$ thì $Q$ ($P \Rightarrow Q$).
+- Tiền đề 2: Khẳng định $P$ đúng ($P$).
+- Kết luận: Do đó, $Q$ đúng ($\therefore Q$).
+
+**Ví dụ 1:**
+
+$$
+\begin{array}{l}
+\text{Chuồn chuồn bay thấp thì mưa} \\
+\text{Chuồn chuồn bay thấp} \\
+\hline
+\therefore \text{Trời mưa}
+\end{array}
+$$
+
+**Ví dụ 2:**
+
+$$
+\begin{array}{l}
+\text{Nếu P lười học thì P đạt môn Toán Rời Rạc} \\
+\text{Mà P rất lười học} \\
+\hline
+\therefore \text{P đạt môn Toán Rời Rạc}
+\end{array}
+$$
+
+### 8.3. Phương pháp phủ định (quy tắc Modus Tollens)
+
+Quy tắc này được thể hiện bởi hằng đúng:
+
+$$
+[(P \Rightarrow Q) \land \overline{Q}] \Rightarrow \overline{P}
+$$
+
+Dưới dạng sơ đồ:
+
+$$
+\begin{array}{c}
+P \Rightarrow Q \\
+\overline{Q} \\
+\hline
+\therefore \overline{P}
+\end{array}
+$$
+
+- Tiền đề 1: Nếu $P$ thì $Q$ ($P \Rightarrow Q$).
+- Tiền đề 2: Phủ định $Q$ (tức là $Q$ sai, ký hiệu $\overline{Q}$ hoặc $\neg Q$).
+- Kết luận: Do đó, phủ định $P$ (tức là $P$ sai, ký hiệu $\overline{P}$ hoặc $\neg P$).
+
+**Ví dụ:**
+
+$$
+\begin{array}{l}
+\text{Nếu P chăm học thì P đạt môn Toán Rời Rạc} \\
+\text{P không đạt môn Toán Rời Rạc} \\
+\hline
+\therefore \text{P không chăm học}
+\end{array}
+$$
+
+### 8.4. Tam đoạn luận (quy tắc bắc cầu / Syllogism)
+
+Quy tắc này được thể hiện bởi hằng đúng:
+
+$$
+[(P \Rightarrow Q) \land (Q \Rightarrow R)] \Rightarrow (P \Rightarrow R)
+$$
+
+Dưới dạng sơ đồ:
+
+$$
+\begin{array}{c}
+P \Rightarrow Q \\
+Q \Rightarrow R \\
+\hline
+\therefore P \Rightarrow R
+\end{array}
+$$
+
+- Tiền đề 1: Nếu $P$ thì $Q$ ($P \Rightarrow Q$).
+- Tiền đề 2: Nếu $Q$ thì $R$ ($Q \Rightarrow R$).
+- Kết luận: Do đó, nếu $P$ thì $R$ ($\therefore P \Rightarrow R$).
+
+**Ví dụ 1:**
+
+$$
+\begin{array}{l}
+a < b \\
+b < c \\
+\hline
+\therefore a < c
+\end{array}
+$$
+
+**Ví dụ 2:**
+
+$$
+\begin{array}{l}
+a \mathbin{\vdots} b \\
+b \mathbin{\vdots} c \\
+\hline
+\therefore a \mathbin{\vdots} c
+\end{array}
+$$
+
+**Ghi chú:** Cả $a \vdots b$ và $b \mid a$ đều mang nghĩa $a$ chia hết cho $b$.
+
+### 8.5. Quy tắc mâu thuẫn (chứng minh bằng phản chứng)
+
+$$
+[P \Rightarrow Q] \iff [(P \land \overline{Q}) \Rightarrow 0]
+$$
+
+Xét suy luận sau và xác định suy luận đúng hay sai:
+
+$$
+\begin{array}{c}
+P \Rightarrow R \\
+\overline{P} \Rightarrow Q \\
+Q \Rightarrow S \\
+\hline
+\therefore \overline{R} \Rightarrow S
+\end{array}
+$$
+
+Phủ định kết luận dựa trên **luật chứng minh phản chứng thứ hai**:
+
+$$
+\overline{\overline{R} \Rightarrow S}
+= \overline{R} \land \overline{S}
+$$
+
+Thêm $\overline{R}$ và $\overline{S}$ vào các tiền đề:
+
+$$
+\begin{array}{c}
+P \Rightarrow R \\
+\overline{P} \Rightarrow Q \\
+Q \Rightarrow S \\
+\overline{R} \\
+\overline{S} \\
+\hline
+\therefore 0
+\end{array}
+$$
+
+Các bước suy luận:
+
+1. Từ (2) và (3), áp dụng **tam đoạn luận**:
+   $$
+   \overline{P} \Rightarrow S.
+   $$
+2. Từ kết quả trên và (5), áp dụng **quy tắc phủ định**:
+   $$
+   \overline{(\overline{P})} = P.
+   $$
+3. Từ kết quả trên và (1), áp dụng **quy tắc khẳng định**:
+   $$
+   R.
+   $$
+4. Kết hợp kết quả trên với (4):
+   $$
+   R \land \overline{R} = 0.
+   $$
+
+**Kết luận:** Suy luận đúng (True).
