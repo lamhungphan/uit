@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big-O Asymptotic Upper Bound Visualizer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- MathJax for rendering math expressions -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        code, pre {
+            font-family: 'Fira Code', monospace;
+        }
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-slate-900 text-slate-100">
+
+    <!-- Header Navigation -->
+    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50 px-4 lg:px-8 py-3 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center font-bold text-white text-xl shadow-lg shadow-indigo-500/30">
+                <!-- $\mathcal{O}$ -->
+            </div>
+            <div>
+                <h1 class="font-bold text-lg leading-tight text-white">Big-O Notation Explorer</h1>
+                <p class="text-xs text-slate-400">Asymptotic Upper Bound Visualizer & TikZ Generator</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-2">
+            <button id="tab-visualizer" onclick="switchTab('visualizer')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/30">
+                <i class="fa-solid font-bold fa-chart-line mr-2"></i>Interactive Explorer
+            </button>
+            <button id="tab-tikz" onclick="switchTab('tikz')" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-all">
+                <i class="fa-solid fa-code mr-2"></i>LaTeX / TikZ Code
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow container mx-auto px-4 lg:px-8 py-6 max-w-7xl">
+        
+        <!-- VISUALIZER VIEW -->
+        <div id="view-visualizer" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Left Column: Controls & Definition -->
+            <div class="lg:col-span-4 space-y-6">
+                
+                <!-- Formal Definition Card -->
+                <div class="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-5 backdrop-blur shadow-xl">
+                    <h2 class="text-sm font-semibold text-indigo-400 uppercase tracking-wider mb-3 flex items-center">
+                        <i class="fa-solid fa-book-bookmark mr-2"></i> Formal Definition
+                    </h2>
+                    <div class="p-3 bg-slate-900/90 rounded-xl border border-slate-700/80 text-center font-serif text-lg py-4">
+                        $$f(n) = \mathcal{O}(g(n))$$
+                    </div>
+                    <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+                        $f(n) = \mathcal{O}(g(n))$ means there exist positive constants <span class="text-emerald-400 font-semibold">$c > 0$</span> and <span class="text-amber-400 font-semibold">$n_0 \ge 1$</span> such that:
+                    </p>
+                    <div class="mt-3 p-3 bg-indigo-950/40 border border-indigo-500/30 rounded-xl text-center text-indigo-200 font-medium text-sm">
+                        $$f(n) \le c \cdot g(n) \quad \text{for all } n \ge n_0$$
+                    </div>
+                    
+                    <!-- Dynamic Condition Validator -->
+                    <div id="validation-status" class="mt-4 p-3 rounded-xl border flex items-center space-x-3 transition-all duration-300">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Parameters Controls Card -->
+                <div class="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-5 backdrop-blur shadow-xl space-y-5">
+                    <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider flex items-center justify-between">
+                        <span><i class="fa-solid fa-sliders mr-2 text-indigo-400"></i> Interactive Controls</span>
+                        <button onclick="resetDefaults()" class="text-xs text-slate-400 hover:text-indigo-400 transition-colors">
+                            <i class="fa-solid fa-rotate-left mr-1"></i> Reset
+                        </button>
+                    </h2>
+
+                    <!-- Preset Functions Selection -->
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">Preset Functions</label>
+                        <select id="preset-select" onchange="applyPreset()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="linear">1. Linear: f(n) = 3n + 10 vs g(n) = n</option>
+                            <option value="quadratic">2. Quadratic: f(n) = 2n² + 5n + 10 vs g(n) = n²</option>
+                            <option value="constant_large">3. Large Constant: f(n) = 100n vs g(n) = n²</option>
+                            <option value="nlogn">4. Log-Linear: f(n) = n log₂(n) + 15 vs g(n) = n²</option>
+                            <option value="exponential">5. Exponential: f(n) = 2ⁿ vs g(n) = 3ⁿ</option>
+                        </select>
+                    </div>
+
+                    <!-- Slider for Constant c -->
+                    <div class="space-y-1">
+                        <div class="flex justify-between items-center text-xs">
+                            <label for="slider-c" class="font-medium text-emerald-400">Constant Scaling factor ($c$)</label>
+                            <span id="val-c" class="font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded text-xs">4.0</span>
+                        </div>
+                        <input type="range" id="slider-c" min="0.5" max="15" step="0.1" value="4.0" oninput="updateVisualization()" class="w-full accent-emerald-500 cursor-pointer h-2 bg-slate-700 rounded-lg">
+                    </div>
+
+                    <!-- Slider for Threshold n0 -->
+                    <div class="space-y-1">
+                        <div class="flex justify-between items-center text-xs">
+                            <label for="slider-n0" class="font-medium text-amber-400">Threshold Start ($n_0$)</label>
+                            <span id="val-n0" class="font-bold text-amber-400 bg-amber-950/60 border border-amber-500/30 px-2 py-0.5 rounded text-xs">10</span>
+                        </div>
+                        <input type="range" id="slider-n0" min="1" max="50" step="1" value="10" oninput="updateVisualization()" class="w-full accent-amber-500 cursor-pointer h-2 bg-slate-700 rounded-lg">
+                    </div>
+
+                    <!-- Range Max n Slider -->
+                    <div class="space-y-1">
+                        <div class="flex justify-between items-center text-xs">
+                            <label for="slider-max-n" class="font-medium text-slate-400">View Domain Range ($n_{max}$)</label>
+                            <span id="val-max-n" class="font-bold text-slate-300 bg-slate-900 border border-slate-700 px-2 py-0.5 rounded text-xs">30</span>
+                        </div>
+                        <input type="range" id="slider-max-n" min="10" max="100" step="5" value="30" oninput="updateVisualization()" class="w-full accent-indigo-500 cursor-pointer h-2 bg-slate-700 rounded-lg">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Right Column: Interactive Plot & Dynamic Status -->
+            <div class="lg:col-span-8 flex flex-col space-y-6">
+                
+                <!-- Chart Box -->
+                <div class="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-5 backdrop-blur shadow-xl flex-grow flex flex-col">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <div>
+                            <h2 class="text-base font-semibold text-white flex items-center">
+                                Asymptotic Curve Comparison
+                            </h2>
+                            <p class="text-xs text-slate-400">Highlighted region represents $n \ge n_0$ where upper bound holds</p>
+                        </div>
+                        
+                        <!-- Legend Indicators -->
+                        <div class="flex items-center space-x-4 text-xs">
+                            <div class="flex items-center space-x-1.5">
+                                <span class="w-3 h-3 rounded-full bg-indigo-500 inline-block"></span>
+                                <span class="text-slate-300 font-medium">$f(n)$</span>
+                            </div>
+                            <div class="flex items-center space-x-1.5">
+                                <span class="w-3 h-3 rounded-full bg-emerald-400 inline-block"></span>
+                                <span class="text-slate-300 font-medium">$c \cdot g(n)$</span>
+                            </div>
+                            <div class="flex items-center space-x-1.5">
+                                <span class="w-3 h-0.5 bg-amber-400 border border-dashed border-amber-400 inline-block"></span>
+                                <span class="text-slate-300 font-medium">$n_0$ line</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Canvas Box -->
+                    <div class="relative flex-grow min-h-[360px] w-full bg-slate-900/60 rounded-xl p-3 border border-slate-700/40">
+                        <canvas id="bigOChart"></canvas>
+                    </div>
+
+                    <!-- Mathematical Context Banner -->
+                    <div class="mt-4 p-4 bg-slate-900/80 rounded-xl border border-slate-700/50 flex flex-col md:flex-row items-center justify-between text-xs gap-3">
+                        <div class="flex items-center space-x-3 text-slate-300">
+                            <div class="p-2 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                                <i class="fa-solid fa-calculator text-base"></i>
+                            </div>
+                            <div>
+                                <span class="text-slate-400 block text-[11px]">Current Equation Evaluation:</span>
+                                <span id="current-equation-str" class="font-mono text-indigo-300 font-medium text-sm">--</span>
+                            </div>
+                        </div>
+                        <div id="validity-badge" class="px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide">
+                            --
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TIKZ / LATEX CODE VIEW -->
+        <div id="view-tikz" class="hidden space-y-6">
+            <div class="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-6 backdrop-blur shadow-xl">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+                    <div>
+                        <h2 class="text-lg font-bold text-white flex items-center">
+                            <i class="fa-solid fa-file-code text-indigo-400 mr-2"></i> TikZ Asymptotic Plot Code
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-1">Standalone LaTeX TikZ snippet matching the Big-O curves for academic documents and papers.</p>
+                    </div>
+                    <button onclick="copyTikZCode()" id="copy-btn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-semibold flex items-center transition-all shadow-md shadow-indigo-600/30">
+                        <i class="fa-regular fa-copy mr-2"></i> Copy TikZ Code
+                    </button>
+                </div>
+
+                <div class="relative">
+                    <pre class="bg-slate-950 p-5 rounded-xl border border-slate-800 text-indigo-300 text-xs overflow-x-auto leading-relaxed"><code id="tikz-code-block">% LaTeX / TikZ preamble required:
+% \usepackage{pgfplots}
+% \pgfplotsset{compat=1.18}
+
+\begin{tikzpicture}
+  \begin{axis}[
+    axis lines = left,
+    xlabel = {$n$},
+    ylabel = {Operations},
+    xmin = 0, xmax = 30,
+    ymin = 0, ymax = 120,
+    domain = 0:30,
+    samples = 100,
+    grid = major,
+    grid style = {dashed, gray!20},
+    legend pos = north west,
+    legend style = {draw=none, fill=slate!10, font=\small},
+    width = 11cm, height = 7.5cm
+  ]
+
+  % Highlight Region n >= n0
+  \addplot [draw=none, fill=emerald!10, domain=10:30] {4*x} \closedcycle;
+
+  % Function f(n)
+  \addplot [color=indigo, ultra thick, domain=0:30] {3*x + 10};
+  \addlegendentry{$f(n) = 3n + 10$}
+
+  % Function c * g(n)
+  \addplot [color=emerald, ultra thick, domain=0:30] {4*x};
+  \addlegendentry{$c \cdot g(n) = 4n$}
+
+  % Threshold line n0
+  \draw [dashed, color=amber, ultra thick] (axis cs:10,0) -- (axis cs:10,120);
+  \node [above, color=amber, font=\small] at (axis cs:10,0) {$n_0 = 10$};
+
+  \end{axis}
+\end{tikzpicture}</code></pre>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950/80 py-4 text-center text-xs text-slate-500">
+        Interactive Computer Science Notation Visualizer &bull; $f(n) = \mathcal{O}(g(n))$
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Preset Definitions
+        const PRESETS = {
+            linear: {
+                name: "f(n) = 3n + 10 vs g(n) = n",
+                fLabel: "f(n) = 3n + 10",
+                gLabel: "g(n) = n",
+                f: (n) => 3 * n + 10,
+                g: (n) => n,
+                defaultC: 4.0,
+                defaultN0: 10,
+                maxN: 30,
+                tikzF: "3*x + 10",
+                tikzG: "x"
+            },
+            quadratic: {
+                name: "f(n) = 2n² + 5n + 10 vs g(n) = n²",
+                fLabel: "f(n) = 2n² + 5n + 10",
+                gLabel: "g(n) = n²",
+                f: (n) => 2 * Math.pow(n, 2) + 5 * n + 10,
+                g: (n) => Math.pow(n, 2),
+                defaultC: 3.0,
+                defaultN0: 7,
+                maxN: 20,
+                tikzF: "2*x^2 + 5*x + 10",
+                tikzG: "x^2"
+            },
+            constant_large: {
+                name: "f(n) = 100n vs g(n) = n²",
+                fLabel: "f(n) = 100n",
+                gLabel: "g(n) = n²",
+                f: (n) => 100 * n,
+                g: (n) => Math.pow(n, 2),
+                defaultC: 2.0,
+                defaultN0: 50,
+                maxN: 80,
+                tikzF: "100*x",
+                tikzG: "x^2"
+            },
+            nlogn: {
+                name: "f(n) = n log₂(n) + 15 vs g(n) = n²",
+                fLabel: "f(n) = n log₂(n) + 15",
+                gLabel: "g(n) = n²",
+                f: (n) => (n > 0 ? n * Math.log2(n) : 0) + 15,
+                g: (n) => Math.pow(n, 2),
+                defaultC: 1.0,
+                defaultN0: 6,
+                maxN: 25,
+                tikzF: "x*ln(x)/ln(2) + 15",
+                tikzG: "x^2"
+            },
+            exponential: {
+                name: "f(n) = 2ⁿ vs g(n) = 3ⁿ",
+                fLabel: "f(n) = 2ⁿ",
+                gLabel: "g(n) = 3ⁿ",
+                f: (n) => Math.pow(2, n),
+                g: (n) => Math.pow(3, n),
+                defaultC: 1.0,
+                defaultN0: 2,
+                maxN: 10,
+                tikzF: "2^x",
+                tikzG: "3^x"
+            }
+        };
+
+        let currentPresetKey = 'linear';
+        let chartInstance = null;
+
+        // Custom Chart.js Plugin to draw vertical n0 line and region background
+        const bigOPlugin = {
+            id: 'bigOThresholdPlugin',
+            beforeDraw(chart, args, options) {
+                const { ctx, chartArea: { top, bottom, left, right }, scales: { x, y } } = chart;
+                const n0 = parseFloat(document.getElementById('slider-n0').value);
+                const n0Pixel = x.getPixelForValue(n0);
+
+                if (n0Pixel >= left && n0Pixel <= right) {
+                    // 1. Draw valid region background for n >= n0
+                    ctx.save();
+                    ctx.fillStyle = 'rgba(16, 185, 129, 0.08)'; // Light emerald tint
+                    ctx.fillRect(n0Pixel, top, right - n0Pixel, bottom - top);
+                    ctx.restore();
+
+                    // 2. Draw vertical threshold dashed line
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.setLineDash([6, 6]);
+                    ctx.strokeStyle = '#f59e0b'; // Amber 500
+                    ctx.lineWidth = 2;
+                    ctx.moveTo(n0Pixel, top);
+                    ctx.lineTo(n0Pixel, bottom);
+                    ctx.stroke();
+
+                    // 3. Draw Text Tag for n0
+                    ctx.fillStyle = '#f59e0b';
+                    ctx.font = '600 12px Inter, sans-serif';
+                    ctx.fillText(`n₀ = ${n0}`, n0Pixel + 6, top + 18);
+                    ctx.restore();
+                }
+            }
+        };
+
+        Chart.register(bigOPlugin);
+
+        // Initialize Application
+        window.addEventListener('DOMContentLoaded', () => {
+            initChart();
+            applyPreset();
+        });
+
+        // Initialize Chart.js
+        function initChart() {
+            const ctx = document.getElementById('bigOChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [
+                        {
+                            label: 'f(n)',
+                            data: [],
+                            borderColor: '#6366f1', // Indigo 500
+                            backgroundColor: '#6366f1',
+                            borderWidth: 3,
+                            pointRadius: 0,
+                            pointHoverRadius: 6,
+                            tension: 0.25
+                        },
+                        {
+                            label: 'c · g(n)',
+                            data: [],
+                            borderColor: '#10b981', // Emerald 500
+                            backgroundColor: '#10b981',
+                            borderWidth: 3,
+                            pointRadius: 0,
+                            pointHoverRadius: 6,
+                            tension: 0.25
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#0f172a',
+                            titleColor: '#f8fafc',
+                            bodyColor: '#cbd5e1',
+                            borderColor: '#334155',
+                            borderWidth: 1,
+                            padding: 10,
+                            callbacks: {
+                                title: (items) => `n = ${items[0].label}`,
+                                label: (context) => ` ${context.dataset.label}: ${context.parsed.y.toFixed(2)}`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            title: {
+                                display: true,
+                                text: 'Input Size (n)',
+                                color: '#94a3b8',
+                                font: { size: 12, weight: '500' }
+                            },
+                            grid: { color: 'rgba(51, 65, 85, 0.4)' },
+                            ticks: { color: '#94a3b8' }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Operations / Growth',
+                                color: '#94a3b8',
+                                font: { size: 12, weight: '500' }
+                            },
+                            grid: { color: 'rgba(51, 65, 85, 0.4)' },
+                            ticks: { color: '#94a3b8' },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Apply selected function preset
+        function applyPreset() {
+            const select = document.getElementById('preset-select');
+            currentPresetKey = select.value;
+            const preset = PRESETS[currentPresetKey];
+
+            // Set default sliders
+            document.getElementById('slider-c').value = preset.defaultC;
+            document.getElementById('slider-n0').value = preset.defaultN0;
+            document.getElementById('slider-max-n').value = preset.maxN;
+
+            updateVisualization();
+        }
+
+        // Reset current preset defaults
+        function resetDefaults() {
+            applyPreset();
+        }
+
+        // Main Update Loop
+        function updateVisualization() {
+            const preset = PRESETS[currentPresetKey];
+            const c = parseFloat(document.getElementById('slider-c').value);
+            const n0 = parseInt(document.getElementById('slider-n0').value);
+            const maxN = parseInt(document.getElementById('slider-max-n').value);
+
+            // Update UI slider labels
+            document.getElementById('val-c').innerText = c.toFixed(1);
+            document.getElementById('val-n0').innerText = n0;
+            document.getElementById('val-max-n').innerText = maxN;
+
+            // Generate plot data points
+            const dataF = [];
+            const dataCG = [];
+            const step = Math.max(0.2, maxN / 100);
+
+            let satisfiesFromN0 = true;
+            let failingPoint = null;
+
+            for (let n = 1; n <= maxN; n += step) {
+                const valF = preset.f(n);
+                const valCG = c * preset.g(n);
+
+                dataF.push({ x: n, y: valF });
+                dataCG.push({ x: n, y: valCG });
+
+                // Check condition for all n >= n0
+                if (n >= n0) {
+                    if (valF > valCG + 1e-6) {
+                        satisfiesFromN0 = false;
+                        if (!failingPoint) failingPoint = n.toFixed(1);
+                    }
+                }
+            }
+
+            // Update Chart datasets
+            chartInstance.data.datasets[0].label = preset.fLabel;
+            chartInstance.data.datasets[0].data = dataF;
+            
+            chartInstance.data.datasets[1].label = `c · g(n) = ${c.toFixed(1)} · (${preset.gLabel.replace('g(n) = ', '')})`;
+            chartInstance.data.datasets[1].data = dataCG;
+
+            chartInstance.options.scales.x.max = maxN;
+            chartInstance.update();
+
+            // Update Dynamic Equations & Validation Box
+            const eqStr = `${preset.fLabel}  \\le  ${c.toFixed(1)} \\cdot (${preset.gLabel.replace('g(n) = ', '')})`;
+            document.getElementById('current-equation-str').innerText = `${preset.fLabel} ≤ ${c.toFixed(1)} · ${preset.gLabel.replace('g(n) = ', '')}`;
+
+            const statusContainer = document.getElementById('validation-status');
+            const badge = document.getElementById('validity-badge');
+
+            if (satisfiesFromN0) {
+                statusContainer.className = "mt-4 p-3 rounded-xl border border-emerald-500/40 bg-emerald-950/30 text-emerald-300 flex items-center space-x-3 transition-all";
+                statusContainer.innerHTML = `
+                    <div class="p-2 bg-emerald-500/20 rounded-lg text-emerald-400">
+                        <i class="fa-solid fa-circle-check text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-xs text-emerald-200">Upper Bound Satisfied</div>
+                        <div class="text-[11px] text-emerald-400/90">f(n) ≤ ${c.toFixed(1)} · g(n) holds for all n ≥ ${n0}</div>
+                    </div>
+                `;
+
+                badge.className = "px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+                badge.innerText = "✓ Valid Upper Bound";
+            } else {
+                statusContainer.className = "mt-4 p-3 rounded-xl border border-rose-500/40 bg-rose-950/30 text-rose-300 flex items-center space-x-3 transition-all";
+                statusContainer.innerHTML = `
+                    <div class="p-2 bg-rose-500/20 rounded-lg text-rose-400">
+                        <i class="fa-solid fa-circle-xmark text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-xs text-rose-200">Condition Fails</div>
+                        <div class="text-[11px] text-rose-300/90">f(n) > c · g(n) at n ≈ ${failingPoint}. Increase c or n₀.</div>
+                    </div>
+                `;
+
+                badge.className = "px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide bg-rose-500/20 text-rose-300 border border-rose-500/30";
+                badge.innerText = "✕ Invalid Choice";
+            }
+
+            // Update TikZ Code block matching parameters
+            generateTikZCode(preset, c, n0, maxN);
+        }
+
+        // Generate LaTeX TikZ snippet dynamically
+        function generateTikZCode(preset, c, n0, maxN) {
+            const maxY = Math.ceil(Math.max(preset.f(maxN), c * preset.g(maxN)) * 1.05);
+
+            const tikz = `% Preamble required: \\usepackage{pgfplots} \\pgfplotsset{compat=1.18}
+
+\\begin{tikzpicture}
+  \\begin{axis}[
+    axis lines = left,
+    xlabel = {$n$},
+    ylabel = {Operations},
+    xmin = 0, xmax = ${maxN},
+    ymin = 0, ymax = ${maxY},
+    domain = 0:${maxN},
+    samples = 100,
+    grid = major,
+    grid style = {dashed, gray!20},
+    legend pos = north west,
+    legend style = {draw=none, fill=slate!10, font=\\small},
+    width = 11cm, height = 7.5cm
+  ]
+
+  % Highlighted Upper Bound Region (n >= n0)
+  \\addplot [draw=none, fill=emerald!15, domain=${n0}:${maxN}] {${c}*(${preset.tikzG})} \\closedcycle;
+
+  % Function f(n)
+  \\addplot [color=indigo, ultra thick, domain=0:${maxN}] {${preset.tikzF}};
+  \\addlegendentry{$f(n) = ${preset.fLabel.replace('f(n) = ', '')}$}
+
+  % Function c * g(n)
+  \\addplot [color=emerald, ultra thick, domain=0:${maxN}] {${c}*(${preset.tikzG})};
+  \\addlegendentry{$c \\cdot g(n) = ${c} \\cdot (${preset.gLabel.replace('g(n) = ', '')})$}
+
+  % Threshold Line n0
+  \\draw [dashed, color=amber, ultra thick] (axis cs:${n0},0) -- (axis cs:${n0},${maxY});
+  \\node [above right, color=amber, font=\\small] at (axis cs:${n0},0) {$n_0 = ${n0}$};
+
+  \\end{axis}
+\\end{tikzpicture}`;
+
+            document.getElementById('tikz-code-block').innerText = tikz;
+        }
+
+        // Copy TikZ snippet to Clipboard
+        function copyTikZCode() {
+            const code = document.getElementById('tikz-code-block').innerText;
+            const btn = document.getElementById('copy-btn');
+            
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            btn.innerHTML = `<i class="fa-solid fa-check mr-2"></i> Copied!`;
+            btn.classList.replace('bg-indigo-600', 'bg-emerald-600');
+
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fa-regular fa-copy mr-2"></i> Copy TikZ Code`;
+                btn.classList.replace('bg-emerald-600', 'bg-indigo-600');
+            }, 2000);
+        }
+
+        // View Tab Switching
+        function switchTab(tab) {
+            const viewVis = document.getElementById('view-visualizer');
+            const viewTikz = document.getElementById('view-tikz');
+            const btnVis = document.getElementById('tab-visualizer');
+            const btnTikz = document.getElementById('tab-tikz');
+
+            if (tab === 'visualizer') {
+                viewVis.classList.remove('hidden');
+                viewTikz.classList.add('hidden');
+                btnVis.className = "px-4 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/30";
+                btnTikz.className = "px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-all";
+            } else {
+                viewVis.classList.add('hidden');
+                viewTikz.classList.remove('hidden');
+                btnTikz.className = "px-4 py-2 rounded-lg text-sm font-medium transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/30";
+                btnVis.className = "px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-all";
+            }
+        }
+    </script>
+</body>
+</html>
