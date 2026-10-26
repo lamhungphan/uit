@@ -1,15 +1,17 @@
+#include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <vector>
 #include <random>
 #include <iomanip>
-// #include <cmath>
+#include <string>
+#include <utility>
 
 using namespace std;
 
-double randomValue(mt19937 &gen, uniform_real_distribution<double> &dist)
+double randomValue(mt19937 &gen, uniform_int_distribution<int> &dist)
 {
-    double value = dist(gen);
-    return round(value * 100.0) / 100.0;
+    return dist(gen) / 100.0;
 }
 
 void printArr(const vector<double> &arr)
@@ -27,34 +29,26 @@ void printArr(const vector<double> &arr)
     cout << endl;
 }
 
-double sumArr(const vector<double> &arr)
+pair<double, double> sumAndProduct(const vector<double> &arr)
 {
     double sum = 0;
-    for (double val : arr)
-    {
-        sum += val;
-    }
-    return sum;
-}
-
-double prodArr(const vector<double> &arr)
-{
     double product = 1;
     for (double val : arr)
     {
+        sum += val;
         product *= val;
     }
-    return product;
+    return {sum, product};
 }
 
 void countShowUp(const vector<double> &arr, double num)
 {
     int count = 0;
-    for (int i = 0; i < arr.size(); ++i)
+    for (double value : arr)
     {
-        if (num == arr[i])
+        if (abs(num - value) < 1e-9)
         {
-            count++;
+            ++count;
         }
     }
     cout << "5. So " << num << " lap lai " << count << " lan" << endl;
@@ -92,52 +86,82 @@ int indexOfMinValue(const vector<double> &arr)
     return static_cast<int>(minIndex);
 }
 
-void reverseArr(const vector<double> &arr)
+vector<double> reverseArr(const vector<double> &arr)
 {
-    cout << "8. Mang sau khi dao nguoc: ";
-    for (size_t i = arr.size(); i > 0; --i)
-    {
-        cout << arr[i - 1] << ", ";
-    }
-    cout << endl;
+    return vector<double>(arr.rbegin(), arr.rend());
 }
 
-void getNegative(const vector<double> &arr)
+vector<double> getNegative(const vector<double> &arr)
 {
-    cout << "9. Cac phan tu am trong mang: ";
+    vector<double> negatives;
     for (double val : arr)
     {
         if (val < 0)
         {
-            cout << val << ", ";
+            negatives.push_back(val);
         }
     }
-    cout << endl;
+    return negatives;
 }
 
-void countElementInRange(const vector<double> &arr, int from, int to)
+int countElementInRange(const vector<double> &arr, double from, double to)
 {
-    int start = max(0, min(from, to));
-    int end = min(static_cast<int>(arr.size()) - 1, max(from, to));
-
-    int count = (start <= end) ? (end - start + 1) : 0;
-    cout << "10. Co " << count << " phan tu tu vi tri " << from << " toi " << to << endl;
-}
-
-void getElementInRange(const vector<double> &arr, int from, int to)
-{
-    int start = max(0, min(from, to));
-    int end = min(static_cast<int>(arr.size()) - 1, max(from, to));
-
-    cout << "11. Cac phan tu tu vi tri " << from << " toi " << to << ": ";
-    for (int i = start; i <= end; ++i)
+    if (from > to)
     {
-        cout << arr[i];
-        if (i < end)
+        swap(from, to);
+    }
+
+    int count = 0;
+    for (double value : arr)
+    {
+        if (value >= from && value <= to)
+        {
+            ++count;
+        }
+    }
+    return count;
+}
+
+vector<double> getElementInRange(const vector<double> &arr, double from, double to)
+{
+    if (from > to)
+    {
+        swap(from, to);
+    }
+
+    vector<double> values;
+    for (double value : arr)
+    {
+        if (value >= from && value <= to)
+        {
+            values.push_back(value);
+        }
+    }
+    return values;
+}
+
+void printValues(const vector<double> &values)
+{
+    if (values.empty())
+    {
+        cout << "khong co";
+        return;
+    }
+
+    for (size_t i = 0; i < values.size(); ++i)
+    {
+        if (i > 0)
         {
             cout << ", ";
         }
+        cout << values[i];
     }
+}
+
+void printValues(const string &label, const vector<double> &values)
+{
+    cout << label;
+    printValues(values);
     cout << endl;
 }
 
@@ -147,7 +171,7 @@ int main()
     random_device rd;
     mt19937 gen(rd());
 
-    uniform_real_distribution<double> dist(-268.0, 339.0);
+    uniform_int_distribution<int> dist(-26799, 33899);
     uniform_int_distribution<int> sizeDist(10, 20);
     int n = sizeDist(gen);
 
@@ -160,23 +184,44 @@ int main()
 
     printArr(oneDimArr);
 
-    cout << "3. Tong cac phan tu trong mang: " << sumArr(oneDimArr) << endl;
-    cout << "4. Tich cac phan tu trong mang: " << prodArr(oneDimArr) << endl;
-    countShowUp(oneDimArr, 99.9);
+    pair<double, double> sumProduct = sumAndProduct(oneDimArr);
+    cout << "3. Tong cac phan tu trong mang: " << sumProduct.first << endl;
+    cout << "4. Tich cac phan tu trong mang: " << sumProduct.second << endl;
+
+    double num;
+    cout << "Nhap gia tri can dem so lan xuat hien: ";
+    if (!(cin >> num))
+    {
+        cerr << "Gia tri khong hop le." << endl;
+        return 1;
+    }
+    countShowUp(oneDimArr, num);
+
     vector<double> evenElements = getEvenInteger(oneDimArr);
 
     cout << "6. Cac phan tu co phan nguyen chan: ";
-    for (double value : evenElements)
-    {
-        cout << value << ", ";
-    }
+    printValues(evenElements);
     cout << endl;
 
     cout << "7. Vi tri phan tu nho nhat mang: " << indexOfMinValue(oneDimArr) << endl;
-    reverseArr(oneDimArr);
-    getNegative(oneDimArr);
-    countElementInRange(oneDimArr, 2, 4);
-    getElementInRange(oneDimArr, 2, 4);
+
+    vector<double> reversed = reverseArr(oneDimArr);
+    printValues("8. Mang dao nguoc: ", reversed);
+    printValues("9. Cac so am trong mang: ", getNegative(oneDimArr));
+
+    double from;
+    double to;
+    cout << "Nhap hai gia tri x, y de loc khoang [x, y]: ";
+    if (!(cin >> from >> to))
+    {
+        cerr << "Khoang gia tri khong hop le." << endl;
+        return 1;
+    }
+    cout << "10. So gia tri trong khoang [" << min(from, to) << ", " << max(from, to)
+         << "]: " << countElementInRange(oneDimArr, from, to) << endl;
+    cout << "11. Cac gia tri trong khoang [" << min(from, to) << ", " << max(from, to) << "]: ";
+    printValues(getElementInRange(oneDimArr, from, to));
+    cout << endl;
 
     return 0;
 }
