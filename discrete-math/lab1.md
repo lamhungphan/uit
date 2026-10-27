@@ -1,12 +1,18 @@
-## Đề bài: Chứng minh sự tương đương logic:
+- Họ và tên: **Nguyễn Phan Lâm Hùng**
+- MSSV: **26410212**
+- Lớp: **MA004.G12.LT.CNTT**
 
-$$\neg (p \rightarrow q) \vee (p \wedge r) \equiv p \wedge (\neg q \vee r)$$
+### Đề bài: Chứng minh sự tương đương logic
+
+$$
+\neg (p \rightarrow q) \vee (p \wedge r) \equiv p \wedge (\neg q \vee r)
+$$
 
 ### Câu 1. Chứng minh bằng bảng chân lý
 
-Ta lập bảng chân lý cho cả vế trái ($\text{VT}$) và vế phải ($\text{VP}$) với 3 biến mệnh đề $p, q, r$ (trong đó $1$ tương ứng với Đúng/True, $0$ tương ứng với Sai/False):
+Ta lập bảng chân lý cho cả vế trái $\text{VT} = \neg(p \rightarrow q) \vee (p \wedge r)$ và vế phải $\text{VP} = p \wedge (\neg q \vee r)$
 
-| $p$ | $q$ | $r$ | $p \rightarrow q$ | $\neg(p \rightarrow q)$ | $p \wedge r$ | **$\text{VT} = \neg(p \rightarrow q) \vee (p \wedge r)$** | $\neg q$ | $\neg q \vee r$ | **$\text{VP} = p \wedge (\neg q \vee r)$** |
+| $p$ | $q$ | $r$ | $p \rightarrow q$ | $\neg(p \rightarrow q)$ | $p \wedge r$ | **$\neg(p \rightarrow q) \vee (p \wedge r)$** | $\neg q$ | $\neg q \vee r$ | **$p \wedge (\neg q \vee r)$** |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | 1 | 1 | 1 | 0 | 1 | **1** | 0 | 1 | **1** |
 | 1 | 1 | 0 | 1 | 0 | 0 | **0** | 0 | 0 | **0** |
@@ -26,7 +32,8 @@ Vậy đẳng thức logic được chứng minh
 
 Ta tiến hành biến đổi vế trái ($\text{VT}$) thành vế phải ($\text{VP}$) bằng cách áp dụng các luật logic tương đương cơ bản:
 
-$$\begin{aligned} 
+$$
+\begin{aligned} 
 \text{VT} &= \neg(p \rightarrow q) \vee (p \wedge r) \\ 
 
 &\equiv \neg(\neg p \vee q) \vee (p \wedge r) && \text{(Luật kéo theo: } p \rightarrow q \equiv \neg p \vee q\text{)} \\ 
@@ -39,8 +46,7 @@ $$\begin{aligned}
 
 &= \text{VP} 
 
-\end{aligned}$$
+\end{aligned}
+$$
 
-Do đó đẳng thức logic 
-$$\neg (p \rightarrow q) \vee (p \wedge r) \equiv p \wedge (\neg q \vee r)$$
-được chứng minh
+Đẳng thức logic $\neg (p \rightarrow q) \vee (p \wedge r) \equiv p \wedge (\neg q \vee r)$ được chứng minh
