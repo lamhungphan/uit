@@ -149,7 +149,7 @@ Quan sát các biến cố đối với một phép thử, mặc dù không th�
 
 Khả năng xảy ra khách quan của một biến cố được gọi là **xác suất** (probability) của biến cố đó.
 
-## 2.2. Định nghĩa xác suất dạng cổ điển
+## 2.2. Định nghĩa xác suất dạng cổ điển (Trọng tâm môn học)
 
 Xét một phép thử với không gian mẫu $\Omega = \{\omega_1; \dots; \omega_n\}$ và biến cố $A \subset \Omega$ có $k$ phần tử.
 
@@ -513,7 +513,9 @@ Trong 1 bài toán, ta xét 3 biến cố $A_1, A_2, B$.
 *Giải.* Gọi $H$: "sản phẩm được chọn là hỏng"; $A$: "sản phẩm được chọn là của phân xưởng $A$"; $B$: "sản phẩm được chọn là của phân xưởng $B$"; $C$: "sản phẩm được chọn là của phân xưởng $C$". Suy ra hệ $\{A, B, C\}$ là đầy đủ.
 
 1. $P(H) = P(A)P(H|A) + P(B)P(H|B) + P(C)P(H|C) = 0{,}2 \cdot 0{,}01 + 0{,}3 \cdot 0{,}02 + 0{,}5 \cdot 0{,}03 = 0{,}023.$
+
 2. $P(AH) = P(A)\,P(H|A) = 0{,}2 \cdot 0{,}01 = 0{,}002.$
+
 3. $P(A|H) = \dfrac{P(A)\,P(H|A)}{P(H)} = \dfrac{0{,}002}{0{,}023} = \dfrac{2}{23}.$
 
 Sơ đồ:
@@ -526,7 +528,29 @@ Sơ đồ:
 
 A. $\dfrac{11}{57}$; B. $\dfrac{10}{57}$; C. $\dfrac{8}{57}$; D. $\dfrac{7}{57}$.
 
-*Đáp án trong slide:* **C**.
+*Giải.* Gọi $T$: "xe đi qua là ôtô tải"; $C$: "xe đi qua là ôtô con"; $M$: "xe đi qua là xe máy"; $B$: "xe đi qua vào bơm dầu". Hệ $\{T, C, M\}$ là đầy đủ.
+
+Từ tỉ lệ $5 : 2 : 13$, ta có:
+
+$$P(T) = \frac{5}{20}, \qquad P(C) = \frac{2}{20}, \qquad P(M) = \frac{13}{20}.$$
+
+Theo công thức Bayes:
+
+$$
+\begin{aligned}
+P(C|B)
+
+&= \frac{P(C)\,P(B|C)}{P(T)\,P(B|T) + P(C)\,P(B|C) + P(M)\,P(B|M)} \\
+
+&= \frac{\frac{2}{20} \cdot 0{,}2}{\frac{5}{20} \cdot 0{,}1 + \frac{2}{20} \cdot 0{,}2 + \frac{13}{20} \cdot 0{,}15} \\
+
+&= \frac{0{,}02}{0{,}1425} \\
+
+&= \frac{8}{57}.
+\end{aligned}
+$$
+
+Vậy xác suất để xe vào bơm dầu là ôtô con bằng $\dfrac{8}{57}$, chọn **C**.
 
 ---
 

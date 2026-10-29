@@ -56,7 +56,7 @@ $$\{X \le x\} = \{\omega \in \Omega : X(\omega) \le x\}, \qquad \{X < x\} = \{\o
 - Nếu $X(\Omega)$ là 1 tập hữu hạn $\{x_1, x_2, \dots, x_n\}$ hay vô hạn đếm được thì $X$ được gọi là **biến ngẫu nhiên rời rạc**. Để cho gọn, ta viết là $X = \{x_1, x_2, \dots, x_n, \dots\}$.
 - Nếu $X(\Omega)$ là 1 khoảng của $\mathbb{R}$ (hay cả $\mathbb{R}$) thì $X$ được gọi là **biến ngẫu nhiên liên tục**.
 
-*Ví dụ:* Chọn ngẫu nhiên một số thực trong khoảng $[0,1]$, gọi $X$ là giá trị được chọn. Khi đó $X$ là ĐLNN liên tục.
+*Ví dụ:* Chọn ngẫu nhiên một số thực trong đoạn $[0,1]$, gọi $X$ là giá trị được chọn. Khi đó $X$ là ĐLNN liên tục.
 
 ĐLNN liên tục: thời gian cài đặt phần mềm, thời gian download file, …
 
@@ -91,8 +91,10 @@ $$f(x) = \begin{cases} p_i & \text{khi } x = x_i, \\ 0 & \text{khi } x \ne x_i,\
 **Chú ý**
 
 - $p_i \ge 0$; $\sum p_i = 1$, $i = 1, 2, \dots$
-- Nếu $x \notin \{x_1, x_2, \dots, x_n, \dots\}$ thì $P(X = x) = 0$.
-- $P(a < X \le b) = \displaystyle\sum_{a < x_i \le b} p_i$.
+
+- Nếu $x \notin \{x_1, x_2, \dots, x_n, \dots\}$ thì $P(X = x) = 0$
+
+- $P(a < X \le b) = \displaystyle\sum_{a < x_i \le b} p_i$
 
 ### VD 2
 
@@ -132,10 +134,13 @@ Một hộp có 3 viên phấn trắng và 2 viên phấn đỏ. Một người 
 
 Gọi $A_i$: "viên phấn được lấy lần thứ $i$ là đỏ", $i = \overline{1;5}$. Ta có:
 
-- $P(X = 2) = P(A_1 A_2) = P(A_1)\,P(A_2 \mid A_1) = \dfrac{2}{5} \cdot \dfrac{1}{4} = 0{,}1.$
-- $P(X = 3) = P(A_1 \bar{A}_2 A_3) + P(\bar{A}_1 A_2 A_3) = \dfrac{2}{5} \cdot \dfrac{3}{4} \cdot \dfrac{1}{3} + \dfrac{3}{5} \cdot \dfrac{2}{4} \cdot \dfrac{1}{3} = 0{,}2.$
-- $P(X = 4) = P(A_1 \bar{A}_2 \bar{A}_3 A_4) + P(\bar{A}_1 A_2 \bar{A}_3 A_4) + P(\bar{A}_1 \bar{A}_2 A_3 A_4) = 0{,}3.$
-- $P(X = 5) = 1 - \dfrac{1}{10} - \dfrac{2}{10} - \dfrac{3}{10} = 0{,}4.$
+- $P(X = 2) = P(A_1 A_2) = P(A_1)\,P(A_2 \mid A_1) = \dfrac{2}{5} \cdot \dfrac{1}{4} = 0{,}1$
+
+- $P(X = 3) = P(A_1 \bar{A}_2 A_3) + P(\bar{A}_1 A_2 A_3) = \dfrac{2}{5} \cdot \dfrac{3}{4} \cdot \dfrac{1}{3} + \dfrac{3}{5} \cdot \dfrac{2}{4} \cdot \dfrac{1}{3} = 0{,}2$
+
+- $P(X = 4) = P(A_1 \bar{A}_2 \bar{A}_3 A_4) + P(\bar{A}_1 A_2 \bar{A}_3 A_4) + P(\bar{A}_1 \bar{A}_2 A_3 A_4) = 0{,}3$
+
+- $P(X = 5) = 1 - \dfrac{1}{10} - \dfrac{2}{10} - \dfrac{3}{10} = 0{,}4$
 
 Vậy bảng phân phối xác suất của $X$ là:
 
@@ -145,28 +150,28 @@ Vậy bảng phân phối xác suất của $X$ là:
 
 Hàm mật độ của $X$ là:
 
-$$f(x) = \begin{cases} 0{,}1 & \text{khi } x = 2, \\ 0{,}2 & \text{khi } x = 3, \\ 0{,}3 & \text{khi } x = 4, \\ 0{,}4 & \text{khi } x = 5, \\ 0 & \text{khi } x \ne 2, 3, 4, 5. \end{cases}$$
+$$f(x) = \begin{cases} 0{,}1 & \text{khi } x = 2, \\ 0{,}2 & \text{khi } x = 3, \\ 0{,}3 & \text{khi } x = 4, \\ 0{,}4 & \text{khi } x = 5, \\ 0 & \text{khi } x \ne 2, 3, 4, 5 \end{cases}$$
 
 ### b) Biến ngẫu nhiên liên tục
 
 Hàm số $f : \mathbb{R} \to \mathbb{R}$ được gọi là **hàm mật độ** của biến ngẫu nhiên liên tục $X$ nếu:
 
-$$P(a \le X \le b) = \int_a^b f(x)\,dx, \quad \forall a, b \in \mathbb{R}.$$
+$$P(a \le X \le b) = \int_a^b f(x)\,dx, \quad \forall a, b \in \mathbb{R}$$
 
 **Chú ý.** $f(x)$ là hàm mật độ của biến ngẫu nhiên liên tục $X$ khi và chỉ khi
 
-$$f(x) \ge 0,\ \forall x \in \mathbb{R} \quad \text{và} \quad \int_{-\infty}^{+\infty} f(x)\,dx = 1.$$
+$$f(x) \ge 0,\ \forall x \in \mathbb{R} \quad \text{và} \quad \int_{-\infty}^{+\infty} f(x)\,dx = 1$$
 
 **Nhận xét**
 
 - Khi $f(x)$ liên tục trên lân cận của điểm $a$, ta có:
 
-  $$P(a - \varepsilon \le X \le a + \varepsilon) = \int_{a-\varepsilon}^{a+\varepsilon} f(x)\,dx \ \Rightarrow\ P(X = a) = \lim_{\varepsilon \to 0} \int_{a-\varepsilon}^{a+\varepsilon} f(x)\,dx = 0.$$
+  $$P(a - \varepsilon \le X \le a + \varepsilon) = \int_{a-\varepsilon}^{a+\varepsilon} f(x)\,dx \ \Rightarrow\ P(X = a) = \lim_{\varepsilon \to 0} \int_{a-\varepsilon}^{a+\varepsilon} f(x)\,dx = 0$$
 
   Vậy
-  $$P(a \le X < b) = P(a < X \le b) = P(a < X < b) = \int_a^b f(x)\,dx.$$
+  $$P(a \le X < b) = P(a < X \le b) = P(a < X < b) = \int_a^b f(x)\,dx$$
 
-- **Ý nghĩa hình học:** xác suất của biến ngẫu nhiên $X$ nhận giá trị trong $[a; b]$ bằng diện tích hình thang cong giới hạn bởi $x = a$, $x = b$, $y = f(x)$ và $Ox$.
+- **Ý nghĩa hình học:** xác suất của biến ngẫu nhiên $X$ nhận giá trị trong $[a; b]$ bằng diện tích hình thang cong giới hạn bởi $x = a$, $x = b$, $y = f(x)$ và $Ox$
 
 ### VD 5
 
