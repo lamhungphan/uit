@@ -1,21 +1,10 @@
 # PHẦN I. LÝ THUYẾT XÁC SUẤT (Probability theory)
 
-## Chương 1. XÁC SUẤT CỦA BIẾN CỐ
+# Chương 1. XÁC SUẤT CỦA BIẾN CỐ
 
-- §1. Biến cố ngẫu nhiên
-- §2. Xác suất của biến cố
-- §3. Công thức tính xác suất
+## §1. BIẾN CỐ NGẪU NHIÊN
 
----
-
-# §1. BIẾN CỐ NGẪU NHIÊN
-
-- 1.1. Hiện tượng ngẫu nhiên
-- 1.2. Phép thử và Biến cố
-- 1.3. Quan hệ giữa các biến cố
-- 1.4. Hệ đầy đủ các biến cố
-
-## 1.1. Hiện tượng ngẫu nhiên
+### 1.1. Hiện tượng ngẫu nhiên
 
 Hiện tượng chia thành:
 
@@ -24,11 +13,11 @@ Hiện tượng chia thành:
 
 Hiện tượng ngẫu nhiên chính là đối tượng khảo sát của lý thuyết xác suất.
 
-## 1.2. Phép thử và Biến cố
+### 1.2. Phép thử và Biến cố
 
 **a) Phép thử (test):** Quan sát, thí nghiệm,… Không thể dự đoán được chắc chắn kết quả xảy ra.
 
-**b) Biến cố (events):** Khi thực hiện một phép thử, ta có thể liệt kê tất cả các kết quả có thể xảy ra.
+**b) Biến cố (events):** Là tập hợp gồm một số kết quả có thể xảy ra của phép thử, tức là một tập con của không gian mẫu $\Omega$.
 
 **VD 1.** Xét một sinh viên thi hết môn XSTK, thì hành động của sinh viên này là một phép thử.
 
@@ -48,12 +37,14 @@ Các biến cố $A, B$ có thể được phát biểu lại là:
 - Trong một phép thử, biến cố mà chắc chắn sẽ xảy ra được gọi là **biến cố chắc chắn**, ký hiệu là $\Omega$.
 - Biến cố không thể xảy ra được gọi là **biến cố rỗng**, ký hiệu là $\varnothing$.
 
+> Lưu ý: Biến cố chắc chắn chính là không gian mẫu, nên đều được ký hiệu là $\Omega$. Vì biến cố chắc chắn gồm toàn bộ kết quả có thể xảy ra
+
 **VD 2.** Từ nhóm có 6 nam và 4 nữ, ta chọn ngẫu nhiên ra 5 người. Khi đó:
 
 - biến cố "chọn được ít nhất 1 nam" là chắc chắn;
 - biến cố "chọn được 5 người nữ" là rỗng.
 
-## 1.3. Quan hệ giữa các biến cố
+### 1.3. Quan hệ giữa các biến cố
 
 ### a) Quan hệ tương đương
 
@@ -105,7 +96,7 @@ Không gian mẫu là: $\Omega = A_9 \cup A_{10} \cup A_{11} \cup A_{12}$.
 
 Biến cố đối lập của $A_{10}$ là: $\overline{A_{10}} = \Omega \setminus A_{10} = A_9 \cup A_{11} \cup A_{12}$.
 
-## 1.4. Hệ đầy đủ các biến cố
+### 1.4. Hệ đầy đủ các biến cố
 
 ### a) Hai biến cố xung khắc
 
@@ -121,7 +112,7 @@ Khi đó, $A$ và $B$ là xung khắc; $B$ và $C$ không xung khắc.
 
 **Chú ý.** $A$ và $B$ xung khắc nhưng không đối lập.
 
-### b) Hệ đầy đủ các biến cố
+#### b) Hệ đầy đủ các biến cố
 
 Trong một phép thử, họ gồm $n$ biến cố $\{A_i\}$, $i = \overline{1,n}$ được gọi là **hệ đầy đủ** khi và chỉ khi có **duy nhất** biến cố $A_{i_0}$, $i_0 \in \{1; 2; \dots; n\}$ của họ xảy ra. Nghĩa là:
 
@@ -134,22 +125,15 @@ Trong một phép thử, họ gồm $n$ biến cố $\{A_i\}$, $i = \overline{1,
 
 ---
 
-# §2. XÁC SUẤT CỦA BIẾN CỐ
+## §2. XÁC SUẤT CỦA BIẾN CỐ
 
-2.1. Khái niệm xác suất
-2.2. Định nghĩa xác suất dạng cổ điển
-2.3. Định nghĩa xác suất dạng thống kê
-2.4. Định nghĩa xác suất theo tiên đề
-2.5. Định nghĩa xác suất dạng hình học
-2.6. Tính chất cơ bản của xác suất
-
-## 2.1. Khái niệm xác suất
+### 2.1. Khái niệm xác suất
 
 Quan sát các biến cố đối với một phép thử, mặc dù không thể khẳng định một biến cố có xảy ra hay không nhưng người ta có thể phỏng đoán khả năng xảy ra của các biến cố này là ít hay nhiều.
 
 Khả năng xảy ra khách quan của một biến cố được gọi là **xác suất** (probability) của biến cố đó.
 
-## 2.2. Định nghĩa xác suất dạng cổ điển (Trọng tâm môn học)
+### 2.2. Định nghĩa xác suất dạng cổ điển (Trọng tâm môn học)
 
 Xét một phép thử với không gian mẫu $\Omega = \{\omega_1; \dots; \omega_n\}$ và biến cố $A \subset \Omega$ có $k$ phần tử.
 
@@ -192,7 +176,7 @@ Từ biểu đồ Ven ta có: tổng số người chờ kết quả nội soi h
 - Ưu điểm: Tính được chính xác giá trị của xác suất mà không cần thực hiện phép thử.
 - Hạn chế: Trong thực tế có nhiều phép thử vô hạn các biến cố và biến cố không đồng khả năng.
 
-## 2.3. Định nghĩa xác suất dạng thống kê
+### 2.3. Định nghĩa xác suất dạng thống kê
 
 - Nếu khi thực hiện một phép thử nào đó $n$ lần, thấy có $k$ lần biến cố $A$ xuất hiện thì tỉ số $\dfrac{k}{n}$ được gọi là **tần suất** của biến cố $A$.
 - Khi $n$ thay đổi, tần suất cũng thay đổi theo nhưng luôn dao động quanh một số cố định $p = \displaystyle\lim_{n \to \infty} \frac{k}{n}$.
@@ -208,7 +192,7 @@ Trong thực tế, khi $n$ đủ lớn thì $P(A) \approx \dfrac{k}{n}$.
 - Laplace đã nghiên cứu tỉ lệ sinh trai – gái ở London, Petecbua và Berlin trong 10 năm và đưa ra tần suất sinh bé gái là 21/43.
 - Cramer đã nghiên cứu tỉ lệ sinh trai – gái ở Thụy Điển trong năm 1935 và kết quả có 42.591 bé gái được sinh ra trong tổng số 88.273 trẻ sơ sinh, tần suất là 0,4825.
 
-## 2.4. Định nghĩa xác suất theo tiên đề
+### 2.4. Định nghĩa xác suất theo tiên đề
 
 **Định nghĩa:** Xét phép thử có không gian mẫu là $\Omega$. Xác suất là một hàm số
 
@@ -222,7 +206,7 @@ $$P(A_1 \cup A_2 \cup \dots) = P(A_1) + P(A_2) + \cdots$$
 
 Từ định nghĩa trên, ta có: $0 \le P(A) \le 1$; $P(\varnothing) = 0$; $P(\Omega) = 1$.
 
-## 2.5. Định nghĩa xác suất dạng hình học
+### 2.5. Định nghĩa xác suất dạng hình học
 
 Cho miền $\Omega$. Gọi **độ đo** của $\Omega$ là độ dài, diện tích, thể tích (ứng với $\Omega$ là đường cong, miền phẳng, khối). Xét điểm $M$ rơi ngẫu nhiên vào miền $\Omega$.
 
@@ -257,7 +241,7 @@ $\{0 \le x \le 1,\ 0 \le y \le 1,\ x - y - 0{,}5 \le 0,\ x - y + 0{,}5 \ge 0\}$
 
 Vậy $p = \dfrac{dt(S)}{dt(\Omega)} = \dfrac{3}{4} = 75\%$.
 
-## 2.6. Tính chất cơ bản của xác suất
+### 2.6. Tính chất cơ bản của xác suất
 
 1. Nếu $A$ là biến cố tùy ý thì $0 \le P(A) \le 1$.
 2. $P(\varnothing) = 0$.
@@ -266,16 +250,13 @@ Vậy $p = \dfrac{dt(S)}{dt(\Omega)} = \dfrac{3}{4} = 75\%$.
 
 ---
 
-# §3. CÔNG THỨC TÍNH XÁC SUẤT
-
-3.1. Công thức cộng xác suất
-3.2. Xác suất có điều kiện
+## §3. CÔNG THỨC TÍNH XÁC SUẤT
 
 - Định nghĩa xác suất có điều kiện
 - Công thức nhân xác suất
 - Công thức xác suất đầy đủ và Bayes
 
-## 3.1. Công thức cộng xác suất
+### 3.1. Công thức cộng xác suất
 
 Xét một phép thử, ta có các công thức cộng xác suất sau:
 
@@ -320,7 +301,7 @@ $$P(H) = 1 - P(\overline{H}) = 1 - P(A \cup B) = 1 - \left[P(A) + P(B) - P(AB)\r
 
 Sơ đồ Ven: ngoài hai tập: **86%**; chỉ tim: **2%**; cả hai: **7%**; chỉ huyết áp: **5%**.
 
-## 3.2. Xác suất có điều kiện
+### 3.2. Xác suất có điều kiện
 
 Xét phép thử: có 3 người $A$, $B$ và $C$ thi tuyển vào một công ty. Gọi $A$: "người $A$ thi đỗ"; $B$: "người $B$ thi đỗ"; $C$: "người $C$ thi đỗ"; $H$: "có 2 người thi đỗ".
 
@@ -343,7 +324,7 @@ $$P(A|H) = \frac{2}{3} = \frac{P(AH)}{P(H)}.$$
 
 Đọc là: biến cố $A$ với điều kiện $H$ (đã xảy ra).
 
-### 3.2.1. Định nghĩa xác suất có điều kiện
+#### 3.2.1. Định nghĩa xác suất có điều kiện
 
 Trong một phép thử, xét hai biến cố bất kỳ $A$ và $B$ với $P(B) > 0$. Xác suất có điều kiện của $A$ với điều kiện $B$ đã xảy ra được ký hiệu và định nghĩa là
 
@@ -371,7 +352,7 @@ $$P(B|A) = \frac{\text{Số sinh viên 18 tuổi là nữ}}{\text{Số sinh viê
 2. nếu $A \subset C$ thì $P(A|B) \le P(C|B)$;
 3. $P(\overline{A}|B) = 1 - P(A|B)$.
 
-### 3.2.2. Công thức nhân xác suất
+#### 3.2.2. Công thức nhân xác suất
 
 **a) Sự độc lập của hai biến cố**
 
@@ -434,7 +415,7 @@ $$A = A_1 \cup \overline{A_1}\,\overline{B_1}A_2 \cup \overline{A_1}\,\overline{
 
 $$P(A) = \frac{2}{6} + \frac{4}{6} \cdot \frac{3}{5} \cdot \frac{2}{4} + \frac{4}{6} \cdot \frac{3}{5} \cdot \frac{2}{4} \cdot \frac{1}{3} \cdot 1 = \frac{3}{5}.$$
 
-### 3.2.3. Công thức xác suất đầy đủ và Bayes
+#### 3.2.3. Công thức xác suất đầy đủ và Bayes
 
 **a) Công thức xác suất đầy đủ**
 
@@ -496,7 +477,7 @@ $$P(A_2|B) = \frac{P(A_2)\,P(B|A_2)}{P(B)} = \frac{0{,}3 \cdot 0{,}98}{0{,}987} 
 
 **Nhận xét.** Nếu ta dùng sơ đồ như VD 10. Khi đó: $P(\text{đèn vàng} \mid \text{tốt})$ = (nhánh 2) **chia** (tổng 2 nhánh).
 
-### Phân biệt các bài toán áp dụng công thức Nhân – Đầy đủ – Bayes
+##### Phân biệt các bài toán áp dụng công thức Nhân – Đầy đủ – Bayes
 
 Trong 1 bài toán, ta xét 3 biến cố $A_1, A_2, B$.
 
@@ -554,7 +535,7 @@ Vậy xác suất để xe vào bơm dầu là ôtô con bằng $\dfrac{8}{57}$,
 
 ---
 
-# Phép thử Bernoulli
+## Phép thử Bernoulli
 
 - Dãy các phép thử lặp lại, độc lập, trong mỗi phép thử chỉ có 2 kết quả: $A$ và $\overline{A}$, xác suất xảy ra biến cố $A$ không đổi $P(A) = p$ được gọi là **dãy phép thử Bernoulli**.
 - Xác suất biến cố $A$ xảy ra $k$ lần trong $n$ phép thử là:
@@ -581,7 +562,7 @@ $$1 - (0{,}6)^n \ge 0{,}9 \Leftrightarrow (0{,}6)^n \le 0{,}1 \Leftrightarrow n 
 
 ---
 
-# BÀI TẬP
+## BÀI TẬP
 
 **Câu 1:** Một cửa hàng có 30 máy tính, trong đó có 20 máy tính do cty A sản xuất và 10 máy tính do cty B sản xuất. Một khách hàng đến cửa hàng mua 3 máy tính. Giả sử khả năng được mua của mỗi máy là như nhau. Tính xác suất để khách hàng này mua được 2 máy của A và 1 máy của B.
 
