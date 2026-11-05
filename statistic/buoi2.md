@@ -1,4 +1,4 @@
-# Chương 2. Biến ngẫu nhiên BIẾN NGẪU NHIÊN
+# Chương 2. BIẾN NGẪU NHIÊN
 
 # §1. BIẾN NGẪU NHIÊN VÀ HÀM MẬT ĐỘ
 
@@ -56,7 +56,6 @@ $$\{X \le x\} = \{\omega \in \Omega : X(\omega) \le x\}, \qquad \{X < x\} = \{\o
 
 - Cho biến ngẫu nhiên $X$ và hàm số $y = \varphi(x)$. Khi đó, biến ngẫu nhiên $Y = \varphi(X)$ được gọi là **hàm của biến ngẫu nhiên $X$**.
 
----
 
 ## 1.2. Hàm mật độ
 
@@ -220,14 +219,16 @@ Giả sử BNN rời rạc $X$ nhận các giá trị trong $[x_1; x_n]$ và $x_
 
 Ta có hàm phân phối của $X$ là:
 
-$$F(x) = \begin{cases}
+$$
+F(x) = \begin{cases}
 0 & \text{khi } x < x_1 \\
 p_1 & \text{khi } x_1 \le x < x_2 \\
 p_1 + p_2 & \text{khi } x_2 \le x < x_3 \\
 \dots & \dots \\
 p_1 + p_2 + \dots + p_{n-1} & \text{khi } x_{n-1} \le x < x_n \\
 1 & \text{khi } x_n \le x.
-\end{cases}$$
+\end{cases}
+$$
 
 **Chứng minh:**
 
@@ -266,13 +267,15 @@ Hãy lập hàm phân phối của $X$ và vẽ đồ thị của $F(x)$?
 
 **Giải.** Hàm phân phối của $X$ là:
 
-$$F(x) = \begin{cases}
+$$
+F(x) = \begin{cases}
 0 & \text{khi } x < -2 \\
 0{,}1 & \text{khi } -2 \le x < 1 \\
 0{,}3 & \text{khi } 1 \le x < 3 \\
 0{,}5 & \text{khi } 3 \le x < 4 \\
 1 & \text{khi } 4 \le x.
-\end{cases}$$
+\end{cases}
+$$
 
 Đồ thị của $F(x)$ là hàm bậc thang, nhảy lên các mức 0,1; 0,3; 0,5; 1 tại các điểm $x = -2, 1, 3, 4$ (liên tục phải tại mỗi điểm nhảy).
 
