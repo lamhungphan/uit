@@ -1,12 +1,4 @@
-# Chương 2. Biến ngẫu nhiên
-
-**Mục lục**
-
-- §1. Biến ngẫu nhiên và hàm mật độ
-- §2. Hàm phân phối xác suất
-- §3. Tham số đặc trưng của biến ngẫu nhiên
-
----
+# Chương 2. Biến ngẫu nhiên BIẾN NGẪU NHIÊN
 
 # §1. BIẾN NGẪU NHIÊN VÀ HÀM MẬT ĐỘ
 
