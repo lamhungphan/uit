@@ -81,9 +81,15 @@ $$
 = \int_0^1 kx\,dx
 = \frac{k}{2}
 = 1
+\implies k = 2 
 $$
 
-Suy ra ${k=2}$
+#### 2. Hàm phân phối $F(x)$:
+
+$$
+F(x) = \begin{cases} 0 & \text{khi } x < 0 \\ \int_0^x 2t \, dt = x^2 & \text{khi } 0 \le x \le 1 \\ 1 & \text{khi } x > 1 \end{cases}
+$$
+
 
 #### 3. Tính $P\left(\dfrac{1}{2}<X<\dfrac{3}{4}\right)$
 
@@ -105,6 +111,11 @@ P\left(\frac{1}{2}<X<\frac{3}{4}\right)
 \end{aligned}
 
 $$
+
+hoặc
+
+* $P\left(X < \frac{1}{2}\right) = F\left(\frac{1}{2}\right) = \left(\frac{1}{2}\right)^2 = \frac{1}{4} = 0{,}25$
+* $P\left(\frac{1}{2} < X < \frac{3}{4}\right) = F\left(\frac{3}{4}\right) - F\left(\frac{1}{2}\right) = \left(\frac{3}{4}\right)^2 - \left(\frac{1}{2}\right)^2 = \frac{9}{16} - \frac{4}{16} = \frac{5}{16} = 0{,}3125$
 
 ---
 

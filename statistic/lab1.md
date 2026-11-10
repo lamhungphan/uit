@@ -1,3 +1,5 @@
+# Bài tập buổi 1
+
 ### Bài tập 1
 
 Gọi $E$ là biến cố khách hàng mua được đúng 2 máy của A và 1 máy của B.
