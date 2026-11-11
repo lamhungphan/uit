@@ -177,9 +177,7 @@ Theo quy tắc nhân, tổng số cách chọn là: $10 \times 5 = 50$ (cách).
 
 ---
 
-# 3. Nguyên lý Chuồng bồ câu
-
-## Nguyên lý Chuồng bồ câu (Dirichlet)
+# 3. Nguyên lý Chuồng bồ câu (Dirichlet)
 
 **Phát biểu:** Nếu xếp $n$ con chim vào $k$ cái chuồng ($n > k$), thì ít nhất một chuồng chứa từ 2 con chim trở lên.
 
@@ -234,20 +232,21 @@ Kiểm tra trực quan: 25 sinh viên có thể chia đều 5 người mỗi lo�
 
 ---
 
-# 4. Hoán vị, Tổ hợp và Nhị thức Newton
-
-## 4. Hoán vị và Tổ hợp
+# 4. Hoán vị, Tổ hợp
 
 - **Hoán vị** ($P_n$): sắp xếp $n$ phần tử theo thứ tự.
 $$P_n = n! = n(n-1)\dots 1$$
+
 - **Chỉnh hợp** ($A_n^k$): chọn $k$ phần tử từ $n$ phần tử và có sắp xếp thứ tự.
 $$A_n^k = \frac{n!}{(n-k)!}$$
+
 - **Tổ hợp** ($C_n^k$): chọn $k$ phần tử từ $n$ phần tử và không quan tâm thứ tự.
 $$C_n^k = \binom{n}{k} = \frac{n!}{k!(n-k)!}$$
 
 **Câu hỏi:** Chọn 3 bạn làm lớp trưởng, lớp phó, thủ quỹ từ 10 bạn: $A_{10}^3 = 720$ (có thứ tự). Chọn 3 bạn đi trực nhật: $C_{10}^3 = 120$ (không thứ tự).
 
-## 5. Nhị thức Newton
+# 5. Nhị thức Newton 
+> Giảm tải
 
 Khai triển biểu thức lũy thừa của một tổng:
 
@@ -261,6 +260,8 @@ Ví dụ khai triển $(x + y)^3$:
 **Hệ quả:** Cho $x = y = 1$, ta được tổng các hệ số $\displaystyle\sum_{k=0}^{n} \binom{n}{k} = 2^n$.
 
 Kiểm tra với $n = 3$: $1 + 3 + 3 + 1 = 8 = 2^3$.
+
+---
 
 ### Bài tập: Xếp chỗ quanh bàn tròn (a)
 
