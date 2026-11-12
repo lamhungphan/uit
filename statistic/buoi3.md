@@ -2,9 +2,6 @@
 
 # §1. PHÂN PHỐI SIÊU BỘI
 
-1.1. Định nghĩa phân phối Siêu bội
-1.2. Các số đặc trưng của $X \sim H(N, N_A, n)$
-
 ## 1.1. Định nghĩa
 
 - Xét tập có $N$ phần tử gồm $N_A$ phần tử có tính chất $A$ và $N - N_A$ phần tử có tính chất $\overline{A}$. Từ tập đó, ta chọn ra $n$ phần tử.
@@ -279,15 +276,6 @@ $$\text{Vậy } p_2 = C_6^2 \cdot (0{,}3033)^2 \cdot (1 - 0{,}3033)^4 = 0{,}3251
 ---
 
 # §4. PHÂN PHỐI CHUẨN
-
-4.1. Phân phối Chuẩn đơn giản
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. Định nghĩa
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.2. Các số đặc trưng của $T \sim N(0; 1)$
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.3. Xác suất của $T \sim N(0; 1)$
-4.2. Phân phối Chuẩn
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.1. Định nghĩa
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.2. Các số đặc trưng của $X \sim N(\mu; \sigma^2)$
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.3. Xác suất của $X \sim N(\mu; \sigma^2)$
 
 ## 4.1. Phân phối Chuẩn đơn giản
 

@@ -1,9 +1,7 @@
 # Chương 5 – Các khái niệm cơ bản của lý thuyết đồ thị
 
-> Nguồn: slide *Chương 5* – Cấu trúc Rời rạc (UIT), TS. Nguyễn Văn Hợi.
 > Các hình vẽ trong slide được dựng lại bằng **mermaid** (bố cục tự động nên có thể khác hình gốc, nhưng các đỉnh và cạnh giống nhau). Đường tô đỏ là đường đi/chu trình/đường ngắn nhất được nêu trong slide.
 
----
 
 # 1. Các khái niệm cơ bản
 
