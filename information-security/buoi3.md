@@ -16,6 +16,15 @@
 
 Tình huống minh hoạ: Eve (kẻ giả mạo) gửi thư cho Bob với nội dung "Hello, I am Alice" → Bob cần cơ chế để biết thư có thật sự đến từ Alice hay không.
 
+```mermaid
+flowchart LR
+    Eve["Eve (kẻ giả mạo)<br/>“Hello, I am Alice”"] --> Mail["✉ Thư"]
+    Mail --> Bob["Bob<br/>(thư này có thật sự từ Alice?)"]
+    classDef bad fill:#ffd6d6,stroke:#c00
+    class Eve bad
+```
+
+
 **Chứng thực** (xác thực, xác nhận – *authentication*) nhằm:
 
 - Xác nhận nguồn gốc của dữ liệu.
@@ -45,10 +54,30 @@ Việc nhận dạng dựa trên một hoặc nhiều yếu tố:
 
 **Mật khẩu và hàm một chiều:** Alice gửi "My password P is …"; Bob không lưu P mà tính `f(P)` bằng hàm một chiều `f` và lưu cặp (Alice, `f(P)`) để đối chiếu.
 
+```mermaid
+flowchart LR
+    Alice["Alice:<br/>“Hello Bob, I am Alice.<br/>My password P is Xur%9pLr”"] -->|"P"| F[/"One-way<br/>function f"\]
+    F --> FP["f(P)"]
+    FP --> T[("Bảng của Bob<br/>Alice │ f(Xur%9pLr)")]
+    T --> OK["Bob: “OK!”"]
+```
+
+
 **One-time passwords (hàm một chiều lặp – iterated one-way function):**
 
+```mermaid
+flowchart LR
+    x0(["x0"]) -->|"f"| x1(["x1"]) -->|"f"| x2(["x2"]) -->|"f"| x3(["x3"]) -.-> xt1(["x(t-1)"]) -->|"f"| xt(["xt"])
 ```
-x0 --f--> x1 --f--> x2 --f--> x3 ... x(t-1) --f--> xt
+
+```mermaid
+sequenceDiagram
+    participant T as Thiết bị người dùng (giữ x0)
+    participant S as Server (lưu xt)
+    Note over T,S: One-time passwords
+    T->>S: X(t-1)
+    T->>S: X(t-2)
+    T->>S: X(t-3)
 ```
 
 - Thiết bị của người dùng giữ `x0`; server lưu `xt`.
@@ -91,12 +120,126 @@ Giả sử Alice và Bob chia sẻ khoá bí mật chung `K`. Alice muốn gửi
 
 Trường `Checksum` (16 bit) nằm trong TCP header (20 octet) cùng với Source port, Destination port, Sequence number, Acknowledgment number, Data offset, Reserved, Flags, Window, Urgent pointer, Options + padding, rồi đến Application data.
 
+```mermaid
+packet-beta
+    title TCP Segment (20 octet)
+    0-15: "Source port"
+    16-31: "Destination port"
+    32-63: "Sequence number"
+    64-95: "Acknowledgment number"
+    96-99: "Data offset"
+    100-105: "Reserved"
+    106-111: "Flags"
+    112-127: "Window"
+    128-143: "Checksum"
+    144-159: "Urgent pointer"
+    160-191: "Options + padding"
+    192-223: "Application data"
+```
+
 ### Điều khiển lỗi khi gửi thông điệp
 
 - **(a) Internal error control**: `A → B: E(K, [M ‖ F(M)])` – tính `F(M)` rồi ghép vào `M`, sau đó mã hoá cả khối. Bên nhận giải mã, tính lại `F` trên `M` và so sánh.
 - **(b) External error control**: `A → B: E(K, M) ‖ F(E(K, M))` – mã hoá `M` trước, rồi tính `F` trên bản mã và ghép vào. Bên nhận tính `F` trên bản mã để so sánh, sau đó mới giải mã.
 
+**(a) Internal error control**
+
+```mermaid
+flowchart LR
+    subgraph A["Source A"]
+        M1["M"] --> CAT1(("‖"))
+        M1 --> F1(("F"))
+        F1 --> CAT1
+        CAT1 --> B1["M<br/>F(M)"]
+        B1 --> E1(("E"))
+        K1["K"] --> E1
+    end
+    E1 --> C1["E(K, [M ‖ F(M)])"]
+    C1 --> D1(("D"))
+    subgraph B["Destination B"]
+        K2["K"] --> D1
+        D1 --> B2["M<br/>F(M)"]
+        B2 -->|"M"| F2(("F"))
+        F2 --> CMP["Compare"]
+        B2 -->|"F(M)"| CMP
+    end
+    classDef cipher fill:#d9d9d9,stroke:#555
+    class C1 cipher
+```
+
+**(b) External error control**
+
+```mermaid
+flowchart LR
+    subgraph A["Source A"]
+        M1["M"] --> E1(("E"))
+        K1["K"] --> E1
+        E1 --> X1["E(K, M)"]
+        X1 --> CAT1(("‖"))
+        X1 --> F1(("F"))
+        F1 --> CAT1
+    end
+    CAT1 --> BL["E(K, M)<br/>F(E(K, M))"]
+    subgraph B["Destination B"]
+        BL -->|"E(K, M)"| D1(("D"))
+        K2["K"] --> D1
+        D1 --> M2["M"]
+        BL -->|"E(K, M)"| F2(("F"))
+        F2 --> CMP["Compare"]
+        BL -->|"F(E(K, M))"| CMP
+    end
+    classDef cipher fill:#d9d9d9,stroke:#555
+    class X1,BL cipher
+```
+
+
 ### Những công dụng cơ bản của mã hoá thông điệp
+
+**(a) Symmetric encryption: confidentiality and authentication**
+
+```mermaid
+flowchart LR
+    M1["M"] --> Enc(("E")) --> C["E(K, M)"] --> Dec(("D")) --> M2["M"]
+    K1["K"] --> Enc
+    K2["K"] --> Dec
+    classDef cipher fill:#d9d9d9,stroke:#555
+    class C cipher
+```
+
+**(b) Public-key encryption: confidentiality**
+
+```mermaid
+flowchart LR
+    M1["M"] --> Enc(("E")) --> C["E(PUb, M)"] --> Dec(("D")) --> M2["M"]
+    K1["PUb"] --> Enc
+    K2["PRb"] --> Dec
+    classDef cipher fill:#d9d9d9,stroke:#555
+    class C cipher
+```
+
+**(c) Public-key encryption: authentication and signature**
+
+```mermaid
+flowchart LR
+    M1["M"] --> Enc(("E")) --> C["E(PRa, M)"] --> Dec(("D")) --> M2["M"]
+    K1["PRa"] --> Enc
+    K2["PUa"] --> Dec
+    classDef cipher fill:#d9d9d9,stroke:#555
+    class C cipher
+```
+
+**(d) Public-key encryption: confidentiality, authentication, and signature**
+
+```mermaid
+flowchart LR
+    M1["M"] --> E1(("E")) --> X1["E(PRa, M)"] --> E2(("E")) --> X2["E(PUb, E(PRa, M))"] --> D1(("D")) --> X3["E(PRa, M)"] --> D2(("D")) --> M2["M"]
+    K1["PRa"] --> E1
+    K2["PUb"] --> E2
+    K3["PRb"] --> D1
+    K4["PUa"] --> D2
+    classDef cipher fill:#d9d9d9,stroke:#555
+    class X1,X2,X3 cipher
+```
 
 **a. Mã hoá khoá đối xứng (khoá bí mật):** `A → B: E(K, M)`
 
@@ -148,6 +291,23 @@ Trường `Checksum` (16 bit) nằm trong TCP header (20 octet) cùng với Sour
   - Banking: MAC kết hợp triple-DES.
   - Internet: HMAC và MAC kết hợp AES.
 
+```mermaid
+flowchart LR
+    subgraph S["Người gửi"]
+        P1["Clear text"] --> MACf["MAC"]
+        K1["🔑 K"] --> MACf
+        MACf --> P2["Clear text<br/>+ MAC 🏅"]
+    end
+    P2 ==>|"truyền"| ATK{{"Kẻ tấn công<br/>Modify"}}
+    ATK ==> P3
+    subgraph R["Người nhận"]
+        P3["Clear text<br/>+ MAC 🏅"] --> VER["VERIFY"]
+        K2["🔑 K"] --> VER
+        VER --> P4["Clear text"]
+    end
+```
+
+
 ### Các công dụng cơ bản của MAC
 
 | | Mô hình | Chứng thực | Bảo mật |
@@ -155,6 +315,78 @@ Trường `Checksum` (16 bit) nằm trong TCP header (20 octet) cùng với Sour
 | a. Chứng thực | `A → B: M ‖ C(K, M)` | Chỉ A và B chia sẻ `K` | – |
 | b. Chứng thực và bảo mật, chứng thực gắn liền với **plaintext** | `A → B: E(K2, [M ‖ C(K1, M)])` | Chỉ A và B chia sẻ `K1` | Chỉ A và B chia sẻ `K2` |
 | c. Chứng thực và bảo mật, chứng thực gắn liền với **ciphertext** | `A → B: E(K2, M) ‖ C(K1, E(K2, M))` | Dùng `K1` | Dùng `K2` |
+
+**(a) Message authentication**
+
+```mermaid
+flowchart LR
+    subgraph A["Source A"]
+        M1["M"] --> CAT1(("‖"))
+        M1 --> C1(("C"))
+        K1["K"] --> C1
+        C1 --> CAT1
+    end
+    CAT1 --> BL["M<br/>C(K, M)"]
+    subgraph B["Destination B"]
+        BL -->|"M"| C2(("C"))
+        K2["K"] --> C2
+        C2 --> CMP["Compare"]
+        BL -->|"C(K, M)"| CMP
+    end
+```
+
+**(b) Message authentication and confidentiality; authentication tied to plaintext**
+
+```mermaid
+flowchart LR
+    subgraph A["Source A"]
+        M1["M"] --> CAT1(("‖"))
+        M1 --> C1(("C"))
+        K1["K1"] --> C1
+        C1 --> CAT1
+        CAT1 --> E1(("E"))
+        K2["K2"] --> E1
+    end
+    E1 --> X["E(K2, [M ‖ C(K1, M)])"]
+    X --> D1(("D"))
+    subgraph B["Destination B"]
+        K3["K2"] --> D1
+        D1 --> BL["M<br/>C(K1, M)"]
+        BL -->|"M"| C2(("C"))
+        K4["K1"] --> C2
+        C2 --> CMP["Compare"]
+        BL -->|"C(K1, M)"| CMP
+    end
+    classDef cipher fill:#d9d9d9,stroke:#555
+    class X cipher
+```
+
+**(c) Message authentication and confidentiality; authentication tied to ciphertext**
+
+```mermaid
+flowchart LR
+    subgraph A["Source A"]
+        M1["M"] --> E1(("E"))
+        K2["K2"] --> E1
+        E1 --> X1["E(K2, M)"]
+        X1 --> CAT1(("‖"))
+        X1 --> C1(("C"))
+        K1["K1"] --> C1
+        C1 --> CAT1
+    end
+    CAT1 --> BL["E(K2, M)<br/>C(K1, E(K2, M))"]
+    subgraph B["Destination B"]
+        BL -->|"E(K2, M)"| D1(("D"))
+        K3["K2"] --> D1
+        D1 --> M2["M"]
+        BL -->|"E(K2, M)"| C2(("C"))
+        K4["K1"] --> C2
+        C2 --> CMP["Compare"]
+        BL -->|"C(K1, E(K2, M))"| CMP
+    end
+    classDef cipher fill:#d9d9d9,stroke:#555
+    class X1,BL cipher
+```
 
 ### Các yêu cầu đối với MAC
 
@@ -184,6 +416,22 @@ Trung bình cần **α vòng** nếu `k = α × n`.
 - Dữ liệu chia thành các khối 64 bit `D1, D2, …, DN`.
 - `O1 = DES_K(D1)`; sau đó `Oi = DES_K(Di ⊕ O(i−1))` (nối tiếp, mỗi bước XOR khối dữ liệu với kết quả bước trước rồi mã hoá DES với cùng khoá `K` 56 bit).
 - MAC (còn gọi là **DAC** – Data Authentication Code) lấy từ `ON`: **16 đến 64 bit**.
+
+```mermaid
+flowchart LR
+    K["K (56 bits)"]
+    D1["D1 (64 bits)"] --> E1["DES encrypt<br/>Time = 1"] --> O1["O1 (64 bits)"]
+    K --> E1
+    O1 --> X2(("⊕"))
+    D2["D2"] --> X2 --> E2["DES encrypt<br/>Time = 2"] --> O2["O2"]
+    K --> E2
+    O2 -.-> XN1(("⊕"))
+    DN1["D(N-1)"] --> XN1 --> EN1["DES encrypt<br/>Time = N-1"] --> ON1["O(N-1)"]
+    K --> EN1
+    ON1 --> XN(("⊕"))
+    DN["DN"] --> XN --> EN["DES encrypt<br/>Time = N"] --> ON["ON"] --> DAC["DAC (16 đến 64 bits)"]
+    K --> EN
+```
 
 ---
 
@@ -233,6 +481,26 @@ Hi = F(H(i-1), Mi) + H(i-1)      với i = 1..N
 H(M) = HN
 ```
 
+```mermaid
+flowchart LR
+    IV["IV = H0"]
+    M1["M1"] --> F1[/"F"\]
+    M2["M2"] --> F2[/"F"\]
+    MN["MN"] --> FN[/"F"\]
+    IV --> F1
+    IV --> P1(("+"))
+    F1 --> P1
+    P1 -->|"H1"| F2
+    P1 --> P2(("+"))
+    F2 --> P2
+    P2 -->|"H2"| DOTS["…"]
+    DOTS -->|"H(N-1)"| FN
+    DOTS --> PN(("+"))
+    FN --> PN
+    PN --> HM["H(M) = HN"]
+```
+
+
 ### Các công dụng cơ bản của hàm băm
 
 | | Mô hình | Tính chất |
@@ -244,7 +512,160 @@ H(M) = HN
 | e. Tính mã băm của thông điệp cộng với trị bí mật | `A → B: M ‖ H(M ‖ S)` | Chứng thực: chỉ A, B chia sẻ `S` |
 | f. Mã hoá kết quả của (e) | `A → B: E(K, [M ‖ H(M ‖ S)])` | Chứng thực: chỉ A, B chia sẻ `S`. Bảo mật: chỉ A, B chia sẻ `K` |
 
+**(a)**
+
+```mermaid
+flowchart LR
+    subgraph A["Source A"]
+        M1["M"] --> CAT1(("‖"))
+        M1 --> H1(("H"))
+        H1 --> CAT1
+        CAT1 --> E1(("E"))
+        K1["K"] --> E1
+    end
+    E1 --> X["E(K, [M ‖ H(M)])"]
+    X --> D1(("D"))
+    subgraph B["Destination B"]
+        K2["K"] --> D1
+        D1 --> BL["M<br/>H(M)"]
+        BL -->|"M"| H2(("H"))
+        H2 --> CMP["Compare"]
+        BL -->|"H(M)"| CMP
+    end
+    classDef cipher fill:#d9d9d9,stroke:#555
+    class X cipher
+```
+
+**(b)**
+
+```mermaid
+flowchart LR
+    subgraph A["Source A"]
+        M1["M"] --> CAT1(("‖"))
+        M1 --> H1(("H"))
+        H1 --> E1(("E"))
+        K1["K"] --> E1
+        E1 --> CAT1
+    end
+    CAT1 --> BL["M<br/>E(K, H(M))"]
+    subgraph B["Destination B"]
+        BL -->|"M"| H2(("H"))
+        H2 --> CMP["Compare"]
+        BL -->|"E(K, H(M))"| D1(("D"))
+        K2["K"] --> D1
+        D1 --> CMP
+    end
+```
+
+**(c)**
+
+```mermaid
+flowchart LR
+    subgraph A["Source A"]
+        M1["M"] --> CAT1(("‖"))
+        M1 --> H1(("H"))
+        H1 --> E1(("E"))
+        K1["PRa"] --> E1
+        E1 --> CAT1
+    end
+    CAT1 --> BL["M<br/>E(PRa, H(M))"]
+    subgraph B["Destination B"]
+        BL -->|"M"| H2(("H"))
+        H2 --> CMP["Compare"]
+        BL -->|"E(PRa, H(M))"| D1(("D"))
+        K2["PUa"] --> D1
+        D1 --> CMP
+    end
+```
+
+**(d)**
+
+```mermaid
+flowchart LR
+    subgraph A["Source A"]
+        M1["M"] --> CAT1(("‖"))
+        M1 --> H1(("H"))
+        H1 --> E1(("E"))
+        K1["PRa"] --> E1
+        E1 --> CAT1
+        CAT1 --> E2(("E"))
+        K2["K"] --> E2
+    end
+    E2 --> X["E(K, [M ‖ E(PRa, H(M))])"]
+    X --> D1(("D"))
+    subgraph B["Destination B"]
+        K3["K"] --> D1
+        D1 --> BL["M<br/>E(PRa, H(M))"]
+        BL -->|"M"| H2(("H"))
+        H2 --> CMP["Compare"]
+        BL -->|"E(PRa, H(M))"| D2(("D"))
+        K4["PUa"] --> D2
+        D2 --> CMP
+    end
+    classDef cipher fill:#d9d9d9,stroke:#555
+    class X cipher
+```
+
+**(e)**
+
+```mermaid
+flowchart LR
+    subgraph A["Source A"]
+        M1["M"] --> CAT1(("‖"))
+        M1 --> CATS1(("‖"))
+        S1["S"] --> CATS1
+        CATS1 --> H1(("H"))
+        H1 --> CAT1
+    end
+    CAT1 --> BL["M<br/>H(M ‖ S)"]
+    subgraph B["Destination B"]
+        BL -->|"M"| CATS2(("‖"))
+        S2["S"] --> CATS2
+        CATS2 --> H2(("H"))
+        H2 --> CMP["Compare"]
+        BL -->|"H(M ‖ S)"| CMP
+    end
+```
+
+**(f)**
+
+```mermaid
+flowchart LR
+    subgraph A["Source A"]
+        M1["M"] --> CAT1(("‖"))
+        M1 --> CATS1(("‖"))
+        S1["S"] --> CATS1
+        CATS1 --> H1(("H"))
+        H1 --> CAT1
+        CAT1 --> E1(("E"))
+        K1["K"] --> E1
+    end
+    E1 --> X["E(K, [M ‖ H(M ‖ S)])"]
+    X --> D1(("D"))
+    subgraph B["Destination B"]
+        K2["K"] --> D1
+        D1 --> BL["M<br/>H(M ‖ S)"]
+        BL -->|"M"| CATS2(("‖"))
+        S2["S"] --> CATS2
+        CATS2 --> H2(("H"))
+        H2 --> CMP["Compare"]
+        BL -->|"H(M ‖ S)"| CMP
+    end
+    classDef cipher fill:#d9d9d9,stroke:#555
+    class X cipher
+```
+
 **Áp dụng cho mật khẩu:** Bob lưu `f(K ‖ S)` (mật khẩu `K` kèm giá trị `S` – tức *salt*) thay vì lưu mật khẩu. Ví dụ: (Alice, `f(Xur%9pLr ‖ 987&*)`, `987&*`).
+
+```mermaid
+flowchart LR
+    Alice["Alice:<br/>“Hello Bob, I am Alice.<br/>My password P is Xur%9pLr”"] -->|"K"| F[/"One-way<br/>function f"\]
+    S["S"] --> F
+    F --> FK["f(K ‖ S)"]
+    FK --> T[("Bảng của Bob<br/>Alice │ f(Xur%9pLr ‖ 987&*) │ 987&*")]
+    T --> OK["Bob: “OK!”"]
+```
+
 
 ### MD5
 
@@ -255,6 +676,16 @@ H(M) = HN
 - Minh hoạ: file `vi du 1.txt` chứa "Truong Dai Hoc Cong Nghe Thong Tin"; chỉ sửa `T` thành `t` ở chữ cuối ("tin") thì MD5 hash thay đổi hoàn toàn:
   - Trước: `61 DD 6D 27 27 A2 96 E9 17 43 B2 23 0A 86 DB 5F`
   - Sau: `FF F7 61 A1 03 9E 6E DA DE 32 B1 7A 60 FD D6 8A`
+
+```mermaid
+flowchart LR
+    F1["vi du 1.txt<br/>“Truong Dai Hoc Cong Nghe Thong Tin”"] --> H1["MD5"]
+    H1 --> R1["61 DD 6D 27 27 A2 96 E9<br/>17 43 B2 23 0A 86 DB 5F"]
+    F1 -->|"sửa T thành t"| F2["vi du 1.txt<br/>“Truong Dai Hoc Cong Nghe Thong tin”"]
+    F2 --> H2["MD5"]
+    H2 --> R2["FF F7 61 A1 03 9E 6E DA<br/>DE 32 B1 7A 60 FD D6 8A"]
+    R1 -. "MD5 hash khác nhau" .- R2
+```
 
 ### SHA
 
@@ -301,10 +732,50 @@ Dùng khoá công khai để tạo chữ ký số. Giả sử A cần gửi cho 
 - **Người gửi ký**: tính digest (hash) từ nội dung thông điệp → dùng private key của người gửi mã hoá digest (ký) → gửi *Signed message* (thông điệp + digital signature).
 - **Người nhận kiểm tra**: dùng public key của người gửi giải mã chữ ký thành digest; đồng thời tính digest từ nội dung thông điệp nhận được; so sánh hai digest để xác minh **tính toàn vẹn** (INTEGRITY).
 
+```mermaid
+flowchart LR
+    subgraph S["Người gửi ký thông điệp"]
+        MSG["Message"] -->|"Compute digest (hash)<br/>từ nội dung thông điệp"| DG1["digest"]
+        DG1 -->|"SIGN THE MESSAGE: dùng private key<br/>của người gửi để mã hoá digest"| SIG["digital signature"]
+        MSG --> SM["Signed message<br/>(Message + digital signature)"]
+        SIG --> SM
+    end
+    SM ==>|"TRANSMIT"| SM2["Signed message<br/>(Message + digital signature)"]
+    subgraph R["Người nhận kiểm tra chữ ký"]
+        SM2 -->|"digital signature"| VER["VERIFY SIGNATURE: dùng public key của người gửi<br/>giải mã chữ ký thành digest"]
+        VER --> DG2["digest"]
+        SM2 -->|"Message"| HS["Compute digest (hash)<br/>từ nội dung thông điệp"]
+        HS --> DG3["digest (mới tính)"]
+        DG2 --> CMP{"So sánh<br/>→ xác minh INTEGRITY"}
+        DG3 --> CMP
+    end
+```
+
 ### Có mã hoá
 
 - **Người gửi ký và mã hoá**: tính digest → ký bằng private key của người gửi → **mã hoá thông điệp và chữ ký bằng public key của người nhận** → gửi *Encrypted Signed Message*.
 - **Người nhận giải mã và kiểm tra**: giải mã thông điệp và chữ ký bằng private key của người nhận → dùng public key của người gửi giải mã chữ ký thành digest → tính digest từ nội dung thông điệp → so sánh để xác minh tính toàn vẹn.
+
+```mermaid
+flowchart LR
+    subgraph S["Người gửi ký và mã hoá thông điệp"]
+        MSG["Message"] -->|"Compute digest (hash)<br/>từ nội dung thông điệp"| DG1["digest"]
+        DG1 -->|"SIGN THE MESSAGE: dùng private key<br/>của người gửi để mã hoá digest"| SIG["digital signature"]
+        MSG --> SM["Signed message<br/>(Message + digital signature)"]
+        SIG --> SM
+        SM -->|"ENCRYPT MESSAGE AND SIGNATURE:<br/>dùng public key của người nhận"| ESM["Encrypted<br/>Signed Message"]
+    end
+    ESM ==>|"TRANSMIT"| ESM2["Encrypted<br/>Signed Message"]
+    subgraph R["Người nhận giải mã và kiểm tra chữ ký"]
+        ESM2 -->|"DECRYPT MESSAGE AND SIGNATURE:<br/>dùng private key của người nhận"| SM2["Signed message<br/>(Message + digital signature)"]
+        SM2 -->|"digital signature"| VER["VERIFY SIGNATURE: dùng public key của người gửi<br/>giải mã chữ ký thành digest"]
+        VER --> DG2["digest"]
+        SM2 -->|"Message"| HS["Compute digest (hash)<br/>từ nội dung thông điệp"]
+        HS --> DG3["digest (mới tính)"]
+        DG2 --> CMP{"So sánh<br/>→ xác minh INTEGRITY"}
+        DG3 --> CMP
+    end
+```
 
 ---
 
