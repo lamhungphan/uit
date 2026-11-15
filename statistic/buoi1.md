@@ -1,4 +1,4 @@
-# PHẦN I. LÝ THUYẾT XÁC SUẤT (Probability theory)
+# PHẦN I. XÁC SUẤT (Probability)
 
 # Chương 1. XÁC SUẤT CỦA BIẾN CỐ
 
