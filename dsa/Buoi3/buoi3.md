@@ -1,4 +1,4 @@
-# Buổi 3 – Danh sách liên kết đơn (Singly Linked List)
+# Danh sách liên kết đơn (Singly Linked List)
 
 ## 1. Ý tưởng
 - Mảng cần biết trước kích thước, thêm/xóa phần tử phải dịch chuyển nhiều.
