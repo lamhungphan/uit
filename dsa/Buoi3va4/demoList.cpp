@@ -85,7 +85,7 @@ int loadData(List& l)
     addHead(l, p2);
     addTail(l, initNode(39));
 
-    return 1;
+    return 1; // 3
 }
 
 /* Tìm kiếm 1 giá trị có trong danh sách hay không

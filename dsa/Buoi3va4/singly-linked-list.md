@@ -135,7 +135,12 @@ int timGiaTriMax(List l)
 ```
 
 ### Xóa node đầu
-Slide trình bày các bước: (1) `p` trỏ vào node đầu, (2) `pHead` dời sang node kế, (3) giải phóng `p`, rồi trả về giá trị đã xóa.
+
+1. `p` trỏ vào node đầu
+2. `pHead` dời sang node kế
+3. giải phóng `p`
+4. Trả về giá trị đã xóa
+
 ```cpp
 int removeHead(List& l)
 {
@@ -150,7 +155,13 @@ int removeHead(List& l)
 ```
 
 ### Xóa node cuối
-Slide trình bày: (1) tìm node `q` đứng ngay trước `pTail`, (2) `p` giữ node cuối, (3) `pTail = q`, (4) `q->pNext = NULL`, (5) giải phóng `p`. Vì danh sách đơn không có con trỏ ngược nên phải duyệt từ đầu để tìm `q`.
+
+1. Tìm node `q` đứng ngay trước `pTail`
+2. `p` giữ node cuối
+3. `pTail = q`
+4. `q->pNext = NULL`
+5. Giải phóng `p`. Vì danh sách đơn không có con trỏ ngược nên phải duyệt từ đầu để tìm `q`
+
 ```cpp
 int removeTail(List& l)
 {
@@ -173,8 +184,6 @@ int removeTail(List& l)
     return value;
 }
 ```
-
-> Hai hàm `removeHead` và `removeTail` ở trên mình viết lại theo các bước trong slide vì slide chỉ để khung trống (`return value;`), chưa có code hoàn chỉnh. Cả hai giả định danh sách không rỗng, bạn nên kiểm tra rỗng trước khi gọi.
 
 ## 5. Ghi nhớ nhanh
 - Thêm đầu/cuối: luôn xét trường hợp danh sách **rỗng** trước.
