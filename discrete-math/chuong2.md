@@ -1,4 +1,4 @@
-# Chương 2
+# Chương 2 - Tập hợp và nguyên lý đếm
 
 # 1. Tập hợp và các phép toán
 

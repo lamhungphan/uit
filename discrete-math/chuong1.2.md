@@ -1,5 +1,3 @@
-# Buổi 2 – Vị từ, lượng từ và suy luận
-
 # 4. Suy luận và chứng minh (tiếp)
 
 ## Quy tắc phản ví dụ & phản chứng

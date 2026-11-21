@@ -1,4 +1,4 @@
-# Buổi 1 – Logic mệnh đề
+# Chương 1 – Logic mệnh đề
 
 # 1. Mệnh đề
 
