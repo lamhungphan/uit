@@ -1,15 +1,12 @@
 # Bảng ký hiệu Toán rời rạc
 
-Ký hiệu có thể được đọc theo nhiều cách tùy ngữ cảnh. Cột “Cách đọc” ghi cách đọc ngắn gọn để đọc công thức thành tiếng; nếu không có cách đọc tự nhiên, ô được để trống.
-
 ## Logic mệnh đề, vị từ và suy luận
 
 | Ký hiệu | Cách đọc | Tiếng Việt | English | Ý nghĩa |
 |---|---|---|---|---|
 | $p,q,r$ |  | Mệnh đề | Propositions | Các khẳng định có giá trị đúng hoặc sai |
 | $0,1$ |  | Sai, đúng | False, true | Giá trị chân lý; cũng dùng cho bit tắt/bật |
-| $\lnot p$ | Không p | Phủ định của p | Negation of p | Đúng khi $p$ sai |
-| $\bar p$ | Nghịch p | Phủ định của p | Negation of p | Cách viết khác của phủ định |
+| $\lnot p$ hoặc $\bar p$  | Nghịch p | Phủ định của p | Negation of p | Đúng khi $p$ sai |
 | $p\land q$ | P và q | Hội | Conjunction / AND | Đúng khi cả hai mệnh đề đúng |
 | $p\lor q$ | P hoặc q | Tuyển | Disjunction / OR | Đúng khi ít nhất một mệnh đề đúng |
 | $p\oplus q$ | P hoặc loại trừ q | Tuyển loại | Exclusive OR / XOR | Đúng khi đúng chính xác một vế |
@@ -26,8 +23,8 @@ Ký hiệu có thể được đọc theo nhiều cách tùy ngữ cảnh. Cột
 | $\vdash$ | Có thể suy ra | Suy diễn được | Derives / proves | Kết luận được suy ra từ tiền đề theo quy tắc |
 | $\lnot(\forall x\,P(x))$ | Phủ định “với mọi x” | Phủ định lượng từ | Negation of universal | Tương đương $\exists x\,\lnot P(x)$ |
 | $\lnot(\exists x\,P(x))$ | Phủ định “tồn tại x” | Phủ định lượng từ | Negation of existential | Tương đương $\forall x\,\lnot P(x)$ |
-| $p,\ p\to q\ \therefore q$ | P; nếu p thì q; do đó q | Modus Ponens | Modus Ponens | Từ $p$ và $p\to q$ suy ra $q$ |
-| $p\to q,\ \lnot q\ \therefore\lnot p$ | Nếu p thì q; không q; do đó không p | Modus Tollens | Modus Tollens | Từ hệ quả sai suy ra giả thiết sai |
+| $p,\ p\to q\ \therefore q$ | P; nếu p thì q; do đó q |  | Modus Ponens | Từ $p$ và $p\to q$ suy ra $q$ |
+| $p\to q,\ \lnot q\ \therefore\lnot p$ | Nếu p thì q; không q; do đó không p | | Modus Tollens | Từ hệ quả sai suy ra giả thiết sai |
 
 ## Tập hợp và phép đếm
 
@@ -43,7 +40,7 @@ Ký hiệu có thể được đọc theo nhiều cách tùy ngữ cảnh. Cột
 | $A-B$ | A trừ B | Hiệu tập hợp | Set difference | Phần tử thuộc $A$ nhưng không thuộc $B$ |
 | $\overline A$ | A gạch ngang trên | Phần bù của A | Complement of A | Các phần tử trong tập vũ trụ nhưng không thuộc $A$ |
 | $\varnothing$ | Tập rỗng | Tập rỗng | Empty set | Tập không có phần tử |
-| $U$ | U | Tập vũ trụ | Universal set | Tập chứa toàn bộ phần tử đang xét |
+| $U$ |  | Tập vũ trụ | Universal set | Tập chứa toàn bộ phần tử đang xét |
 | $\mathcal P(S)$ | P hoa của S | Tập lũy thừa | Power set | Tập gồm mọi tập con của $S$ |
 | $A\times B$ | A nhân Đề-các B | Tích Đề-các | Cartesian product | Tập các cặp $(a,b)$ với $a\in A,b\in B$ |
 | $\lvert A\rvert$ | Số phần tử của A | Lực lượng tập hợp | Cardinality | Số phần tử của tập hữu hạn $A$ |
