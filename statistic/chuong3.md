@@ -146,9 +146,16 @@ $$P(3 \le X \le 5) = p_3 + p_4 + p_5 = C_{100}^3 (0{,}02)^3 (0{,}98)^{97} + C_{1
 
 3. Gọi $N$ là số cây bạch đàn ông $B$ cần phải trồng. Ta có:
 
-$$P(X \ge 1) = 1 - P(X = 0) = 1 - p_0 = 1 - C_N^0 (0{,}02)^0 (0{,}98)^N = 1 - (0{,}98)^N.$$
+$$
+P(X \ge 1)  = 1 - P(X = 0) = 1 - p_0 
+            = 1 - C_N^0 (0{,}02)^0 (0{,}98)^N = 1 - (0{,}98)^N
+$$
 
-$$P(X \ge 1) > 0{,}1 \Leftrightarrow 1 - (0{,}98)^N > 0{,}1 \Leftrightarrow (0{,}98)^N < 0{,}9 \Leftrightarrow N \ln 0{,}98 < \ln 0{,}9 \Leftrightarrow N > 5{,}2152.$$
+$$
+P(X \ge 1) > 0{,}1   \Leftrightarrow 1 - (0{,}98)^N > 0{,}1 
+                     \Leftrightarrow (0{,}98)^N < 0{,}9 \Leftrightarrow N \ln 0{,}98 < \ln 0{,}9 
+                     \Leftrightarrow N > 5{,}2152
+$$
 
 Vậy ông $B$ cần phải trồng ít nhất 6 cây bạch đàn.
 
@@ -173,7 +180,10 @@ A. 9 người; B. 10 người; C. 12 người; D. 13 người.
 
 *Giải.* Gọi $n$, $n \ge 8$ là số người cần phải kiểm tra và $X$ là số người được chọn, ta có:
 
-$$X = \{0; 1; 2; \dots; n\},\ p = 0{,}56 \Rightarrow X \in B(n; 0{,}56) \Rightarrow P(X = 8) = C_n^8 (0{,}56)^8 (0{,}44)^{n-8}.$$
+$$
+X  = \{0; 1; 2; \dots; n\},\ p = 0{,}56 \Rightarrow X \in B(n; 0{,}56) 
+   \Rightarrow P(X = 8) = C_n^8 (0{,}56)^8 (0{,}44)^{n-8}
+$$
 
 Thử trực tiếp từ đáp án, ta được đáp án đúng là **B**.
 
