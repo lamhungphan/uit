@@ -169,6 +169,128 @@ void printList(List l)
     }
 }
 
+// 8.
+/*  Cập nhật xếp loại học lực
+Input:
+    + List l
+
+Output:
+    + return void
+*/
+void classifyPerfomance(List& l)
+{
+  if(l.pHead == nullptr) return;
+
+  for (Node* p = l.pHead; p != nullptr; p= p->pNext){
+    float diem = p->data.diemTB;
+
+    if (diem >= 8.0f && diem <= 10.0f)
+    {
+        p->data.xepLoai = "Gioi";
+    }
+    else if (diem >= 6.5f)
+    {
+        p->data.xepLoai = "Kha";
+    }
+    else if (diem >= 5.0f)
+    {
+        p->data.xepLoai = "Trung binh";
+    } else 
+    {
+        p->data.xepLoai = "Yeu";
+    }
+  }
+}
+
+// 9.
+/* Tìm điểm trung bình cao nhất
+Input:
+    + List l
+
+Output:
+    + return float
+*/
+float findMaxScore(List& l)
+{   
+    if (l.pHead == nullptr)
+        return 0.0f;
+
+    float max = l.pHead->data.diemTB;
+
+    for(Node* p = l.pHead; p != nullptr; p = p->pNext){
+        if (p->data.diemTB > max)
+        max = p->data.diemTB;
+    }
+    return max;
+}
+
+// 10.
+/*  Tìm kiếm sinh viên theo mã sinh viên
+Input:
+    + int
+
+Output:
+    + return SinhVien
+*/
+SinhVien findSinhVienById(List& l, int maSV)
+{
+    for(Node* p = l.pHead; p != nullptr; p = p->pNext)
+    {
+        if(p->data.maSV == maSV){
+            return p->data;
+        }
+    }
+    return {0, "", 0.0f, ""};
+}
+
+// 11.
+/*   Tìm SV có điểm trung bình cao nhất
+Input:
+    + List l
+
+Output:
+    + return SinhVien
+*/
+SinhVien findMaxScoreSinhVien(List& l)
+{
+    if (l.pHead == nullptr){
+        return {0, "", 0.0f, ""};
+    }
+
+    Node* max = l.pHead;
+    for (Node* p = l.pHead->pNext; p != nullptr; p = p->pNext)
+    {
+        if (p->data.diemTB > max->data.diemTB)
+            max = p;
+    }
+
+    return max->data;
+}
+
+// 12.
+/*   Tìm SV có trung bình thấp nhất
+Input:
+    + List l
+
+Output:
+    + return SinhVien
+*/
+SinhVien findMinScoreSinhVien(List& l)
+{
+    if (l.pHead == nullptr)
+        return {0, "", 0.0f, ""};
+
+    Node* min = l.pHead;
+
+    for (Node* p = l.pHead->pNext; p != nullptr; p = p->pNext)
+    {
+        if (p->data.diemTB < min->data.diemTB)
+            min = p;
+    }
+
+    return min->data;
+}
+
 /* Tìm và in thông tin sinh viên kế cuối trong danh sách
 Input:
     + List l
@@ -205,6 +327,27 @@ int main()
 
     cout << "\n=== SINH VIEN KE CUOI ===" << endl;
     printSecondLast(l);
+
+    cout << "\n=== BAI 8: XEP LOAI HOC LUC ===" << endl;
+    classifyPerfomance(l);
+    printList(l);
+
+    cout << "\n=== BAI 9: DIEM TRUNG BINH CAO NHAT ===" << endl;
+    cout << findMaxScore(l) << endl;
+
+    cout << "\n=== BAI 10: TIM SINH VIEN THEO MA ===" << endl;
+    int maSVCanTim = 125;
+    SinhVien svTimDuoc = findSinhVienById(l, maSVCanTim);
+    if (svTimDuoc.maSV != 0)
+        printSinhVien(svTimDuoc);
+    else
+        cout << "Khong tim thay sinh vien co ma " << maSVCanTim << endl;
+
+    cout << "\n=== BAI 11: SINH VIEN CO DIEM CAO NHAT ===" << endl;
+    printSinhVien(findMaxScoreSinhVien(l));
+
+    cout << "\n=== BAI 12: SINH VIEN CO DIEM THAP NHAT ===" << endl;
+    printSinhVien(findMinScoreSinhVien(l));
 
     return 0;
 }
