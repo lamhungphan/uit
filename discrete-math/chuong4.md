@@ -89,11 +89,11 @@ Hàm Bool $n$ biến là ánh xạ $f:B^n\to B$ với $B=\{0,1\}$.
 | 0 | 0 | 0 | 0 |
 | 0 | 0 | 1 | 0 |
 | 0 | 1 | 0 | 0 |
-| 0 | 1 | 1 | 1 |
+| 0 | 1 | 1 | `1` |
 | 1 | 0 | 0 | 0 |
-| 1 | 0 | 1 | 1 |
-| 1 | 1 | 0 | 1 |
-| 1 | 1 | 1 | 1 |
+| 1 | 0 | 1 | `1` |
+| 1 | 1 | 0 | `1` |
+| 1 | 1 | 1 | `1` |
 
 **Ví dụ 2:** $f(x,y)=\bar x\lor y$ là hàm 2 biến, bảng có $2^2=4$ dòng: $f(1,0)=0$, các dòng còn lại bằng $1$.
 
@@ -122,12 +122,12 @@ Mỗi từ tối tiểu chỉ bằng $1$ tại đúng một dòng của bảng c
 - $E=xy\lor yz$ là công thức đa thức (chưa phải CDNF); $F=xyz\lor\bar x\bar y\bar z$ là CDNF.
 
 ## Tìm CDNF từ bảng chân trị
-**Quy tắc:** mỗi dòng có $f=1$ cho một từ tối tiểu; biến bằng $1$ viết $x_i$, biến bằng $0$ viết $\bar x_i$.
+**Quy tắc:** mỗi dòng có $f=1$ cho một từ tối tiểu; biến bằng $1$ viết $x_i$, biến bằng $0$ viết $\bar x_i$
 
-- Hàm bầu cử 3 phiếu: $f=\bar xyz\lor x\bar yz\lor xy\bar z\lor xyz$.
-- $f(x,y)=\bar x\lor y$ (các dòng $f=1$: $00,01,11$): $f=\bar x\bar y\lor\bar xy\lor xy$.
+- Ví dụ 1: Hàm bầu cử 3 phiếu: $f=\bar xyz\lor x\bar yz\lor xy\bar z\lor xyz$
+- Ví dụ 2: $f(x,y)=\bar x\lor y$ (các dòng $f=1$: $00,01,11$): $f=\bar x\bar y\lor\bar xy\lor xy$
 
-CDNF thường dài; mục tiêu tiếp theo là tìm công thức ngắn nhất.
+CDNF thường dài; mục tiêu tiếp theo là tìm công thức ngắn nhất
 
 ## Công thức đa thức tối tiểu
 Cho hai công thức đa thức của một hàm Bool: $F:\ f=m_1\lor\cdots\lor m_k$ và $G:\ f=M_1\lor\cdots\lor M_l$.
