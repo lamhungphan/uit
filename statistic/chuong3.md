@@ -426,16 +426,19 @@ Trong đó, $n$ được gọi là bậc tự do.
 **Câu 1:** Một máy tính có 20 thư mục trong đó có 5 thư mục bị nhiễm virus. Chọn ngẫu nhiên 6 thư mục để kiểm tra xem có bị nhiễm virus hay không.
 
 a) Tính xác suất có ít nhất 3 thư mục bị nhiễm virus.
+
 b) Trung bình có bao nhiêu thư mục bị nhiễm trong 6 thư mục được chọn?
 
 **Câu 2:** Một kĩ thuật viên theo dõi 12 máy tự động. Xác suất để mỗi máy cần đến sự điều chỉnh của kĩ thuật viên trong mỗi ngày là 0.1. Các máy này hoạt động độc lập nhau.
 
 a) Gọi $X$ là số máy cần sự điều chỉnh mỗi ngày. Tìm phân phối xác suất của $X$.
+
 b) Tìm xác suất mỗi ngày có ít nhất 1 máy cần điều chỉnh.
 
 **Câu 3:** Xác suất trúng mỗi tờ vé số là 0.001.
 
 a) Hỏi nếu mua 20 tờ vé số thì xác suất trúng 2 tờ là bao nhiêu?
+
 b) Hỏi trung bình mua 20 tờ vé số thì trúng bao nhiêu tờ?
 
 **Câu 4:** Có một trò chơi điện tử được phát hành. 60% người chơi hoàn thành được hết các level và có 30% trong số đó sau đó mua phiên bản tiếp theo. Hỏi trung bình trong 15 người chơi, có bao nhiêu người mua phiên bản tiếp theo? Xác suất có ít nhất 2 người chơi sẽ mua phiên bản mới trong 15 người chơi?
@@ -445,6 +448,7 @@ b) Hỏi trung bình mua 20 tờ vé số thì trúng bao nhiêu tờ?
 **Câu 6:** Một công ty cung cấp dịch vụ internet có trung bình 20 khách hàng đăng kí tài khoản mới mỗi ngày. Biết rằng số tài khoản mới đăng kí mỗi ngày có phân phối Poisson.
 
 a) Tính xác suất có ít nhất 3 tài khoản mới đăng kí ra trong ngày mai.
+
 b) Tính xác suất có ít nhất 6 tài khoản mới đăng kí trong 2 ngày tới.
 
 **Câu 7:** Nếu chiều cao $X$ của sinh viên nam có phân phối chuẩn với trung bình 166cm, độ lệch chuẩn 4cm, thì có bao nhiêu % sinh viên nam có chiều cao
@@ -465,9 +469,11 @@ b) Tính xác suất có ít nhất 6 tài khoản mới đăng kí trong 2 ngà
 
 **Câu 11:** Tuổi thọ $X$ (năm) của một loại bóng đèn $A$ là BNN tuân theo luật phân phối chuẩn $N(4;\ 2.25)$.
 
-a. Tính tỉ lệ bóng đèn $A$ có tuổi thọ từ 4.5 năm trở lên.
-b. Quan sát ngẫu nhiên 1 bóng đèn loại $A$ thấy nó có tuổi thọ trên tuổi thọ trung bình. Hãy tính xác suất bóng đèn đó có tuổi thọ không quá 5 năm.
-c. Cần mua bao nhiêu bóng đèn loại $A$ để xác suất mua được ít nhất 1 bóng có tuổi thọ từ 6 năm trở lên không nhỏ hơn 90%.
+a) Tính tỉ lệ bóng đèn $A$ có tuổi thọ từ 4.5 năm trở lên.
+
+b) Quan sát ngẫu nhiên 1 bóng đèn loại $A$ thấy nó có tuổi thọ trên tuổi thọ trung bình. Hãy tính xác suất bóng đèn đó có tuổi thọ không quá 5 năm.
+
+c) Cần mua bao nhiêu bóng đèn loại $A$ để xác suất mua được ít nhất 1 bóng có tuổi thọ từ 6 năm trở lên không nhỏ hơn 90%.
 
 **Câu 12:** Đường kính của một loại trục máy do máy tiện làm ra là một đại lượng ngẫu nhiên có phân phối chuẩn, với giá trị trung bình là 25 mm, và phương sai là 44,1 mm². Trục máy được xem là đạt tiêu chuẩn kỹ thuật nếu đường kính nằm trong khoảng từ 23,44 mm đến 26,56 mm.
 
